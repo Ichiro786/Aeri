@@ -41,7 +41,7 @@ data class PageTheme(val color: Color, val ink: Color) {
             val luminance = 0.2126 * red + 0.7152 * green + 0.0722 * blue
             if (luminance >= 0.94) return null
             val ink = if (luminance > 0.55) Color.Black.copy(alpha = 0.85f) else Color.White.copy(alpha = 0.92f)
-            return PageTheme(ardiaColor(number), ink)
+            return PageTheme(aeriColor(number), ink)
         }
     }
 }
@@ -70,9 +70,9 @@ fun PageLoadingPlaceholder(
 ) {
     val theme = remember(themeColorHex) { PageTheme.parse(themeColorHex) }
     val host = remember(url) { Monogram.host(url) }
-    val newTab = stringResource(R.string.ardia_new_tab)
+    val newTab = stringResource(R.string.aeri_new_tab)
     val shownTitle = remember(title, host, newTab) { PlaceholderText.distinctTitle(title, host, newTab) }
-    val description = stringResource(R.string.ardia_loading_page, accessibilityTitle)
+    val description = stringResource(R.string.aeri_loading_page, accessibilityTitle)
     val reveal = remember { Animatable(if (revealDelayMillis == null) 1f else 0f) }
     LaunchedEffect(revealDelayMillis) {
         if (revealDelayMillis == null || reveal.value == 1f) return@LaunchedEffect
@@ -101,12 +101,12 @@ fun PageLoadingPlaceholder(
             ),
         )
         if (shownTitle != null) {
-            Text(shownTitle, style = ArdiaType.headline, color = primary, textAlign = TextAlign.Center, maxLines = 3, overflow = TextOverflow.Ellipsis)
+            Text(shownTitle, style = AeriType.headline, color = primary, textAlign = TextAlign.Center, maxLines = 3, overflow = TextOverflow.Ellipsis)
         }
         if (host != null) {
             Text(
                 host,
-                style = if (shownTitle == null) ArdiaType.headline else ArdiaType.subheadline,
+                style = if (shownTitle == null) AeriType.headline else AeriType.subheadline,
                 color = if (shownTitle == null) primary else secondary,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,

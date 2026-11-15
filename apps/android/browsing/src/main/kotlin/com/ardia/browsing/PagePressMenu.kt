@@ -24,8 +24,8 @@ import androidx.compose.ui.unit.dp
 import com.ardia.appmodel.AppModel
 import com.ardia.appmodel.BrowseSession
 import com.ardia.browser.PressTarget
-import com.ardia.design.ArdiaSymbols
-import com.ardia.design.ArdiaType
+import com.ardia.design.AeriSymbols
+import com.ardia.design.AeriType
 import com.ardia.design.SystemPalette
 import kotlin.math.roundToInt
 
@@ -73,7 +73,7 @@ internal fun PagePressMenu(model: AppModel, press: BrowseSession.PagePress) {
         GlassMenu(expanded = true, onDismissRequest = dismiss, modifier = Modifier.testTag(BrowsingTags.PRESS_MENU)) {
             Text(
                 PressMenuItems.heading(target),
-                style = ArdiaType.footnote,
+                style = AeriType.footnote,
                 color = SystemPalette.secondaryLabel.current,
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis,
@@ -107,9 +107,9 @@ internal fun PagePressMenu(model: AppModel, press: BrowseSession.PagePress) {
 @Composable
 private fun pressLabel(action: PressAction): Pair<String, ImageVector> = when (action) {
     PressAction.OpenInNewTab -> stringResource(R.string.browsing_open_in_new_tab) to BrowsingSymbols.plusSquareOnSquare
-    PressAction.OpenInBackground -> stringResource(R.string.browsing_open_in_background) to ArdiaSymbols.squareOnSquare
-    PressAction.CopyLink -> stringResource(R.string.browsing_copy_link) to ArdiaSymbols.link
-    PressAction.Share -> stringResource(R.string.browsing_share_ellipsis) to ArdiaSymbols.squareAndArrowUp
+    PressAction.OpenInBackground -> stringResource(R.string.browsing_open_in_background) to AeriSymbols.squareOnSquare
+    PressAction.CopyLink -> stringResource(R.string.browsing_copy_link) to AeriSymbols.link
+    PressAction.Share -> stringResource(R.string.browsing_share_ellipsis) to AeriSymbols.squareAndArrowUp
     PressAction.Download -> stringResource(R.string.browsing_download_linked_file) to BrowsingSymbols.arrowDownCircle
     PressAction.SaveImage -> stringResource(R.string.browsing_save_image) to BrowsingSymbols.arrowDownCircle
 }

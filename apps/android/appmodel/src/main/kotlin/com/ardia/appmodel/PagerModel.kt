@@ -6,7 +6,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import com.ardia.design.ArdiaSpring
+import com.ardia.design.AeriSpring
 import com.ardia.design.Motion
 import com.ardia.store.BrowserTab
 import kotlin.math.PI
@@ -17,7 +17,7 @@ import kotlin.math.sin
 import kotlin.math.sqrt
 
 @Stable
-class PagerModel(private val settleSpring: ArdiaSpring = Motion.pagerSettle, private val clock: () -> Long = System::nanoTime) {
+class PagerModel(private val settleSpring: AeriSpring = Motion.pagerSettle, private val clock: () -> Long = System::nanoTime) {
     data class Settle(val from: Float, val to: Float, val velocity: Float, val startNanos: Long)
 
     var isActive: Boolean by mutableStateOf(false)
@@ -89,7 +89,7 @@ class PagerModel(private val settleSpring: ArdiaSpring = Motion.pagerSettle, pri
     }
 
     companion object {
-        fun springValue(spring: ArdiaSpring, target: Double, initialVelocity: Double, time: Double): Double {
+        fun springValue(spring: AeriSpring, target: Double, initialVelocity: Double, time: Double): Double {
             val omega = 2 * PI / spring.response
             val zeta = spring.dampingFraction.toDouble().coerceAtMost(1.0)
             val initial = target

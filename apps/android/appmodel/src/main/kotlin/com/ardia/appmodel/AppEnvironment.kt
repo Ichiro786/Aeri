@@ -44,7 +44,7 @@ class AppEnvironment(
 
         fun preloadPreferences(context: Context): Thread {
             val app = context.applicationContext
-            return thread(name = "ArdiaPreferences", isDaemon = true) {
+            return thread(name = "AeriPreferences", isDaemon = true) {
                 app.getSharedPreferences(BrowserStore.PREFERENCES_NAME, Context.MODE_PRIVATE).all
                 app.getSharedPreferences(BLOCKING_PREFERENCES, Context.MODE_PRIVATE).all
             }

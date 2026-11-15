@@ -30,7 +30,7 @@ import com.ardia.browser.PressTarget
 import com.ardia.browser.ReadableContent
 import com.ardia.browser.ReadableContentException
 import com.ardia.browser.WebsiteDataKind
-import com.ardia.design.ArdiaTheme
+import com.ardia.design.AeriTheme
 import com.ardia.store.CoreScript
 import com.ardia.store.TabOrigin
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -142,7 +142,7 @@ class BackOrderScreenTest {
         page().mutableState.value = page().mutableState.value.copy(url = "https://second.example/", canGoBack = true)
         context.getSharedPreferences("ardia.reader", Context.MODE_PRIVATE).edit().putString("reader.theme", "dark").commit()
         compose.setContent {
-            ArdiaTheme(darkTheme = false, look = model.look, reduceMotion = true, reduceTransparency = true) { BrowsingView(model, isFront = true) }
+            AeriTheme(darkTheme = false, look = model.look, reduceMotion = true, reduceTransparency = true) { BrowsingView(model, isFront = true) }
         }
         settle()
     }

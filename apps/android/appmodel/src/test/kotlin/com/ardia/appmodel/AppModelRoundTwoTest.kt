@@ -376,10 +376,10 @@ class AppModelRoundTwoTest {
         assertEquals("Copied URL Without Trackers", f.toastText())
         f.app.share("https://shared.example/", "Shared")
         f.app.shareText("hello")
-        f.app.shareText("https://a.example/", subject = "Open Tabs from Ardia")
+        f.app.shareText("https://a.example/", subject = "Open Tabs from Aeri")
         assertEquals(listOf("https://shared.example/"), f.system.shares)
         assertEquals(listOf("hello", "https://a.example/"), f.system.textShares)
-        assertEquals(listOf(null, "Open Tabs from Ardia"), f.system.textSubjects)
+        assertEquals(listOf(null, "Open Tabs from Aeri"), f.system.textSubjects)
     }
 
     @Test

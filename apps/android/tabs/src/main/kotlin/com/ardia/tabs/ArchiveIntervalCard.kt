@@ -33,21 +33,21 @@ import androidx.compose.ui.semantics.customActions
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import com.ardia.design.GlassMenu
-import com.ardia.design.ArdiaSymbols
-import com.ardia.design.ArdiaType
+import com.ardia.design.AeriSymbols
+import com.ardia.design.AeriType
 import com.ardia.design.BrowsePalette
-import com.ardia.design.LocalArdiaDarkTheme
+import com.ardia.design.LocalAeriDarkTheme
 import com.ardia.design.SystemPalette
 import com.ardia.design.TabsLayout
 import com.ardia.design.TabsPalette
-import com.ardia.design.ardiaGradient
+import com.ardia.design.aeriGradient
 import com.ardia.store.AutoArchiveInterval
 import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 internal fun ArchiveIntervalCard(interval: AutoArchiveInterval, choose: (AutoArchiveInterval) -> Unit, dismiss: () -> Unit, modifier: Modifier = Modifier) {
-    val dark = LocalArdiaDarkTheme.current
+    val dark = LocalAeriDarkTheme.current
     val shape = RoundedCornerShape(TabsLayout.archiveCardRadius)
     val dismissLabel = stringResource(R.string.tabs_dismiss)
     val latestDismiss by rememberUpdatedState(dismiss)
@@ -71,7 +71,7 @@ internal fun ArchiveIntervalCard(interval: AutoArchiveInterval, choose: (AutoArc
     ) {
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
             ArchiveTile(TabsLayout.archiveCardTile * minOf(LocalDensity.current.fontScale, 48f / 28f))
-            Text(stringResource(R.string.tabs_archive_inactive_tabs), style = ArdiaType.body, color = SystemPalette.label.resolve(dark))
+            Text(stringResource(R.string.tabs_archive_inactive_tabs), style = AeriType.body, color = SystemPalette.label.resolve(dark))
         }
         IntervalPicker(interval) {
             choose(it)
@@ -83,16 +83,16 @@ internal fun ArchiveIntervalCard(interval: AutoArchiveInterval, choose: (AutoArc
 @Composable
 internal fun ArchiveTile(side: androidx.compose.ui.unit.Dp) {
     Box(
-        Modifier.size(side).background(TabsPalette.archiveTile.ardiaGradient(), RoundedCornerShape(side * 0.25f)),
+        Modifier.size(side).background(TabsPalette.archiveTile.aeriGradient(), RoundedCornerShape(side * 0.25f)),
         contentAlignment = Alignment.Center,
     ) {
-        Icon(ArdiaSymbols.archiveboxFill, null, Modifier.size(side * 0.55f), tint = Color.White)
+        Icon(AeriSymbols.archiveboxFill, null, Modifier.size(side * 0.55f), tint = Color.White)
     }
 }
 
 @Composable
 internal fun IntervalPicker(interval: AutoArchiveInterval, choose: (AutoArchiveInterval) -> Unit) {
-    val dark = LocalArdiaDarkTheme.current
+    val dark = LocalAeriDarkTheme.current
     var open by remember { mutableStateOf(false) }
     val label = stringResource(R.string.tabs_archive_inactive_tabs)
     Box {
@@ -104,12 +104,12 @@ internal fun IntervalPicker(interval: AutoArchiveInterval, choose: (AutoArchiveI
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(4.dp),
         ) {
-            Text(interval.title, style = ArdiaType.body, color = SystemPalette.secondaryLabel.resolve(dark))
-            Icon(ArdiaSymbols.chevronUpChevronDown, null, Modifier.size(14.dp), tint = SystemPalette.secondaryLabel.resolve(dark))
+            Text(interval.title, style = AeriType.body, color = SystemPalette.secondaryLabel.resolve(dark))
+            Icon(AeriSymbols.chevronUpChevronDown, null, Modifier.size(14.dp), tint = SystemPalette.secondaryLabel.resolve(dark))
         }
         GlassMenu(expanded = open, onDismissRequest = { open = false }) {
             for (option in AutoArchiveInterval.entries) {
-                MenuRow(option.title, if (option == interval) ArdiaSymbols.checkmark else null) {
+                MenuRow(option.title, if (option == interval) AeriSymbols.checkmark else null) {
                     open = false
                     if (option != interval) choose(option)
                 }

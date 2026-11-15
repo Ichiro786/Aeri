@@ -12,7 +12,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 import com.ardia.appmodel.AppModel
-import com.ardia.design.LocalArdiaDarkTheme
+import com.ardia.design.LocalAeriDarkTheme
 import com.ardia.design.ProfileLook
 
 object StatusBarInk {
@@ -41,7 +41,7 @@ object StatusBarInk {
 
 @Composable
 fun StatusBarInkOwner(model: AppModel) {
-    val dark = LocalArdiaDarkTheme.current
+    val dark = LocalAeriDarkTheme.current
     val wanted = StatusBarInk.darkIcons(StatusBarInk.layer(model), model.look, dark, model.isIncognito)
     val context = LocalContext.current
     val view = LocalView.current

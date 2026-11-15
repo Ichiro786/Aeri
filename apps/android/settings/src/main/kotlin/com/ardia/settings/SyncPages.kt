@@ -56,8 +56,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.ardia.appmodel.SettingsRoute
-import com.ardia.design.ArdiaSymbols
-import com.ardia.design.ArdiaType
+import com.ardia.design.AeriSymbols
+import com.ardia.design.AeriType
 import com.ardia.design.Motion
 import com.ardia.design.Palette
 import com.ardia.design.ProfileBackdrop
@@ -173,7 +173,7 @@ fun SyncSettingsPage(nav: SettingsNav) {
                         SettingsHero(
                             title = stringResource(R.string.sync_with_mac),
                             subtitle = words.heroSubtitle.text,
-                            icon = ArdiaSymbols.macbookAndIphone,
+                            icon = AeriSymbols.macbookAndIphone,
                             tint = SettingsTint.sync,
                         ) {
                             Box(Modifier.fillMaxWidth().animateContentSize(Motion.smooth.spec())) {
@@ -233,10 +233,10 @@ fun SyncSettingsPage(nav: SettingsNav) {
 private fun LazyListScope.offSections() {
     item(key = "features") {
         SettingsGroup(header = stringResource(R.string.sync_what_you_get), footer = stringResource(R.string.sync_off_footer)) {
-            SyncFeatureRow(ArdiaSymbols.macbook, stringResource(R.string.sync_feature_mac_tabs), showsDivider = true)
-            SyncFeatureRow(ArdiaSymbols.pinFill, stringResource(R.string.sync_feature_pinned), showsDivider = true)
-            SyncFeatureRow(ArdiaSymbols.paperplaneFill, stringResource(R.string.sync_feature_send), showsDivider = true)
-            SyncFeatureRow(ArdiaSymbols.clockArrowCirclepath, stringResource(R.string.sync_feature_history))
+            SyncFeatureRow(AeriSymbols.macbook, stringResource(R.string.sync_feature_mac_tabs), showsDivider = true)
+            SyncFeatureRow(AeriSymbols.pinFill, stringResource(R.string.sync_feature_pinned), showsDivider = true)
+            SyncFeatureRow(AeriSymbols.paperplaneFill, stringResource(R.string.sync_feature_send), showsDivider = true)
+            SyncFeatureRow(AeriSymbols.clockArrowCirclepath, stringResource(R.string.sync_feature_history))
         }
     }
 }
@@ -250,7 +250,7 @@ private fun SyncFeatureRow(icon: androidx.compose.ui.graphics.vector.ImageVector
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Icon(icon, null, Modifier.width(28.dp).size(20.dp), tint = Palette.formAccent.current)
-            Text(title, style = ArdiaType.body, color = SystemPalette.label.current)
+            Text(title, style = AeriType.body, color = SystemPalette.label.current)
         }
         if (showsDivider) RowDivider(SettingsLayout.rowInset + 28.dp + Spacing.small)
     }
@@ -407,7 +407,7 @@ fun SyncConnectPage(nav: SettingsNav, onConnected: () -> Unit) {
         showsTitle = heroHidden,
     ) {
         item(key = "hero") {
-            SettingsHero(stringResource(R.string.sync_connect), stringResource(R.string.connect_subtitle), ArdiaSymbols.macbookAndIphone, SettingsTint.sync)
+            SettingsHero(stringResource(R.string.sync_connect), stringResource(R.string.connect_subtitle), AeriSymbols.macbookAndIphone, SettingsTint.sync)
         }
         item(key = "steps") {
             SettingsGroup(header = stringResource(R.string.connect_two_steps), footer = stringResource(R.string.connect_footer)) {
@@ -421,18 +421,18 @@ fun SyncConnectPage(nav: SettingsNav, onConnected: () -> Unit) {
                         AnimatedContent(hasPhrase, transitionSpec = { fadeIn() togetherWith fadeOut() }, label = "phraseStep") { added ->
                             if (added) {
                                 Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(Spacing.tight)) {
-                                    Icon(ArdiaSymbols.checkmarkCircleFill, null, Modifier.size(18.dp), tint = goodInk())
-                                    Text(stringResource(R.string.connect_phrase_added), style = ArdiaType.subheadline.medium, color = goodInk(), modifier = Modifier.weight(1f))
+                                    Icon(AeriSymbols.checkmarkCircleFill, null, Modifier.size(18.dp), tint = goodInk())
+                                    Text(stringResource(R.string.connect_phrase_added), style = AeriType.subheadline.medium, color = goodInk(), modifier = Modifier.weight(1f))
                                     BarTextButton(stringResource(R.string.connect_change), onClick = { nav.push(SettingsDestination.EnterWords) })
                                 }
                             } else {
                                 FlowRow(horizontalArrangement = Arrangement.spacedBy(Spacing.tight), verticalArrangement = Arrangement.spacedBy(Spacing.tight)) {
                                     CapsuleButton(
-                                        stringResource(R.string.connect_scan_code), onClick = { scanning = true }, icon = ArdiaSymbols.qrcodeViewfinder, prominent = true,
+                                        stringResource(R.string.connect_scan_code), onClick = { scanning = true }, icon = AeriSymbols.qrcodeViewfinder, prominent = true,
                                         modifier = Modifier.testTag(SettingsTags.row("scanCode")),
                                     )
                                     CapsuleButton(
-                                        stringResource(R.string.connect_enter_words), onClick = { nav.push(SettingsDestination.EnterWords) }, icon = ArdiaSymbols.characterCursorIbeam,
+                                        stringResource(R.string.connect_enter_words), onClick = { nav.push(SettingsDestination.EnterWords) }, icon = AeriSymbols.characterCursorIbeam,
                                         modifier = Modifier.testTag(SettingsTags.row("enterWords")),
                                     )
                                 }
@@ -448,14 +448,14 @@ fun SyncConnectPage(nav: SettingsNav, onConnected: () -> Unit) {
                         Column(verticalArrangement = Arrangement.spacedBy(Spacing.tight)) {
                             if (folder != null && !session.isConnecting) {
                                 Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-                                    Icon(ArdiaSymbols.folderFill, null, Modifier.size(16.dp), tint = SystemPalette.secondaryLabel.current)
-                                    Text(folder.name, style = ArdiaType.subheadline.medium, color = SystemPalette.secondaryLabel.current)
+                                    Icon(AeriSymbols.folderFill, null, Modifier.size(16.dp), tint = SystemPalette.secondaryLabel.current)
+                                    Text(folder.name, style = AeriType.subheadline.medium, color = SystemPalette.secondaryLabel.current)
                                 }
                             }
                             if (session.isConnecting) {
                                 Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(Spacing.tight)) {
                                     CircularProgressIndicator(Modifier.size(16.dp), strokeWidth = 2.dp, color = SystemPalette.secondaryLabel.current)
-                                    Text(stringResource(R.string.connect_connecting), style = ArdiaType.subheadline, color = SystemPalette.secondaryLabel.current)
+                                    Text(stringResource(R.string.connect_connecting), style = AeriType.subheadline, color = SystemPalette.secondaryLabel.current)
                                 }
                             } else {
                                 CapsuleButton(
@@ -465,7 +465,7 @@ fun SyncConnectPage(nav: SettingsNav, onConnected: () -> Unit) {
                                 )
                             }
                             AnimatedVisibility(session.failure != null) {
-                                Text(session.failure.orEmpty(), style = ArdiaType.subheadline, color = problemInk())
+                                Text(session.failure.orEmpty(), style = AeriType.subheadline, color = problemInk())
                             }
                         }
                     }
@@ -523,12 +523,12 @@ fun RecoveryPhraseEntryPage(nav: SettingsNav) {
         item(key = "phrase") {
             Column {
                 Row(Modifier.fillMaxWidth().padding(start = Spacing.page + SettingsLayout.rowInset, end = Spacing.page + SettingsLayout.rowInset, bottom = Spacing.tight)) {
-                    Text(stringResource(R.string.phrase_header), style = ArdiaType.footnote, color = SystemPalette.secondaryLabel.current)
+                    Text(stringResource(R.string.phrase_header), style = AeriType.footnote, color = SystemPalette.secondaryLabel.current)
                     Spacer(Modifier.weight(1f))
                     AnimatedContent(check.counterText, transitionSpec = { fadeIn() togetherWith fadeOut() }, label = "wordCount") { counter ->
                         Text(
                             counter,
-                            style = ArdiaType.footnote.monospacedDigits,
+                            style = AeriType.footnote.monospacedDigits,
                             color = if (check.isTooLong) problemInk() else SystemPalette.secondaryLabel.current,
                             modifier = Modifier.testTag(SettingsTags.row("wordCount")),
                         )
@@ -566,7 +566,7 @@ fun RecoveryPhraseEntryPage(nav: SettingsNav) {
         if (draft.isEmpty()) {
             item(key = "paste") {
                 Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
-                    CapsuleButton(stringResource(R.string.settings_paste), icon = ArdiaSymbols.docOnDoc, onClick = {
+                    CapsuleButton(stringResource(R.string.settings_paste), icon = AeriSymbols.docOnDoc, onClick = {
                         scope.launch {
                             val text = clipboard.getClipEntry()?.clipData?.takeIf { it.itemCount > 0 }?.getItemAt(0)?.text?.toString()
                             if (!text.isNullOrBlank()) draft = text

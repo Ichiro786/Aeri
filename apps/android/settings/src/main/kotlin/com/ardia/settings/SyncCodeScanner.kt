@@ -71,8 +71,8 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
-import com.ardia.design.ArdiaSymbols
-import com.ardia.design.ArdiaType
+import com.ardia.design.AeriSymbols
+import com.ardia.design.AeriType
 import com.ardia.design.Motion
 import com.ardia.design.Palette
 import com.ardia.design.Radius
@@ -162,7 +162,7 @@ fun SyncCodeScanner(onScan: (String) -> Unit, onEnterWords: () -> Unit, onCancel
         Box(Modifier.windowInsetsPadding(WindowInsets.safeDrawing).padding(Spacing.tight)) {
             Text(
                 stringResource(R.string.settings_cancel),
-                style = ArdiaType.body,
+                style = AeriType.body,
                 color = Color.White,
                 modifier = Modifier
                     .clip(RoundedCornerShape(50))
@@ -186,8 +186,8 @@ private fun Viewfinder(showsRejection: Boolean, onEnterWords: () -> Unit) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(Spacing.tight),
         ) {
-            Text(stringResource(R.string.scan_title), style = ArdiaType.title3.bold, color = Color.White, textAlign = TextAlign.Center)
-            Text(stringResource(R.string.scan_detail), style = ArdiaType.subheadline, color = Color.White.copy(alpha = 0.75f), textAlign = TextAlign.Center)
+            Text(stringResource(R.string.scan_title), style = AeriType.title3.bold, color = Color.White, textAlign = TextAlign.Center)
+            Text(stringResource(R.string.scan_detail), style = AeriType.subheadline, color = Color.White.copy(alpha = 0.75f), textAlign = TextAlign.Center)
         }
         Spacer(Modifier.weight(1f))
         Canvas(Modifier.size(250.dp).clearAndSetSemantics {}) { drawViewfinderCorners(Color.White.copy(alpha = 0.9f), 3.dp.toPx(), 0.18f) }
@@ -195,7 +195,7 @@ private fun Viewfinder(showsRejection: Boolean, onEnterWords: () -> Unit) {
         AnimatedVisibility(showsRejection, enter = fadeIn(Motion.snappy.spec()), exit = fadeOut(Motion.snappy.spec())) {
             Text(
                 SyncJoin.SCAN_REJECTED,
-                style = ArdiaType.subheadline.medium,
+                style = AeriType.subheadline.medium,
                 color = Color.White,
                 textAlign = TextAlign.Center,
                 modifier = Modifier
@@ -218,10 +218,10 @@ private fun Unavailable(title: String, message: String, showsSettings: Boolean, 
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(Spacing.medium, Alignment.CenterVertically),
     ) {
-        Icon(if (showsSettings) ArdiaSymbols.gearshape else ArdiaSymbols.qrcodeViewfinder, null, Modifier.size(48.dp), tint = Color.White.copy(alpha = 0.85f))
+        Icon(if (showsSettings) AeriSymbols.gearshape else AeriSymbols.qrcodeViewfinder, null, Modifier.size(48.dp), tint = Color.White.copy(alpha = 0.85f))
         Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(Spacing.tight)) {
-            Text(title, style = ArdiaType.title3.bold, color = Color.White, textAlign = TextAlign.Center)
-            Text(message, style = ArdiaType.subheadline, color = Color.White.copy(alpha = 0.75f), textAlign = TextAlign.Center)
+            Text(title, style = AeriType.title3.bold, color = Color.White, textAlign = TextAlign.Center)
+            Text(message, style = AeriType.subheadline, color = Color.White.copy(alpha = 0.75f), textAlign = TextAlign.Center)
         }
         Column(Modifier.padding(top = Spacing.tight), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(Spacing.small)) {
             if (showsSettings) {
@@ -243,7 +243,7 @@ private fun GlassButton(text: String, onClick: () -> Unit, modifier: Modifier = 
             .padding(horizontal = Spacing.large, vertical = Spacing.small),
         contentAlignment = Alignment.Center,
     ) {
-        Text(text, style = ArdiaType.body.semibold, color = if (prominent) Palette.onPrimaryAction.resolve(true) else Color.White)
+        Text(text, style = AeriType.body.semibold, color = if (prominent) Palette.onPrimaryAction.resolve(true) else Color.White)
     }
 }
 
@@ -301,7 +301,7 @@ private fun CameraPreview(modifier: Modifier = Modifier, onPayload: (String) -> 
 }
 
 private class QrFrameAnalyzer(private val onPayload: (String) -> Unit) : ImageAnalysis.Analyzer {
-    val executor: ExecutorService = Executors.newSingleThreadExecutor { work -> Thread(work, "ardia-sync-scanner").apply { isDaemon = true } }
+    val executor: ExecutorService = Executors.newSingleThreadExecutor { work -> Thread(work, "aeri-sync-scanner").apply { isDaemon = true } }
     private val decoder = QrDecoder()
     private val main = Handler(Looper.getMainLooper())
     private var buffer = ByteArray(0)

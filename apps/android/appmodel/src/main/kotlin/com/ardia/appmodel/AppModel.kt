@@ -34,7 +34,7 @@ import com.ardia.browser.PrivatePagesUnavailableException
 import com.ardia.browser.SitePreferences
 import com.ardia.browser.VisitKind
 import com.ardia.browser.WebsiteDataKind
-import com.ardia.design.ArdiaSymbols
+import com.ardia.design.AeriSymbols
 import com.ardia.design.ProfileLook
 import com.ardia.design.ReceivedTabsSender
 import com.ardia.design.Toast
@@ -253,7 +253,7 @@ class AppModel(
     internal fun allowsIncognito(): Boolean {
         val supported = web.separatesPrivatePages
         supportsIncognito = supported
-        if (!supported) toasts.show(Toast(INCOGNITO_NEEDS_WEBVIEW, ArdiaSymbols.exclamationmarkTriangleFill))
+        if (!supported) toasts.show(Toast(INCOGNITO_NEEDS_WEBVIEW, AeriSymbols.exclamationmarkTriangleFill))
         return supported
     }
 
@@ -274,7 +274,7 @@ class AppModel(
             throw cancelled
         } catch (failure: Exception) {
             storeOpenFailed = true
-            toasts.show(Toast(STORE_UNAVAILABLE, ArdiaSymbols.exclamationmarkTriangleFill, Toast.LONG_DURATION_MILLIS))
+            toasts.show(Toast(STORE_UNAVAILABLE, AeriSymbols.exclamationmarkTriangleFill, Toast.LONG_DURATION_MILLIS))
             return
         } finally {
             isOpeningStore = false
@@ -428,7 +428,7 @@ class AppModel(
     fun pinCurrentToMac() {
         val tab = tabs.selectedTab ?: return
         if (!syncState.isEnabled) {
-            toasts.show(Toast(SYNC_TO_PIN, ArdiaSymbols.laptopcomputer, onTap = { sheet = Sheet.SyncSetup }))
+            toasts.show(Toast(SYNC_TO_PIN, AeriSymbols.laptopcomputer, onTap = { sheet = Sheet.SyncSetup }))
             return
         }
         pinToMac(tab)
@@ -463,7 +463,7 @@ class AppModel(
         val enabled = !blockersEnabled(page)
         blocking.setExempt(host, !enabled, page.isPrivate)
         val message = if (enabled) "Blockers enabled for $host" else "Blockers disabled for $host"
-        toasts.show(Toast(message, if (enabled) ArdiaSymbols.handRaisedFill else ArdiaSymbols.shieldLefthalfFilled))
+        toasts.show(Toast(message, if (enabled) AeriSymbols.handRaisedFill else AeriSymbols.shieldLefthalfFilled))
         page.reload()
     }
 
@@ -529,7 +529,7 @@ class AppModel(
 
     private fun refusePrivatePage(id: String) {
         supportsIncognito = false
-        toasts.show(Toast(INCOGNITO_NEEDS_WEBVIEW, ArdiaSymbols.exclamationmarkTriangleFill))
+        toasts.show(Toast(INCOGNITO_NEEDS_WEBVIEW, AeriSymbols.exclamationmarkTriangleFill))
         incognitoState = false
         val tabStore = tabStore ?: return
         tabStore.close(id)
@@ -570,7 +570,7 @@ class AppModel(
             is PageEvent.OpenWindow -> openPopup(id, event.popup)
             is PageEvent.Download -> startDownload(event.download)
             PageEvent.CloseRequested -> closeTab(id)
-            is PageEvent.ExternalAppMissing -> toasts.show(Toast(NO_APP_FOR_LINK, ArdiaSymbols.exclamationmarkTriangleFill))
+            is PageEvent.ExternalAppMissing -> toasts.show(Toast(NO_APP_FOR_LINK, AeriSymbols.exclamationmarkTriangleFill))
             is PageEvent.LongPress -> browse.press = BrowseSession.PagePress(id, event.target, event.x, event.y)
         }
     }
@@ -607,7 +607,7 @@ class AppModel(
                 privateDownloadIds = privateDownloadIds + id
                 privateStopAnnounced = false
             }
-            toasts.show(Toast(downloading(download.fileName), ArdiaSymbols.arrowDownCircleFill))
+            toasts.show(Toast(downloading(download.fileName), AeriSymbols.arrowDownCircleFill))
         } else {
             toasts.show(Toasts.downloadFailed(download.fileName))
         }
@@ -660,7 +660,7 @@ class AppModel(
     internal fun noteSaveFailure(failure: Throwable?) {
         val wasFailing = saveFailure != null
         saveFailure = failure
-        if (failure != null && !wasFailing) toasts.show(Toast(SAVE_FAILED, ArdiaSymbols.exclamationmarkTriangleFill, Toast.LONG_DURATION_MILLIS))
+        if (failure != null && !wasFailing) toasts.show(Toast(SAVE_FAILED, AeriSymbols.exclamationmarkTriangleFill, Toast.LONG_DURATION_MILLIS))
     }
 
     private fun endPrivateBrowsing() {
@@ -675,7 +675,7 @@ class AppModel(
 
     private fun announcePrivateDownloadsStopped(count: Int) {
         privateStopAnnounced = true
-        toasts.show(Toast(stoppedPrivateDownloads(count), ArdiaSymbols.exclamationmarkTriangleFill, Toast.LONG_DURATION_MILLIS))
+        toasts.show(Toast(stoppedPrivateDownloads(count), AeriSymbols.exclamationmarkTriangleFill, Toast.LONG_DURATION_MILLIS))
     }
 
     val deckTabs: List<BrowserTab> get() = tabs.deckTabs
@@ -865,7 +865,7 @@ class AppModel(
         if (!BrowserUrl.isSyncable(tab.url)) return
         scope.launch {
             val sent = runCatching { sync.send(tab.url, tab.title, device, tab.profileSyncId, fromPrivateTab = tab.isPrivate) }.getOrDefault(false)
-            toasts.show(if (sent) Toasts.sentTab(device.name) else Toast(couldNotSend(device.name), ArdiaSymbols.exclamationmarkTriangleFill))
+            toasts.show(if (sent) Toasts.sentTab(device.name) else Toast(couldNotSend(device.name), AeriSymbols.exclamationmarkTriangleFill))
         }
     }
 
@@ -873,7 +873,7 @@ class AppModel(
         if (tab.isPrivate || !BrowserUrl.isSyncable(tab.url)) return
         scope.launch {
             val pinned = runCatching { sync.pinToMac(tab.url, tab.title, tab.profileSyncId) }.getOrDefault(false)
-            toasts.show(if (pinned) Toast(PINNED, ArdiaSymbols.starFill) else Toast(COULD_NOT_PIN, ArdiaSymbols.exclamationmarkTriangleFill))
+            toasts.show(if (pinned) Toast(PINNED, AeriSymbols.starFill) else Toast(COULD_NOT_PIN, AeriSymbols.exclamationmarkTriangleFill))
         }
     }
 
@@ -932,7 +932,7 @@ class AppModel(
             SearchSuggestion.Kind.Url, SearchSuggestion.Kind.History, SearchSuggestion.Kind.Bookmark -> url?.let { openPage(it, TabOrigin.TYPED) }
             SearchSuggestion.Kind.Calculation -> suggestion.copyValue?.let { value ->
                 system.copyText(value)
-                toasts.show(Toast("Copied $value", ArdiaSymbols.equalCircleFill))
+                toasts.show(Toast("Copied $value", AeriSymbols.equalCircleFill))
             }
         }
     }
@@ -1178,11 +1178,11 @@ class AppModel(
             syncSnapshot.devices.firstOrNull { it.id == deviceId }
         }
         if (!syncState.isEnabled || device == null) {
-            toasts.show(Toast(couldNotSend(device?.name ?: YOUR_MAC), ArdiaSymbols.exclamationmarkTriangleFill))
+            toasts.show(Toast(couldNotSend(device?.name ?: YOUR_MAC), AeriSymbols.exclamationmarkTriangleFill))
             return false
         }
         val sent = runCatching { sync.send(url, title, device) }.getOrDefault(false)
-        toasts.show(if (sent) Toasts.sentTab(device.name) else Toast(couldNotSend(device.name), ArdiaSymbols.exclamationmarkTriangleFill))
+        toasts.show(if (sent) Toasts.sentTab(device.name) else Toast(couldNotSend(device.name), AeriSymbols.exclamationmarkTriangleFill))
         return sent
     }
 
@@ -1333,8 +1333,8 @@ class AppModel(
 
         fun couldNotSend(deviceName: String) = "Couldn’t Send to $deviceName"
 
-        const val SAVE_FAILED = "Ardia Can’t Save Tabs and History"
-        const val STORE_UNAVAILABLE = "Ardia Can’t Open Your Tabs. Free Up Space and Reopen Ardia."
+        const val SAVE_FAILED = "Aeri Can’t Save Tabs and History"
+        const val STORE_UNAVAILABLE = "Aeri Can’t Open Your Tabs. Free Up Space and Reopen Aeri."
 
         fun stoppedPrivateDownloads(count: Int) = if (count == 1) "Stopped 1 Private Download" else "Stopped $count Private Downloads"
 

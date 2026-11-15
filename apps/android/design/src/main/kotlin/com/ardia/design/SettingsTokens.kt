@@ -8,14 +8,14 @@ object SettingsTile {
 }
 
 object SettingsTint {
-    val neutral = ardiaColor(0x86888D)
-    val red = ardiaColor(0xFF5A5F)
-    val orange = ardiaColor(0xFF901A)
-    val yellow = ardiaColor(0xFFC829)
-    val blue = ardiaColor(0x458AFF)
-    val deepBlue = ardiaColor(0x007AFF)
-    val purple = ardiaColor(0xB059EE)
-    val green = ardiaColor(0x3EA82E)
+    val neutral = aeriColor(0x86888D)
+    val red = aeriColor(0xFF5A5F)
+    val orange = aeriColor(0xFF901A)
+    val yellow = aeriColor(0xFFC829)
+    val blue = aeriColor(0x458AFF)
+    val deepBlue = aeriColor(0x007AFF)
+    val purple = aeriColor(0xB059EE)
+    val green = aeriColor(0x3EA82E)
 
     val sync = blue
     val ads = red
@@ -25,12 +25,12 @@ object SettingsTint {
     val archive = purple
     val keyboard = yellow
     val swipe = blue
-    val nightShade = ardiaColor(0x5856D6)
+    val nightShade = aeriColor(0x5856D6)
     val appLinks = green
-    val bottomBar = ardiaColor(0x30B0C7)
+    val bottomBar = aeriColor(0x30B0C7)
     val defaultBrowser = deepBlue
     val clearData = red
-    val export = ardiaColor(0x0153FF)
+    val export = aeriColor(0x0153FF)
     val onboarding = orange
 }
 
@@ -43,7 +43,7 @@ object MenuLayout {
     val rowHeight = 50.dp
 }
 
-object ArdiaColors {
+object AeriColors {
     val accentText = Palette.formAccent
     val title = SystemPalette.label
 }

@@ -32,9 +32,9 @@ class ColorsTest {
         assertRgb(doubleArrayOf(0.37000, 0.29020, 0.05949), LegibleInk.resolve(SettingsTint.yellow, dark = false, increasedContrast = true))
         assertRgb(doubleArrayOf(0.17749, 0.48094, 0.13169), LegibleInk.resolve(SettingsTint.green, dark = false))
         assertRgb(doubleArrayOf(0.41514, 0.42133, 0.43682), LegibleInk.resolve(SettingsTint.neutral, dark = false))
-        assertRgb(doubleArrayOf(0.0, 0.40667, 0.85000), LegibleInk.resolve(ardiaColor(0x007AFF), dark = false))
-        assertRgb(doubleArrayOf(0.06000, 0.50973, 1.0), LegibleInk.resolve(ardiaColor(0x007AFF), dark = true))
-        assertRgb(doubleArrayOf(0.02392, 0.31576, 0.61000), LegibleInk.resolve(ardiaColor(0x0A84FF), dark = false, increasedContrast = true))
+        assertRgb(doubleArrayOf(0.0, 0.40667, 0.85000), LegibleInk.resolve(aeriColor(0x007AFF), dark = false))
+        assertRgb(doubleArrayOf(0.06000, 0.50973, 1.0), LegibleInk.resolve(aeriColor(0x007AFF), dark = true))
+        assertRgb(doubleArrayOf(0.02392, 0.31576, 0.61000), LegibleInk.resolve(aeriColor(0x0A84FF), dark = false, increasedContrast = true))
     }
 
     @Test
@@ -45,8 +45,8 @@ class ColorsTest {
 
     @Test
     fun `adaptive colours pick by appearance`() {
-        assertEquals(ardiaColor(0x6395FC), BrowsePalette.loadingBorder.resolve(dark = false))
-        assertEquals(ardiaColor(0x4A77D4), BrowsePalette.loadingBorder.resolve(dark = true))
-        assertEquals(ardiaColor(0x007AFF), BrowsePalette.searchAccent.resolve(dark = false))
+        assertEquals(aeriColor(0x6395FC), BrowsePalette.loadingBorder.resolve(dark = false))
+        assertEquals(aeriColor(0x4A77D4), BrowsePalette.loadingBorder.resolve(dark = true))
+        assertEquals(aeriColor(0x007AFF), BrowsePalette.searchAccent.resolve(dark = false))
     }
 }

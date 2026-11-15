@@ -68,11 +68,11 @@ import com.ardia.appmodel.AppModel
 import com.ardia.design.GlassAlert
 import com.ardia.design.GlassMenu
 import com.ardia.design.GlassMenuDivider
-import com.ardia.design.ArdiaSymbols
-import com.ardia.design.ArdiaType
+import com.ardia.design.AeriSymbols
+import com.ardia.design.AeriType
 import com.ardia.design.BrowsePalette
 import com.ardia.design.FaviconImage
-import com.ardia.design.LocalArdiaDarkTheme
+import com.ardia.design.LocalAeriDarkTheme
 import com.ardia.design.LocalProfileLook
 import com.ardia.design.LocalReduceMotion
 import com.ardia.design.Motion
@@ -184,38 +184,38 @@ internal fun LazyItemScope.listItemMotion(reduceMotion: Boolean): Modifier {
 
 @Composable
 private fun ArchiveTopBar(interval: AutoArchiveInterval, canDelete: Boolean, done: () -> Unit, choose: (AutoArchiveInterval) -> Unit, deleteAll: () -> Unit) {
-    val dark = LocalArdiaDarkTheme.current
+    val dark = LocalAeriDarkTheme.current
     var menu by remember { mutableStateOf(false) }
     Box(Modifier.fillMaxWidth().heightIn(min = 52.dp).padding(horizontal = Spacing.tight)) {
         TextButton(onClick = done, modifier = Modifier.align(Alignment.CenterStart)) {
-            Text(stringResource(R.string.archive_done), style = ArdiaType.body.semibold, color = Palette.formAccent.resolve(dark))
+            Text(stringResource(R.string.archive_done), style = AeriType.body.semibold, color = Palette.formAccent.resolve(dark))
         }
         Text(
             stringResource(R.string.archive_title),
-            style = ArdiaType.headline,
+            style = AeriType.headline,
             color = SystemPalette.label.resolve(dark),
             modifier = Modifier.align(Alignment.Center).semantics { heading() },
         )
         Box(Modifier.align(Alignment.CenterEnd)) {
             val options = stringResource(R.string.archive_options)
             IconButton(onClick = { menu = true }, modifier = Modifier.semantics { contentDescription = options }) {
-                Icon(ArdiaSymbols.ellipsis, null, tint = Palette.formAccent.resolve(dark))
+                Icon(AeriSymbols.ellipsis, null, tint = Palette.formAccent.resolve(dark))
             }
             GlassMenu(expanded = menu, onDismissRequest = { menu = false }) {
                 Text(
                     stringResource(R.string.tabs_archive_inactive_tabs),
-                    style = ArdiaType.footnote,
+                    style = AeriType.footnote,
                     color = SystemPalette.secondaryLabel.resolve(dark),
                     modifier = Modifier.padding(horizontal = 16.dp, vertical = 6.dp),
                 )
                 for (option in AutoArchiveInterval.entries) {
-                    MenuRow(option.title, if (option == interval) ArdiaSymbols.checkmark else null) {
+                    MenuRow(option.title, if (option == interval) AeriSymbols.checkmark else null) {
                         menu = false
                         choose(option)
                     }
                 }
                 GlassMenuDivider()
-                MenuRow(stringResource(R.string.archive_delete_all_menu), ArdiaSymbols.trash, destructive = true, enabled = canDelete) {
+                MenuRow(stringResource(R.string.archive_delete_all_menu), AeriSymbols.trash, destructive = true, enabled = canDelete) {
                     menu = false
                     deleteAll()
                 }
@@ -226,7 +226,7 @@ private fun ArchiveTopBar(interval: AutoArchiveInterval, canDelete: Boolean, don
 
 @Composable
 private fun ArchiveSearchField(query: String, onChange: (String) -> Unit) {
-    val dark = LocalArdiaDarkTheme.current
+    val dark = LocalAeriDarkTheme.current
     val prompt = stringResource(R.string.archive_search_prompt)
     val secondary = SystemPalette.secondaryLabel.resolve(dark)
     Row(
@@ -239,14 +239,14 @@ private fun ArchiveSearchField(query: String, onChange: (String) -> Unit) {
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(6.dp),
     ) {
-        Icon(ArdiaSymbols.magnifyingglass, null, Modifier.size(17.dp), tint = secondary)
+        Icon(AeriSymbols.magnifyingglass, null, Modifier.size(17.dp), tint = secondary)
         Box(Modifier.weight(1f).padding(vertical = 8.dp)) {
-            if (query.isEmpty()) Text(prompt, style = ArdiaType.body, color = secondary, maxLines = 1)
+            if (query.isEmpty()) Text(prompt, style = AeriType.body, color = secondary, maxLines = 1)
             BasicTextField(
                 value = query,
                 onValueChange = onChange,
                 singleLine = true,
-                textStyle = ArdiaType.body.copy(color = SystemPalette.label.resolve(dark)),
+                textStyle = AeriType.body.copy(color = SystemPalette.label.resolve(dark)),
                 cursorBrush = SolidColor(Palette.formAccent.resolve(dark)),
                 modifier = Modifier.fillMaxWidth().semantics { contentDescription = prompt }.testTag(ARCHIVE_SEARCH_TAG),
             )
@@ -254,7 +254,7 @@ private fun ArchiveSearchField(query: String, onChange: (String) -> Unit) {
         if (query.isNotEmpty()) {
             val clear = stringResource(R.string.archive_clear_search)
             Icon(
-                ArdiaSymbols.xmarkCircleFill,
+                AeriSymbols.xmarkCircleFill,
                 clear,
                 Modifier.size(32.dp).clickable(onClickLabel = clear) { onChange("") }.padding(7.dp),
                 tint = secondary,
@@ -301,7 +301,7 @@ private fun ArchiveResults(model: AppModel, query: String, haptics: Haptics) {
 
 @Composable
 private fun ArchiveDayHeader(day: LocalDate, today: LocalDate) {
-    val dark = LocalArdiaDarkTheme.current
+    val dark = LocalAeriDarkTheme.current
     val locale = LocalConfiguration.current.locales[0] ?: Locale.getDefault()
     val label = when (val kind = ArchiveDayLabel.of(day, today)) {
         ArchiveDayLabel.Today -> stringResource(R.string.archive_today)
@@ -312,7 +312,7 @@ private fun ArchiveDayHeader(day: LocalDate, today: LocalDate) {
     }
     Text(
         label,
-        style = ArdiaType.subheadline.semibold,
+        style = AeriType.subheadline.semibold,
         color = SystemPalette.secondaryLabel.resolve(dark),
         modifier = Modifier
             .fillMaxWidth()
@@ -325,7 +325,7 @@ private fun ArchiveDayHeader(day: LocalDate, today: LocalDate) {
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun ArchiveRowItem(model: AppModel, tab: BrowserTab, haptics: Haptics, modifier: Modifier = Modifier) {
-    val dark = LocalArdiaDarkTheme.current
+    val dark = LocalAeriDarkTheme.current
     var menu by remember { mutableStateOf(false) }
     val restore = {
         haptics.selection()
@@ -344,7 +344,7 @@ private fun ArchiveRowItem(model: AppModel, tab: BrowserTab, haptics: Haptics, m
                 Modifier.fillMaxSize().background(SystemPalette.red.resolve(dark)).padding(horizontal = 20.dp),
                 contentAlignment = Alignment.CenterEnd,
             ) {
-                Icon(ArdiaSymbols.trash, stringResource(R.string.archive_delete), tint = Color.White)
+                Icon(AeriSymbols.trash, stringResource(R.string.archive_delete), tint = Color.White)
             }
         },
     ) {
@@ -356,23 +356,23 @@ private fun ArchiveRowItem(model: AppModel, tab: BrowserTab, haptics: Haptics, m
                     .combinedClickable(onClickLabel = hint, onLongClick = { menu = true }, onClick = restore),
             )
             GlassMenu(expanded = menu, onDismissRequest = { menu = false }) {
-                MenuRow(stringResource(R.string.archive_open), ArdiaSymbols.arrowUpForwardSquare) {
+                MenuRow(stringResource(R.string.archive_open), AeriSymbols.arrowUpForwardSquare) {
                     menu = false
                     model.restoreArchived(tab.id)
                 }
                 if (model.shareUrl(tab) != null) {
-                    MenuRow(stringResource(R.string.tabs_copy_link), ArdiaSymbols.link) {
+                    MenuRow(stringResource(R.string.tabs_copy_link), AeriSymbols.link) {
                         menu = false
                         model.copyLink(tab)
                         haptics.success()
                     }
-                    MenuRow(stringResource(R.string.tabs_share), ArdiaSymbols.squareAndArrowUp) {
+                    MenuRow(stringResource(R.string.tabs_share), AeriSymbols.squareAndArrowUp) {
                         menu = false
                         model.share(tab)
                     }
                 }
                 GlassMenuDivider()
-                MenuRow(stringResource(R.string.archive_delete), ArdiaSymbols.trash, destructive = true) {
+                MenuRow(stringResource(R.string.archive_delete), AeriSymbols.trash, destructive = true) {
                     menu = false
                     delete()
                 }
@@ -383,7 +383,7 @@ private fun ArchiveRowItem(model: AppModel, tab: BrowserTab, haptics: Haptics, m
 
 @Composable
 private fun ArchiveRow(tab: BrowserTab, modifier: Modifier = Modifier) {
-    val dark = LocalArdiaDarkTheme.current
+    val dark = LocalAeriDarkTheme.current
     val context = LocalContext.current
     val fontScale = LocalDensity.current.fontScale
     val newTab = stringResource(R.string.tabs_new_tab)
@@ -402,19 +402,19 @@ private fun ArchiveRow(tab: BrowserTab, modifier: Modifier = Modifier) {
         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
             Text(
                 TabText.title(tab, newTab),
-                style = ArdiaType.body,
+                style = AeriType.body,
                 color = SystemPalette.label.resolve(dark),
                 maxLines = if (fontScale >= LARGE_FONT_SCALE) Int.MAX_VALUE else 2,
                 overflow = TextOverflow.Ellipsis,
             )
-            Text(facts, style = ArdiaType.subheadline, color = SystemPalette.secondaryLabel.resolve(dark), maxLines = 1, overflow = TextOverflow.Ellipsis)
+            Text(facts, style = AeriType.subheadline, color = SystemPalette.secondaryLabel.resolve(dark), maxLines = 1, overflow = TextOverflow.Ellipsis)
         }
     }
 }
 
 @Composable
 private fun ArchiveEmptyState(modifier: Modifier = Modifier) {
-    val dark = LocalArdiaDarkTheme.current
+    val dark = LocalAeriDarkTheme.current
     Column(
         modifier.widthIn(max = 320.dp).padding(Spacing.large),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -422,23 +422,23 @@ private fun ArchiveEmptyState(modifier: Modifier = Modifier) {
     ) {
         ArchiveTile(64.dp)
         Spacer(Modifier.size(2.dp))
-        Text(stringResource(R.string.archive_empty_title), style = ArdiaType.title2.semibold, color = SystemPalette.label.resolve(dark), textAlign = TextAlign.Center)
-        Text(stringResource(R.string.archive_empty_message), style = ArdiaType.subheadline, color = SystemPalette.secondaryLabel.resolve(dark), textAlign = TextAlign.Center)
+        Text(stringResource(R.string.archive_empty_title), style = AeriType.title2.semibold, color = SystemPalette.label.resolve(dark), textAlign = TextAlign.Center)
+        Text(stringResource(R.string.archive_empty_message), style = AeriType.subheadline, color = SystemPalette.secondaryLabel.resolve(dark), textAlign = TextAlign.Center)
     }
 }
 
 @Composable
 private fun ArchiveNoResults(query: String) {
-    val dark = LocalArdiaDarkTheme.current
+    val dark = LocalAeriDarkTheme.current
     Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         Column(
             Modifier.widthIn(max = 320.dp).padding(Spacing.large),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(10.dp),
         ) {
-            Icon(ArdiaSymbols.magnifyingglass, null, Modifier.size(44.dp), tint = SystemPalette.secondaryLabel.resolve(dark))
-            Text(stringResource(R.string.archive_no_results, query), style = ArdiaType.title2.semibold, color = SystemPalette.label.resolve(dark), textAlign = TextAlign.Center)
-            Text(stringResource(R.string.archive_no_results_message), style = ArdiaType.subheadline, color = SystemPalette.secondaryLabel.resolve(dark), textAlign = TextAlign.Center)
+            Icon(AeriSymbols.magnifyingglass, null, Modifier.size(44.dp), tint = SystemPalette.secondaryLabel.resolve(dark))
+            Text(stringResource(R.string.archive_no_results, query), style = AeriType.title2.semibold, color = SystemPalette.label.resolve(dark), textAlign = TextAlign.Center)
+            Text(stringResource(R.string.archive_no_results_message), style = AeriType.subheadline, color = SystemPalette.secondaryLabel.resolve(dark), textAlign = TextAlign.Center)
         }
     }
 }

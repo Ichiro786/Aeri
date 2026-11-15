@@ -78,27 +78,27 @@ data class FrostedStyle(
         val bar = FrostedStyle(
             blurRadius = 24.dp,
             saturation = 1.8f,
-            tint = adaptive(ardiaColor(0xFFFFFF, 0.3f), ardiaColor(0x1C1C1E, 0.38f)),
-            fallback = adaptive(ardiaColor(0xF7F7F9, 0.94f), ardiaColor(0x1C1C1E, 0.94f)),
+            tint = adaptive(aeriColor(0xFFFFFF, 0.3f), aeriColor(0x1C1C1E, 0.38f)),
+            fallback = adaptive(aeriColor(0xF7F7F9, 0.94f), aeriColor(0x1C1C1E, 0.94f)),
         )
         val sheet = FrostedStyle(
             blurRadius = 30.dp,
             saturation = 1.8f,
-            tint = adaptive(ardiaColor(0xFFFFFF, 0.62f), ardiaColor(0x1C1C1E, 0.64f)),
-            fallback = adaptive(ardiaColor(0xF2F2F7, 0.97f), ardiaColor(0x1C1C1E, 0.97f)),
+            tint = adaptive(aeriColor(0xFFFFFF, 0.62f), aeriColor(0x1C1C1E, 0.64f)),
+            fallback = adaptive(aeriColor(0xF2F2F7, 0.97f), aeriColor(0x1C1C1E, 0.97f)),
         )
         val glass = FrostedStyle(
             blurRadius = 12.dp,
             saturation = 1.5f,
-            tint = adaptive(ardiaColor(0xFFFFFF, 0.45f), ardiaColor(0xFFFFFF, 0.1f)),
-            fallback = adaptive(ardiaColor(0xFFFFFF, 0.82f), ardiaColor(0x3A3A3C, 0.82f)),
+            tint = adaptive(aeriColor(0xFFFFFF, 0.45f), aeriColor(0xFFFFFF, 0.1f)),
+            fallback = adaptive(aeriColor(0xFFFFFF, 0.82f), aeriColor(0x3A3A3C, 0.82f)),
             edge = adaptive(Color.Black.copy(alpha = 0.06f), Color.White.copy(alpha = 0.1f)),
         )
         val thin = FrostedStyle(
             blurRadius = 20.dp,
             saturation = 1.6f,
-            tint = adaptive(ardiaColor(0xFFFFFF, 0.18f), ardiaColor(0x000000, 0.22f)),
-            fallback = adaptive(ardiaColor(0xF2F2F7, 0.9f), ardiaColor(0x1C1C1E, 0.9f)),
+            tint = adaptive(aeriColor(0xFFFFFF, 0.18f), aeriColor(0x000000, 0.22f)),
+            fallback = adaptive(aeriColor(0xF2F2F7, 0.9f), aeriColor(0x1C1C1E, 0.9f)),
         )
     }
 }
@@ -198,7 +198,7 @@ private class FrostedNode(var backdrop: FrostedBackdrop?, var shape: Shape, var 
     }
 
     override fun ContentDrawScope.draw() {
-        val dark = currentValueOf(LocalArdiaDarkTheme)
+        val dark = currentValueOf(LocalAeriDarkTheme)
         val reduceTransparency = currentValueOf(LocalReduceTransparency)
         val outline = outline(this)
         val source = backdrop?.layer

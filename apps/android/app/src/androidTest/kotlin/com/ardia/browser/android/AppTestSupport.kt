@@ -33,7 +33,7 @@ import java.util.concurrent.Executors
 import org.junit.Assert.fail
 
 object AppTest {
-    const val TAG = "ArdiaTour"
+    const val TAG = "AeriTour"
     const val READY_TIMEOUT_MILLIS = 120_000L
     const val ACTIVITY_TIMEOUT_MILLIS = 60_000L
     const val SETTLE_STEP_MILLIS = 400L
@@ -41,7 +41,7 @@ object AppTest {
 
     val instrumentation get() = InstrumentationRegistry.getInstrumentation()
     val context: Context get() = ApplicationProvider.getApplicationContext()
-    val app: ArdiaApplication get() = ArdiaApplication.of(context)
+    val app: AeriApplication get() = AeriApplication.of(context)
 
     fun <T> onMain(work: () -> T): T {
         if (Looper.myLooper() == Looper.getMainLooper()) return work()
@@ -82,7 +82,7 @@ object AppTest {
     fun launch(arguments: Map<String, Any> = emptyMap(), demo: Boolean = true): AppSession {
         finishAll()
         val intent = Intent(context, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-        if (demo) intent.putExtra(LaunchArguments.ARDIA_DEMO, true)
+        if (demo) intent.putExtra(LaunchArguments.AERI_DEMO, true)
         for ((key, value) in arguments) {
             when (value) {
                 is Boolean -> intent.putExtra(key, value)

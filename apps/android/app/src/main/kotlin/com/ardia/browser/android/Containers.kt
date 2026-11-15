@@ -1,7 +1,7 @@
 package com.ardia.browser.android
 
 import com.ardia.design.glassRim
-import com.ardia.design.LocalArdiaDarkTheme
+import com.ardia.design.LocalAeriDarkTheme
 import com.ardia.design.Glass
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.PredictiveBackHandler
@@ -181,7 +181,7 @@ fun <T : Any> SheetHost(
                         shape = RoundedCornerShape(topStart = Radius.sheet, topEnd = Radius.sheet)
                     }
                     .background(MaterialTheme.colorScheme.background)
-                    .glassRim(RoundedCornerShape(topStart = Radius.sheet, topEnd = Radius.sheet), Glass.isLiquid, LocalArdiaDarkTheme.current, Glass.sheetRim)
+                    .glassRim(RoundedCornerShape(topStart = Radius.sheet, topEnd = Radius.sheet), Glass.isLiquid, LocalAeriDarkTheme.current, Glass.sheetRim)
                     .blocksTouchesBelow()
                     .nestedScroll(connection)
                     .draggable(

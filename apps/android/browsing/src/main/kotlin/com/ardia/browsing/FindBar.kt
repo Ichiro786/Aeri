@@ -44,9 +44,9 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import com.ardia.browser.FindResult
 import com.ardia.browser.Page
-import com.ardia.design.ArdiaSymbols
-import com.ardia.design.ArdiaThemeState
-import com.ardia.design.ArdiaType
+import com.ardia.design.AeriSymbols
+import com.ardia.design.AeriThemeState
+import com.ardia.design.AeriType
 import com.ardia.design.BrowseLayout
 import com.ardia.design.BrowsePalette
 import com.ardia.design.Palette
@@ -82,7 +82,7 @@ internal fun FindBar(page: Page, onDone: () -> Unit, modifier: Modifier = Modifi
         null -> null
     }
     val hasMatches = (result?.total ?: 0) > 0 && result?.query == query
-    val surface = ArdiaThemeState.look.surface.current
+    val surface = AeriThemeState.look.surface.current
     Box(
         modifier
             .testTag(BrowsingTags.FIND_BAR)
@@ -107,15 +107,15 @@ internal fun FindBar(page: Page, onDone: () -> Unit, modifier: Modifier = Modifi
                 horizontalArrangement = Arrangement.spacedBy(Spacing.tight),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                Icon(ArdiaSymbols.magnifyingglass, null, Modifier.size(16.dp), tint = BrowsePalette.foregroundSecondary.current)
+                Icon(AeriSymbols.magnifyingglass, null, Modifier.size(16.dp), tint = BrowsePalette.foregroundSecondary.current)
                 val placeholder = stringResource(R.string.browsing_find_placeholder)
                 Box(Modifier.weight(1f), contentAlignment = Alignment.CenterStart) {
-                    if (query.isEmpty()) Text(placeholder, style = ArdiaType.body, color = BrowsePalette.foregroundTertiary.current, maxLines = 1)
+                    if (query.isEmpty()) Text(placeholder, style = AeriType.body, color = BrowsePalette.foregroundTertiary.current, maxLines = 1)
                     BasicTextField(
                         value = query,
                         onValueChange = { query = it },
                         singleLine = true,
-                        textStyle = ArdiaType.body.copy(color = SystemPalette.label.current),
+                        textStyle = AeriType.body.copy(color = SystemPalette.label.current),
                         cursorBrush = SolidColor(Palette.formAccent.current),
                         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
                         keyboardActions = KeyboardActions(onSearch = { if (hasMatches) page.findNext() }),
@@ -129,15 +129,15 @@ internal fun FindBar(page: Page, onDone: () -> Unit, modifier: Modifier = Modifi
                 if (count != null) {
                     Text(
                         count,
-                        style = ArdiaType.subheadline.monospacedDigits,
+                        style = AeriType.subheadline.monospacedDigits,
                         color = if (hasMatches) BrowsePalette.foregroundSecondary.current else BrowsePalette.findError,
                         maxLines = 1,
                         modifier = Modifier.testTag(BrowsingTags.FIND_COUNT).semantics { liveRegion = LiveRegionMode.Polite },
                     )
                 }
             }
-            FindButton(ArdiaSymbols.chevronUp, stringResource(R.string.browsing_previous_match), hasMatches) { page.findPrevious() }
-            FindButton(ArdiaSymbols.chevronDown, stringResource(R.string.browsing_next_match), hasMatches) { page.findNext() }
+            FindButton(AeriSymbols.chevronUp, stringResource(R.string.browsing_previous_match), hasMatches) { page.findPrevious() }
+            FindButton(AeriSymbols.chevronDown, stringResource(R.string.browsing_next_match), hasMatches) { page.findNext() }
             Box(
                 Modifier
                     .heightIn(min = BrowseLayout.hitTarget)
@@ -145,7 +145,7 @@ internal fun FindBar(page: Page, onDone: () -> Unit, modifier: Modifier = Modifi
                     .padding(horizontal = Spacing.tight),
                 contentAlignment = Alignment.Center,
             ) {
-                Text(stringResource(R.string.browsing_done), style = ArdiaType.body.semibold, color = Palette.formAccent.current)
+                Text(stringResource(R.string.browsing_done), style = AeriType.body.semibold, color = Palette.formAccent.current)
             }
         }
     }

@@ -7,7 +7,7 @@ import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 
-object ArdiaType {
+object AeriType {
     val largeTitle = style(34.sp, 41.sp)
     val title = style(28.sp, 34.sp)
     val title2 = style(22.sp, 28.sp)

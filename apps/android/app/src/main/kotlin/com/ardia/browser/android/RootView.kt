@@ -24,7 +24,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.zIndex
 import com.ardia.appmodel.AppModel
 import com.ardia.browser.android.system.SystemSnapshotExport
-import com.ardia.design.ArdiaTheme
+import com.ardia.design.AeriTheme
 import com.ardia.design.LocalBarButtonScale
 import com.ardia.design.LocalLiquidGlass
 import com.ardia.design.LocalReduceMotion
@@ -35,16 +35,16 @@ import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.first
 
 object RootTags {
-    const val ROOT = "ardia.root"
-    const val SURFACES = "ardia.surfaces"
-    const val SHEET = "ardia.sheet"
-    const val VOICE = "ardia.voice"
-    const val ONBOARDING = "ardia.onboarding"
+    const val ROOT = "aeri.root"
+    const val SURFACES = "aeri.surfaces"
+    const val SHEET = "aeri.sheet"
+    const val VOICE = "aeri.voice"
+    const val ONBOARDING = "aeri.onboarding"
 }
 
 @Composable
-fun ArdiaRoot(model: AppModel, createdAt: Long) {
-    ArdiaTheme(darkTheme = isSystemInDarkTheme(), look = model.look) {
+fun AeriRoot(model: AppModel, createdAt: Long) {
+    AeriTheme(darkTheme = isSystemInDarkTheme(), look = model.look) {
         CompositionLocalProvider(
             LocalBarButtonScale provides model.settings.barButtonSize.scale,
             LocalLiquidGlass provides (model.settings.interfaceStyle == InterfaceStyle.GLASS),

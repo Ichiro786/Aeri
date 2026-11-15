@@ -337,7 +337,7 @@ fun FaviconImage(iconUrl: String?, pageUrl: String?, modifier: Modifier = Modifi
 
 @Composable
 private fun FaviconContent(image: ImageBitmap, tone: FaviconTone, size: Dp) {
-    val plate = FaviconPlate.color(tone, LocalArdiaDarkTheme.current)
+    val plate = FaviconPlate.color(tone, LocalAeriDarkTheme.current)
     if (plate != null) {
         Box(Modifier.fillMaxSize().background(plate, RoundedCornerShape(size * 0.26f)))
         Image(image, null, Modifier.fillMaxSize().padding(size * 0.14f), contentScale = ContentScale.Fit, filterQuality = FilterQuality.High)
@@ -350,13 +350,13 @@ private fun FaviconContent(image: ImageBitmap, tone: FaviconTone, size: Dp) {
 fun MonogramTile(pageUrl: String?, size: Dp, modifier: Modifier = Modifier) {
     val host = remember(pageUrl) { Monogram.host(pageUrl) }
     val letter = remember(host) { Monogram.letter(host) }
-    val tint = remember(host) { ardiaColor(Monogram.tintHex(host)) }
+    val tint = remember(host) { aeriColor(Monogram.tintHex(host)) }
     val fontSize = with(LocalDensity.current) { (size * 0.56f).toSp() }
-    Box(modifier.fillMaxSize().background(tint.ardiaGradient()), contentAlignment = Alignment.Center) {
+    Box(modifier.fillMaxSize().background(tint.aeriGradient()), contentAlignment = Alignment.Center) {
         if (letter != null) {
             Text(letter, color = Color.White, style = TextStyle(fontSize = fontSize, lineHeight = fontSize, fontWeight = FontWeight.SemiBold))
         } else {
-            Icon(ArdiaSymbols.globe, null, Modifier.size(size * 0.6f), tint = Color.White)
+            Icon(AeriSymbols.globe, null, Modifier.size(size * 0.6f), tint = Color.White)
         }
     }
 }

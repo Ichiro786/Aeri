@@ -42,7 +42,7 @@ interface SyncTimers {
 }
 
 class SystemSyncTimers : SyncTimers {
-    private val scheduler = ScheduledThreadPoolExecutor(1) { work -> Thread(work, "ardia-sync-timers").apply { isDaemon = true } }.apply {
+    private val scheduler = ScheduledThreadPoolExecutor(1) { work -> Thread(work, "aeri-sync-timers").apply { isDaemon = true } }.apply {
         removeOnCancelPolicy = true
     }
 

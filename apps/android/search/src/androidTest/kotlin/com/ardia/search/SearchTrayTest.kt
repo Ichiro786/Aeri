@@ -20,7 +20,7 @@ import com.ardia.appmodel.AppEnvironment
 import com.ardia.appmodel.AppModel
 import com.ardia.appmodel.BrowseSession
 import com.ardia.appmodel.LaunchArguments
-import com.ardia.design.ArdiaTheme
+import com.ardia.design.AeriTheme
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert.assertEquals
@@ -48,7 +48,7 @@ class SearchTrayTest {
         compose.waitUntil(TIMEOUT) { onMain { model.isReady } }
         runBlocking { model.omnibox.warmUp() }
         compose.setContent {
-            ArdiaTheme {
+            AeriTheme {
                 SearchTrayHost(model)
             }
         }

@@ -3,7 +3,7 @@ package com.ardia.appmodel
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Paint
-import com.ardia.design.ArdiaSymbols
+import com.ardia.design.AeriSymbols
 import com.ardia.design.Toast
 import com.ardia.design.Toasts
 import com.ardia.store.IncomingTab
@@ -83,7 +83,7 @@ internal object LaunchHooks {
         "received" -> Toasts.tabReceived("MacBook Pro")
         "receivedSeveral" -> Toasts.tabReceived("MacBook Pro", count = 3)
         "sent" -> Toasts.sentTab("MacBook Pro")
-        "pinned" -> Toast(AppModel.PINNED, ArdiaSymbols.starFill)
+        "pinned" -> Toast(AppModel.PINNED, AeriSymbols.starFill)
         else -> null
     }
 

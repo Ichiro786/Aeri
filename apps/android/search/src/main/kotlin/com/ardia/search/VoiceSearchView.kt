@@ -70,12 +70,12 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.ardia.appmodel.AppModel
-import com.ardia.design.ArdiaLogoMark
-import com.ardia.design.ArdiaSymbols
-import com.ardia.design.ArdiaType
+import com.ardia.design.AeriLogoMark
+import com.ardia.design.AeriSymbols
+import com.ardia.design.AeriType
 import com.ardia.design.FrostedBackdrop
 import com.ardia.design.FrostedStyle
-import com.ardia.design.LocalArdiaDarkTheme
+import com.ardia.design.LocalAeriDarkTheme
 import com.ardia.design.LocalReduceMotion
 import com.ardia.design.Motion
 import com.ardia.design.ProfileBackdrop
@@ -155,7 +155,7 @@ fun VoiceSearchView(model: AppModel, modifier: Modifier = Modifier) {
 
     BackHandler { close() }
 
-    CompositionLocalProvider(LocalArdiaDarkTheme provides true) {
+    CompositionLocalProvider(LocalAeriDarkTheme provides true) {
         val frost = rememberFrostedBackdrop()
         Box(modifier.fillMaxSize()) {
             ProfileBackdrop(Modifier.fillMaxSize().frostedBackdropSource(frost))
@@ -185,7 +185,7 @@ fun VoiceSearchView(model: AppModel, modifier: Modifier = Modifier) {
                 )
             }
             GlassCircle(
-                icon = ArdiaSymbols.xmark,
+                icon = AeriSymbols.xmark,
                 label = stringResource(R.string.voice_cancel),
                 frost = frost,
                 onClick = ::close,
@@ -202,18 +202,13 @@ fun VoiceSearchView(model: AppModel, modifier: Modifier = Modifier) {
 private fun LevelLogo(dictation: DictationSession) {
     val reduceMotion = LocalReduceMotion.current
     val level = animateFloatAsState(dictation.level, tween(120, easing = SwiftEasing.easeOut), label = "voiceLevel")
-    ArdiaLogoMark(
+    AeriLogoMark(
         Modifier
             .size(128.dp)
             .graphicsLayer {
                 val scale = if (reduceMotion) 1f else 0.92f + level.value * 0.16f
                 scaleX = scale
                 scaleY = scale
-                shadowElevation = 12.dp.toPx()
-                shape = CircleShape
-                clip = false
-                ambientShadowColor = Color.Black.copy(alpha = 0.15f)
-                spotShadowColor = Color.Black.copy(alpha = 0.15f)
             },
     )
 }
@@ -231,10 +226,10 @@ private fun Transcript(dictation: DictationSession, context: Context) {
     ) { state ->
         when (state) {
             DictationSession.State.Denied -> Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(Spacing.small)) {
-                Text(stringResource(R.string.voice_permission_title), style = ArdiaType.title3.semibold, color = Color.White, textAlign = TextAlign.Center)
+                Text(stringResource(R.string.voice_permission_title), style = AeriType.title3.semibold, color = Color.White, textAlign = TextAlign.Center)
                 Text(
                     stringResource(R.string.voice_permission_detail),
-                    style = ArdiaType.subheadline,
+                    style = AeriType.subheadline,
                     color = Color.White.copy(alpha = 0.8f),
                     textAlign = TextAlign.Center,
                 )
@@ -244,7 +239,7 @@ private fun Transcript(dictation: DictationSession, context: Context) {
             }
             is DictationSession.State.Unavailable -> Text(
                 stringResource(problemText(state.problem)),
-                style = ArdiaType.title3.semibold,
+                style = AeriType.title3.semibold,
                 color = Color.White,
                 textAlign = TextAlign.Center,
             )
@@ -257,7 +252,7 @@ private fun Transcript(dictation: DictationSession, context: Context) {
                 ) { shown ->
                     Text(
                         shown.ifEmpty { stringResource(R.string.voice_listening) },
-                        style = ArdiaType.title2.semibold,
+                        style = AeriType.title2.semibold,
                         color = Color.White.copy(alpha = if (shown.isEmpty()) 0.7f else 1f),
                         textAlign = TextAlign.Center,
                         modifier = Modifier
@@ -333,9 +328,9 @@ private fun Controls(dictation: DictationSession, frost: FrostedBackdrop, onTryA
             label = "voiceControls",
         ) { shownPhase ->
             when (shownPhase) {
-                ControlsPhase.Done -> GlassPill(stringResource(R.string.voice_done), ArdiaSymbols.stopFill, frost) { dictation.stop() }
+                ControlsPhase.Done -> GlassPill(stringResource(R.string.voice_done), AeriSymbols.stopFill, frost) { dictation.stop() }
                 ControlsPhase.Search -> GlassPill(stringResource(R.string.voice_search), null, frost) { onSearch(dictation.transcript.trim()) }
-                ControlsPhase.TryAgain -> GlassPill(stringResource(R.string.voice_try_again), ArdiaSymbols.micFill, frost, onClick = onTryAgain)
+                ControlsPhase.TryAgain -> GlassPill(stringResource(R.string.voice_try_again), AeriSymbols.micFill, frost, onClick = onTryAgain)
                 ControlsPhase.None -> Box(Modifier.fillMaxWidth())
             }
         }
@@ -365,7 +360,7 @@ private fun GlassPill(text: String, icon: ImageVector?, frost: FrostedBackdrop?,
         verticalAlignment = Alignment.CenterVertically,
     ) {
         if (icon != null) Icon(icon, null, Modifier.size(17.dp), tint = Color.White)
-        Text(text, style = ArdiaType.body.medium, color = Color.White)
+        Text(text, style = AeriType.body.medium, color = Color.White)
     }
 }
 

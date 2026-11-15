@@ -37,7 +37,7 @@ data class LaunchArguments(
         const val DEFAULT_DELAY_SECONDS = 6.0
         const val DEFAULT_STEP_GAP_SECONDS = 1.5
 
-        const val ARDIA_DEMO = "ArdiaDemo"
+        const val AERI_DEMO = "AeriDemo"
         const val BROWSE_OPEN = "BrowseOpen"
         const val BROWSE_QUERY = "BrowseQuery"
         const val BROWSE_SURFACE = "BrowseSurface"
@@ -52,14 +52,14 @@ data class LaunchArguments(
         const val BROWSE_OVERLAY = "BrowseOverlay"
         const val BROWSE_STEPS = "BrowseSteps"
         const val BROWSE_STEP_GAP = "BrowseStepGap"
-        const val ARDIA_DECK = "ArdiaDeck"
-        const val ARDIA_ONBOARDING = "ArdiaOnboarding"
-        const val ARDIA_OPEN_SHEET = "ArdiaOpenSheet"
-        const val ARDIA_OPEN_SETTINGS = "ArdiaOpenSettings"
-        const val ARDIA_RESTING_START = "ArdiaRestingStart"
-        const val ARDIA_COLOR = "ArdiaColor"
-        const val ARDIA_TOAST = "ArdiaToast"
-        const val ARDIA_TRUSTED_SITES = "ArdiaTrustedSites"
+        const val AERI_DECK = "AeriDeck"
+        const val AERI_ONBOARDING = "AeriOnboarding"
+        const val AERI_OPEN_SHEET = "AeriOpenSheet"
+        const val AERI_OPEN_SETTINGS = "AeriOpenSettings"
+        const val AERI_RESTING_START = "AeriRestingStart"
+        const val AERI_COLOR = "AeriColor"
+        const val AERI_TOAST = "AeriToast"
+        const val AERI_TRUSTED_SITES = "AeriTrustedSites"
         const val BROWSE_PAGER_FREEZE = "BrowsePagerFreeze"
         const val BROWSE_PAGER_SCRIPT = "BrowsePagerScript"
         const val BROWSE_LOAD_FREEZE = "BrowseLoadFreeze"
@@ -84,7 +84,7 @@ data class LaunchArguments(
             }
             fun number(key: String): Double? = text(key)?.toDoubleOrNull()
             fun whole(key: String): Int? = number(key)?.toInt()
-            val isDemo = flag(ARDIA_DEMO)
+            val isDemo = flag(AERI_DEMO)
             return LaunchArguments(
                 isDemo = isDemo,
                 browseOpen = text(BROWSE_OPEN),
@@ -101,14 +101,14 @@ data class LaunchArguments(
                 browseOverlay = values[BROWSE_OVERLAY]?.toString(),
                 browseSteps = text(BROWSE_STEPS)?.split(',')?.mapNotNull { it.trim().toIntOrNull() }.orEmpty(),
                 browseStepGapSeconds = number(BROWSE_STEP_GAP) ?: DEFAULT_STEP_GAP_SECONDS,
-                deckScript = text(ARDIA_DECK),
-                showsOnboarding = flag(ARDIA_ONBOARDING),
-                openSheet = text(ARDIA_OPEN_SHEET),
-                opensSettings = flag(ARDIA_OPEN_SETTINGS),
-                restingStart = flag(ARDIA_RESTING_START),
-                color = text(ARDIA_COLOR),
-                toast = text(ARDIA_TOAST),
-                trustedSitesSample = flag(ARDIA_TRUSTED_SITES),
+                deckScript = text(AERI_DECK),
+                showsOnboarding = flag(AERI_ONBOARDING),
+                openSheet = text(AERI_OPEN_SHEET),
+                opensSettings = flag(AERI_OPEN_SETTINGS),
+                restingStart = flag(AERI_RESTING_START),
+                color = text(AERI_COLOR),
+                toast = text(AERI_TOAST),
+                trustedSitesSample = flag(AERI_TRUSTED_SITES),
                 pagerFreeze = if (isDemo) number(BROWSE_PAGER_FREEZE) else null,
                 pagerScript = isDemo && flag(BROWSE_PAGER_SCRIPT),
                 loadFreeze = if (isDemo) number(BROWSE_LOAD_FREEZE) else null,

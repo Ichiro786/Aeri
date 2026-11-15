@@ -81,7 +81,7 @@ class ScriptEngine(
 
     companion object {
         init {
-            System.loadLibrary("ardiahermes")
+            System.loadLibrary("aerihermes")
         }
 
         val bytecodeVersion: Int get() = nativeBytecodeVersion()

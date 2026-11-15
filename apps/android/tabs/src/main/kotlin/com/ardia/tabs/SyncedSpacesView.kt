@@ -78,10 +78,10 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.ardia.appmodel.AppModel
 import com.ardia.design.GlassMenu
-import com.ardia.design.ArdiaSymbols
-import com.ardia.design.ArdiaType
+import com.ardia.design.AeriSymbols
+import com.ardia.design.AeriType
 import com.ardia.design.FaviconImage
-import com.ardia.design.LocalArdiaDarkTheme
+import com.ardia.design.LocalAeriDarkTheme
 import com.ardia.design.LocalIncreasedContrast
 import com.ardia.design.LocalReduceMotion
 import com.ardia.design.Motion
@@ -105,7 +105,7 @@ import kotlin.math.max
 
 @Composable
 fun SyncedSpacesView(model: AppModel, modifier: Modifier = Modifier) {
-    val dark = LocalArdiaDarkTheme.current
+    val dark = LocalAeriDarkTheme.current
     val contrast = LocalIncreasedContrast.current
     val reduceMotion = LocalReduceMotion.current
     val haptics = rememberHaptics()
@@ -172,7 +172,7 @@ fun SyncedSpacesView(model: AppModel, modifier: Modifier = Modifier) {
 
 @Composable
 private fun SpacesHeader(title: String, archive: () -> Unit, close: () -> Unit) {
-    val dark = LocalArdiaDarkTheme.current
+    val dark = LocalAeriDarkTheme.current
     Row(
         Modifier.fillMaxWidth().padding(start = Spacing.medium + 4.dp, end = Spacing.page, top = Spacing.medium, bottom = Spacing.tight),
         verticalAlignment = Alignment.CenterVertically,
@@ -180,20 +180,20 @@ private fun SpacesHeader(title: String, archive: () -> Unit, close: () -> Unit) 
     ) {
         Text(
             title,
-            style = ArdiaType.title2.semibold,
+            style = AeriType.title2.semibold,
             color = SystemPalette.label.resolve(dark),
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
             modifier = Modifier.weight(1f).semantics { heading() },
         )
-        HeaderButton(ArdiaSymbols.archivebox, stringResource(R.string.spaces_archive), archive)
-        HeaderButton(ArdiaSymbols.xmark, stringResource(R.string.spaces_close), close)
+        HeaderButton(AeriSymbols.archivebox, stringResource(R.string.spaces_archive), archive)
+        HeaderButton(AeriSymbols.xmark, stringResource(R.string.spaces_close), close)
     }
 }
 
 @Composable
 private fun HeaderButton(symbol: ImageVector, label: String, action: () -> Unit) {
-    val dark = LocalArdiaDarkTheme.current
+    val dark = LocalAeriDarkTheme.current
     val ink = SystemPalette.label.resolve(dark)
     Box(
         Modifier
@@ -245,7 +245,7 @@ private fun SpacePage(model: AppModel, profile: SyncedProfile) {
             }
             pinnedSections(profile.pinned.sections, depth = 0, expanded = expandedGroups, toggle = toggle, links = links, reduceMotion = reduceMotion)
             if (profile.bookmarks.isNotEmpty()) {
-                item(key = "bookmarks-header") { SectionHeader(stringResource(R.string.spaces_bookmarks), ArdiaSymbols.star) }
+                item(key = "bookmarks-header") { SectionHeader(stringResource(R.string.spaces_bookmarks), AeriSymbols.star) }
                 bookmarks(profile.bookmarks, depth = 0, expanded = expandedGroups, toggle = toggle, links = links, reduceMotion = reduceMotion)
             }
             for (device in devices) {
@@ -300,7 +300,7 @@ private fun LazyListScope.bookmarks(
         val key = "folder:${bookmark.key}"
         val isOpen = key in expanded
         animatedItem(key, reduceMotion) {
-            FolderRow(bookmark.title, ArdiaSymbols.folderFill, null, depth, isOpen) { toggle(key) }
+            FolderRow(bookmark.title, AeriSymbols.folderFill, null, depth, isOpen) { toggle(key) }
         }
         if (isOpen) bookmarks(bookmark.children.orEmpty(), depth + 1, expanded, toggle, links, reduceMotion)
     }
@@ -324,7 +324,7 @@ private fun LazyListScope.animatedItem(key: String, reduceMotion: Boolean, conte
 
 @Composable
 private fun SectionHeader(title: String, icon: ImageVector) {
-    val dark = LocalArdiaDarkTheme.current
+    val dark = LocalAeriDarkTheme.current
     val ink = SystemPalette.secondaryLabel.resolve(dark)
     Row(
         Modifier.fillMaxWidth().padding(start = Spacing.medium, end = Spacing.medium, top = Spacing.small + Spacing.small, bottom = 4.dp).semantics(mergeDescendants = true) { heading() },
@@ -332,14 +332,14 @@ private fun SectionHeader(title: String, icon: ImageVector) {
         horizontalArrangement = Arrangement.spacedBy(6.dp),
     ) {
         Icon(icon, null, Modifier.size(15.dp), tint = ink)
-        Text(title, style = ArdiaType.footnote.semibold, color = ink)
+        Text(title, style = AeriType.footnote.semibold, color = ink)
     }
 }
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun RemoteRow(title: String, url: String, depth: Int, links: RemoteLinks, symbol: ImageVector? = null) {
-    val dark = LocalArdiaDarkTheme.current
+    val dark = LocalAeriDarkTheme.current
     val fontScale = LocalDensity.current.fontScale
     var menu by remember { mutableStateOf(false) }
     val iconSide = (24 * fontScale.coerceAtMost(40f / 24f)).dp
@@ -364,7 +364,7 @@ private fun RemoteRow(title: String, url: String, depth: Int, links: RemoteLinks
             }
             Text(
                 label,
-                style = ArdiaType.body.medium,
+                style = AeriType.body.medium,
                 color = SystemPalette.label.resolve(dark),
                 maxLines = if (fontScale >= LARGE_FONT_SCALE) 3 else 1,
                 overflow = TextOverflow.Ellipsis,
@@ -372,16 +372,16 @@ private fun RemoteRow(title: String, url: String, depth: Int, links: RemoteLinks
             )
         }
         GlassMenu(expanded = menu, onDismissRequest = { menu = false }) {
-            MenuRow(stringResource(R.string.spaces_open), ArdiaSymbols.arrowUpForwardSquare) {
+            MenuRow(stringResource(R.string.spaces_open), AeriSymbols.arrowUpForwardSquare) {
                 menu = false
                 open()
             }
             if (BrowserUrl.isSyncable(url)) {
-                MenuRow(stringResource(R.string.spaces_copy_link), ArdiaSymbols.link) {
+                MenuRow(stringResource(R.string.spaces_copy_link), AeriSymbols.link) {
                     menu = false
                     links.copy(url)
                 }
-                MenuRow(stringResource(R.string.spaces_share), ArdiaSymbols.squareAndArrowUp) {
+                MenuRow(stringResource(R.string.spaces_share), AeriSymbols.squareAndArrowUp) {
                     menu = false
                     links.share(url, label)
                 }
@@ -392,12 +392,12 @@ private fun RemoteRow(title: String, url: String, depth: Int, links: RemoteLinks
 
 @Composable
 private fun GroupRow(group: PinnedGroup, depth: Int, isOpen: Boolean, toggle: () -> Unit) {
-    FolderRow(group.name, SpaceColors.symbol(group.icon) ?: ArdiaSymbols.folderFill, SpaceColors.color(group.color), depth, isOpen, toggle)
+    FolderRow(group.name, SpaceColors.symbol(group.icon) ?: AeriSymbols.folderFill, SpaceColors.color(group.color), depth, isOpen, toggle)
 }
 
 @Composable
 private fun FolderRow(title: String, icon: ImageVector, tint: Color?, depth: Int, isOpen: Boolean, toggle: () -> Unit) {
-    val dark = LocalArdiaDarkTheme.current
+    val dark = LocalAeriDarkTheme.current
     val secondary = SystemPalette.secondaryLabel.resolve(dark)
     val turn by animateFloatAsState(if (isOpen) 90f else 0f, Motion.snappy.spec(), label = "disclosure")
     val state = stringResource(if (isOpen) R.string.spaces_collapse else R.string.spaces_expand)
@@ -412,17 +412,17 @@ private fun FolderRow(title: String, icon: ImageVector, tint: Color?, depth: Int
         horizontalArrangement = Arrangement.spacedBy(Spacing.small),
     ) {
         Icon(icon, null, Modifier.widthIn(min = 24.dp).size(20.dp), tint = tint ?: secondary)
-        Text(title, style = ArdiaType.body.medium, color = SystemPalette.label.resolve(dark), maxLines = 2, overflow = TextOverflow.Ellipsis, modifier = Modifier.weight(1f))
-        Icon(ArdiaSymbols.chevronRight, null, Modifier.size(14.dp).rotate(turn), tint = secondary)
+        Text(title, style = AeriType.body.medium, color = SystemPalette.label.resolve(dark), maxLines = 2, overflow = TextOverflow.Ellipsis, modifier = Modifier.weight(1f))
+        Icon(AeriSymbols.chevronRight, null, Modifier.size(14.dp).rotate(turn), tint = secondary)
     }
 }
 
 @Composable
 private fun ShowAllRow(expand: () -> Unit) {
-    val dark = LocalArdiaDarkTheme.current
+    val dark = LocalAeriDarkTheme.current
     Text(
         stringResource(R.string.spaces_show_all),
-        style = ArdiaType.subheadline.semibold,
+        style = AeriType.subheadline.semibold,
         color = SystemPalette.secondaryLabel.resolve(dark),
         modifier = Modifier
             .fillMaxWidth()
@@ -454,7 +454,7 @@ private fun PinnedTileGrid(tiles: List<PinnedTile>, open: (String, String) -> Un
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun PinnedTileView(tile: PinnedTile, height: Dp, showsTitle: Boolean, open: (String, String) -> Unit, modifier: Modifier = Modifier) {
-    val dark = LocalArdiaDarkTheme.current
+    val dark = LocalAeriDarkTheme.current
     val folder = tile.folder?.takeIf { it.isNotEmpty() }
     var menu by remember { mutableStateOf(false) }
     val label = TabText.remoteTitle(tile.title, tile.url).let { if (tile.title.isEmpty()) BrowserUrl.host(tile.url).orEmpty() else it }
@@ -482,13 +482,13 @@ private fun PinnedTileView(tile: PinnedTile, height: Dp, showsTitle: Boolean, op
                 contentAlignment = Alignment.Center,
             ) {
                 if (folder != null) {
-                    Icon(ArdiaSymbols.folderFill, null, Modifier.size(22.dp), tint = SystemPalette.secondaryLabel.resolve(dark))
+                    Icon(AeriSymbols.folderFill, null, Modifier.size(22.dp), tint = SystemPalette.secondaryLabel.resolve(dark))
                 } else {
                     FaviconImage(null, tile.url, size = 24.dp)
                 }
             }
             if (showsTitle) {
-                Text(label, style = ArdiaType.caption.medium, color = SystemPalette.secondaryLabel.resolve(dark), maxLines = 1, overflow = TextOverflow.Ellipsis)
+                Text(label, style = AeriType.caption.medium, color = SystemPalette.secondaryLabel.resolve(dark), maxLines = 1, overflow = TextOverflow.Ellipsis)
             }
         }
         if (folder != null) {
@@ -506,7 +506,7 @@ private fun PinnedTileView(tile: PinnedTile, height: Dp, showsTitle: Boolean, op
 
 @Composable
 private fun SpaceSwitcher(profiles: List<SyncedProfile>, selected: Int, choose: (Int) -> Unit) {
-    val dark = LocalArdiaDarkTheme.current
+    val dark = LocalAeriDarkTheme.current
     val ink = SystemPalette.label.resolve(dark)
     Box(
         Modifier
@@ -554,15 +554,15 @@ private fun SpaceSwitcher(profiles: List<SyncedProfile>, selected: Int, choose: 
 @Composable
 private fun SyncStatusBanner(phase: SyncPhase, status: String, openSettings: () -> Unit) {
     val symbol = when (phase) {
-        SyncPhase.NeedsFolderAccess -> ArdiaSymbols.folderFill
-        SyncPhase.Locked -> ArdiaSymbols.named("lock.fill") ?: ArdiaSymbols.exclamationmarkTriangleFill
-        SyncPhase.Reset -> ArdiaSymbols.arrowClockwise
-        is SyncPhase.Stalled -> ArdiaSymbols.exclamationmarkTriangleFill
-        SyncPhase.Offline -> ArdiaSymbols.named("wifi.slash") ?: ArdiaSymbols.exclamationmarkTriangleFill
+        SyncPhase.NeedsFolderAccess -> AeriSymbols.folderFill
+        SyncPhase.Locked -> AeriSymbols.named("lock.fill") ?: AeriSymbols.exclamationmarkTriangleFill
+        SyncPhase.Reset -> AeriSymbols.arrowClockwise
+        is SyncPhase.Stalled -> AeriSymbols.exclamationmarkTriangleFill
+        SyncPhase.Offline -> AeriSymbols.named("wifi.slash") ?: AeriSymbols.exclamationmarkTriangleFill
         else -> null
     } ?: return
     val needsAction = phase == SyncPhase.NeedsFolderAccess || phase == SyncPhase.Locked || phase == SyncPhase.Reset
-    val dark = LocalArdiaDarkTheme.current
+    val dark = LocalAeriDarkTheme.current
     val ink = SystemPalette.label.resolve(dark)
     Row(
         Modifier
@@ -574,27 +574,27 @@ private fun SyncStatusBanner(phase: SyncPhase, status: String, openSettings: () 
         horizontalArrangement = Arrangement.spacedBy(10.dp),
     ) {
         Icon(symbol, null, Modifier.size(18.dp), tint = ORANGE)
-        Text(status, style = ArdiaType.subheadline, color = ink, modifier = Modifier.weight(1f))
+        Text(status, style = AeriType.subheadline, color = ink, modifier = Modifier.weight(1f))
         if (needsAction) {
-            OutlinedButton(onClick = openSettings) { Text(stringResource(R.string.spaces_fix), style = ArdiaType.subheadline.semibold) }
+            OutlinedButton(onClick = openSettings) { Text(stringResource(R.string.spaces_fix), style = AeriType.subheadline.semibold) }
         }
     }
 }
 
 @Composable
 private fun SpacesUnavailable(isOff: Boolean, modifier: Modifier = Modifier, action: () -> Unit) {
-    val dark = LocalArdiaDarkTheme.current
+    val dark = LocalAeriDarkTheme.current
     Box(modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
         Column(
             Modifier.widthIn(max = 320.dp).padding(Spacing.large),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(10.dp),
         ) {
-            Icon(ArdiaSymbols.macbookAndIphone, null, Modifier.size(48.dp), tint = SystemPalette.secondaryLabel.resolve(dark))
-            Text(stringResource(R.string.spaces_unavailable_title), style = ArdiaType.title2.semibold, color = SystemPalette.label.resolve(dark), textAlign = TextAlign.Center)
+            Icon(AeriSymbols.macbookAndIphone, null, Modifier.size(48.dp), tint = SystemPalette.secondaryLabel.resolve(dark))
+            Text(stringResource(R.string.spaces_unavailable_title), style = AeriType.title2.semibold, color = SystemPalette.label.resolve(dark), textAlign = TextAlign.Center)
             Text(
                 stringResource(if (isOff) R.string.spaces_unavailable_off else R.string.spaces_unavailable_waiting),
-                style = ArdiaType.subheadline,
+                style = AeriType.subheadline,
                 color = SystemPalette.secondaryLabel.resolve(dark),
                 textAlign = TextAlign.Center,
             )
@@ -604,7 +604,7 @@ private fun SpacesUnavailable(isOff: Boolean, modifier: Modifier = Modifier, act
                 colors = ButtonDefaults.buttonColors(containerColor = Palette.primaryAction.resolve(dark), contentColor = Palette.onPrimaryAction.resolve(dark)),
                 modifier = Modifier.padding(top = 6.dp),
             ) {
-                Text(stringResource(if (isOff) R.string.spaces_sync_with_mac else R.string.spaces_sync_settings), style = ArdiaType.body.semibold)
+                Text(stringResource(if (isOff) R.string.spaces_sync_with_mac else R.string.spaces_sync_settings), style = AeriType.body.semibold)
             }
         }
     }
@@ -612,17 +612,17 @@ private fun SpacesUnavailable(isOff: Boolean, modifier: Modifier = Modifier, act
 
 @Composable
 private fun NothingHereYet(name: String) {
-    val dark = LocalArdiaDarkTheme.current
+    val dark = LocalAeriDarkTheme.current
     Column(
         Modifier.fillMaxWidth().padding(top = Spacing.section, start = Spacing.large, end = Spacing.large),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(10.dp),
     ) {
-        Icon(ArdiaSymbols.squareStack, null, Modifier.size(40.dp), tint = SystemPalette.secondaryLabel.resolve(dark))
-        Text(stringResource(R.string.spaces_nothing_here), style = ArdiaType.title3.semibold, color = SystemPalette.label.resolve(dark), textAlign = TextAlign.Center)
+        Icon(AeriSymbols.squareStack, null, Modifier.size(40.dp), tint = SystemPalette.secondaryLabel.resolve(dark))
+        Text(stringResource(R.string.spaces_nothing_here), style = AeriType.title3.semibold, color = SystemPalette.label.resolve(dark), textAlign = TextAlign.Center)
         Text(
             stringResource(R.string.spaces_nothing_here_message, name),
-            style = ArdiaType.subheadline,
+            style = AeriType.subheadline,
             color = SystemPalette.secondaryLabel.resolve(dark),
             textAlign = TextAlign.Center,
         )

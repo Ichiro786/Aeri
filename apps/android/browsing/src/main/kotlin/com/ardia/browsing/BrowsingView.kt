@@ -62,11 +62,11 @@ import com.ardia.appmodel.PagerModel
 import com.ardia.browser.FullscreenVideo
 import com.ardia.browser.PageColors
 import com.ardia.browser.ScrollDirection
-import com.ardia.design.ArdiaThemeState
+import com.ardia.design.AeriThemeState
 import com.ardia.design.BarButtons
 import com.ardia.design.BrowseLayout
 import com.ardia.design.LoadingLine
-import com.ardia.design.LocalArdiaDarkTheme
+import com.ardia.design.LocalAeriDarkTheme
 import com.ardia.design.LocalBarButtonScale
 import com.ardia.design.LocalReduceMotion
 import com.ardia.design.Motion
@@ -85,8 +85,8 @@ fun BrowsingView(model: AppModel, isFront: Boolean, modifier: Modifier = Modifie
     val view = LocalView.current
     val density = LocalDensity.current
     val reduceMotion = LocalReduceMotion.current
-    val dark = LocalArdiaDarkTheme.current
-    val surface = ArdiaThemeState.look.surface.current
+    val dark = LocalAeriDarkTheme.current
+    val surface = AeriThemeState.look.surface.current
     val pager = remember(model) { TabPager(model, PagerModel(), scope) { view.performHapticFeedback(HapticFeedbackConstants.CLOCK_TICK) } }
     pager.reduceMotion = reduceMotion
     val corner = rememberDisplayCornerRadius()
@@ -302,7 +302,7 @@ private fun Bar(
     )
     val gone by remember { derivedStateOf { hide > 0.99f } }
     val travel = with(LocalDensity.current) { BrowseLayout.barCollapseTravel.toPx() }
-    val barDark = tone?.let(PageColors::isDark) ?: LocalArdiaDarkTheme.current
+    val barDark = tone?.let(PageColors::isDark) ?: LocalAeriDarkTheme.current
     Box(
         modifier
             .testTag(BrowsingTags.BAR)
@@ -316,7 +316,7 @@ private fun Bar(
             .tabPagerDrag(pager, enabled = !hidden),
     ) {
         if (!(hidden && gone)) {
-            CompositionLocalProvider(LocalArdiaDarkTheme provides barDark) {
+            CompositionLocalProvider(LocalAeriDarkTheme provides barDark) {
                 BottomBar(
                     model = model,
                     isSearchPresented = model.browse.search != null,

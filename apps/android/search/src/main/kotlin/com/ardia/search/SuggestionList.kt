@@ -67,8 +67,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.ardia.design.ArdiaSymbols
-import com.ardia.design.ArdiaType
+import com.ardia.design.AeriSymbols
+import com.ardia.design.AeriType
 import com.ardia.design.BrowseLayout
 import com.ardia.design.BrowsePalette
 import com.ardia.design.FaviconImage
@@ -333,7 +333,7 @@ private fun SuggestionRow(
             }
             if (refinable) {
                 Box(Modifier.size(REFINE_WIDTH, pitch), contentAlignment = Alignment.Center) {
-                    Icon(ArdiaSymbols.arrowUpForward, contentDescription = null, modifier = Modifier.size(15.dp).rotate(-90f), tint = iconTint)
+                    Icon(AeriSymbols.arrowUpForward, contentDescription = null, modifier = Modifier.size(15.dp).rotate(-90f), tint = iconTint)
                 }
             }
         }
@@ -354,7 +354,7 @@ private fun SuggestionRow(
 private fun RowLeading(row: TrayRow, iconSlot: Dp, tint: Color) {
     when (row) {
         is TrayRow.Paste -> Icon(
-            if (row.offer == ClipboardOffer.Link) ArdiaSymbols.link else ArdiaSymbols.docOnDoc,
+            if (row.offer == ClipboardOffer.Link) AeriSymbols.link else AeriSymbols.docOnDoc,
             contentDescription = null,
             modifier = Modifier.size(SYMBOL_SIZE),
             tint = tint,
@@ -383,7 +383,7 @@ private fun RowLabel(row: TrayRow, typed: String, primary: Color, secondary: Col
         ) {
             Text(
                 stringResource(if (row.offer == ClipboardOffer.Link) R.string.search_link_you_copied else R.string.search_text_you_copied),
-                style = ArdiaType.subheadline,
+                style = AeriType.subheadline,
                 color = secondary,
                 maxLines = 1,
             )
@@ -393,15 +393,15 @@ private fun RowLabel(row: TrayRow, typed: String, primary: Color, secondary: Col
             when (val kind = suggestion.kind) {
                 SearchSuggestion.Kind.Query -> {
                     val text = remember(suggestion.title, typed, primary, secondary) { queryText(suggestion.title, typed, primary, secondary) }
-                    Text(text, style = ArdiaType.title3, maxLines = if (largeText) 4 else 2, overflow = TextOverflow.Ellipsis)
+                    Text(text, style = AeriType.title3, maxLines = if (largeText) 4 else 2, overflow = TextOverflow.Ellipsis)
                 }
                 else -> TitleAndDetail(suggestion.title, primary, secondary, largeText) {
                     when {
                         kind is SearchSuggestion.Kind.RemoteTab && kind.deviceName.isNotEmpty() ->
-                            DetailWithIcon(ArdiaSymbols.laptopcomputer, suggestion.detail ?: kind.deviceName, secondary)
+                            DetailWithIcon(AeriSymbols.laptopcomputer, suggestion.detail ?: kind.deviceName, secondary)
                         kind is SearchSuggestion.Kind.OpenTab ->
-                            DetailWithIcon(ArdiaSymbols.arrowRightCircle, stringResource(R.string.search_switch_to_tab), secondary)
-                        else -> suggestion.detail?.let { Text(it, style = ArdiaType.subheadline, color = secondary, maxLines = 1, overflow = TextOverflow.Ellipsis) }
+                            DetailWithIcon(AeriSymbols.arrowRightCircle, stringResource(R.string.search_switch_to_tab), secondary)
+                        else -> suggestion.detail?.let { Text(it, style = AeriType.subheadline, color = secondary, maxLines = 1, overflow = TextOverflow.Ellipsis) }
                     }
                 }
             }
@@ -412,7 +412,7 @@ private fun RowLabel(row: TrayRow, typed: String, primary: Color, secondary: Col
 @Composable
 private fun TitleAndDetail(title: String, primary: Color, secondary: Color, largeText: Boolean, detail: @Composable () -> Unit) {
     Column(verticalArrangement = Arrangement.spacedBy(1.dp)) {
-        Text(title, style = ArdiaType.body, color = primary, maxLines = if (largeText) 3 else 1, overflow = TextOverflow.Ellipsis)
+        Text(title, style = AeriType.body, color = primary, maxLines = if (largeText) 3 else 1, overflow = TextOverflow.Ellipsis)
         detail()
     }
 }
@@ -421,7 +421,7 @@ private fun TitleAndDetail(title: String, primary: Color, secondary: Color, larg
 private fun DetailWithIcon(icon: ImageVector, text: String, color: Color) {
     Row(horizontalArrangement = Arrangement.spacedBy(4.dp), verticalAlignment = Alignment.CenterVertically) {
         Icon(icon, contentDescription = null, modifier = Modifier.size(13.dp), tint = color)
-        Text(text, style = ArdiaType.subheadline, color = color, maxLines = 1, overflow = TextOverflow.Ellipsis)
+        Text(text, style = AeriType.subheadline, color = color, maxLines = 1, overflow = TextOverflow.Ellipsis)
     }
 }
 
@@ -435,13 +435,13 @@ private fun queryText(title: String, typed: String, primary: Color, secondary: C
 
 internal object SuggestionSymbols {
     fun of(kind: SearchSuggestion.Kind): ImageVector = when (kind) {
-        SearchSuggestion.Kind.Query -> ArdiaSymbols.magnifyingglass
-        SearchSuggestion.Kind.Url -> ArdiaSymbols.globe
-        is SearchSuggestion.Kind.OpenTab -> ArdiaSymbols.squareOnSquare
-        is SearchSuggestion.Kind.RemoteTab -> ArdiaSymbols.laptopcomputer
-        SearchSuggestion.Kind.History -> ArdiaSymbols.clockArrowCirclepath
-        SearchSuggestion.Kind.Bookmark -> ArdiaSymbols.star
-        SearchSuggestion.Kind.Calculation -> ArdiaSymbols.equalCircleFill
+        SearchSuggestion.Kind.Query -> AeriSymbols.magnifyingglass
+        SearchSuggestion.Kind.Url -> AeriSymbols.globe
+        is SearchSuggestion.Kind.OpenTab -> AeriSymbols.squareOnSquare
+        is SearchSuggestion.Kind.RemoteTab -> AeriSymbols.laptopcomputer
+        SearchSuggestion.Kind.History -> AeriSymbols.clockArrowCirclepath
+        SearchSuggestion.Kind.Bookmark -> AeriSymbols.star
+        SearchSuggestion.Kind.Calculation -> AeriSymbols.equalCircleFill
     }
 }
 

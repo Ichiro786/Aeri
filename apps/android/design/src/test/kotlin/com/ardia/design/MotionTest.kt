@@ -7,7 +7,7 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class MotionTest {
-    private fun assertSpring(spring: ArdiaSpring, stiffness: Double, damping: Double) {
+    private fun assertSpring(spring: AeriSpring, stiffness: Double, damping: Double) {
         assertEquals(stiffness, spring.stiffness.toDouble(), stiffness * 1e-5)
         assertEquals(damping, spring.damping.toDouble(), damping * 1e-5)
     }
@@ -33,7 +33,7 @@ class MotionTest {
 
     @Test
     fun `a negative bounce over-damps the way SwiftUI does`() {
-        assertEquals(1f / 0.8f, ArdiaSpring.withBounce(0.3f, -0.2f).dampingRatio, 1e-6f)
+        assertEquals(1f / 0.8f, AeriSpring.withBounce(0.3f, -0.2f).dampingRatio, 1e-6f)
     }
 
     @Test

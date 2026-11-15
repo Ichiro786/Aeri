@@ -65,9 +65,9 @@ import com.ardia.browser.Page
 import com.ardia.browser.PageLoadFailure
 import com.ardia.browser.PageState
 import com.ardia.browser.PageSurface
-import com.ardia.design.ArdiaSymbols
-import com.ardia.design.ArdiaThemeState
-import com.ardia.design.ArdiaType
+import com.ardia.design.AeriSymbols
+import com.ardia.design.AeriThemeState
+import com.ardia.design.AeriType
 import com.ardia.design.BrowsePalette
 import com.ardia.design.Layout
 import com.ardia.design.Motion
@@ -319,7 +319,7 @@ internal fun RefreshIndicator(gestures: PageGestures, modifier: Modifier = Modif
             CircularProgressIndicator(Modifier.size(22.dp), color = BrowsePalette.loadingBorder.current, strokeWidth = 2.dp)
         } else {
             Icon(
-                ArdiaSymbols.arrowClockwise,
+                AeriSymbols.arrowClockwise,
                 null,
                 Modifier.size(20.dp).graphicsLayer {
                     rotationZ = (gestures.pull / PullToRefreshRules.TRIGGER_DP).coerceIn(0f, 1f) * 300f
@@ -341,7 +341,7 @@ internal fun PageContent(
     gesturesEnabled: Boolean,
     modifier: Modifier = Modifier,
 ) {
-    val surface = ArdiaThemeState.look.surface.current
+    val surface = AeriThemeState.look.surface.current
     val scope = rememberCoroutineScope()
     val gestures = remember(tab.id) { PageGestures(scope) }
     val view = LocalView.current
@@ -424,13 +424,13 @@ private const val REATTACH_SETTLE_MILLIS = 150L
 @Composable
 internal fun PageFailureView(failure: PageLoadFailure, onRetry: () -> Unit) {
     val context = LocalContext.current
-    val surface = ArdiaThemeState.look.surface.current
+    val surface = AeriThemeState.look.surface.current
     val retry by rememberUpdatedState(onRetry)
     if (failure.retriesWhenOnline) RetryWhenOnline(context) { retry() }
     val icon = when {
         failure is PageLoadFailure.Crashed -> BrowsingSymbols.exclamationTriangle
         failure is PageLoadFailure.Network && failure.reason == NetworkFailure.Offline -> BrowsingSymbols.wifiSlash
-        else -> ArdiaSymbols.globe
+        else -> AeriSymbols.globe
     }
     Column(
         Modifier
@@ -444,20 +444,20 @@ internal fun PageFailureView(failure: PageLoadFailure, onRetry: () -> Unit) {
         Icon(icon, null, Modifier.padding(bottom = Spacing.hairline).size(36.dp), tint = SystemPalette.secondaryLabel.current)
         Text(
             failure.title(context),
-            style = ArdiaType.title3.semibold,
+            style = AeriType.title3.semibold,
             color = SystemPalette.label.current,
             textAlign = TextAlign.Center,
             modifier = Modifier.widthIn(max = 320.dp),
         )
         Text(
             failure.message(context),
-            style = ArdiaType.subheadline,
+            style = AeriType.subheadline,
             color = SystemPalette.secondaryLabel.current,
             textAlign = TextAlign.Center,
             modifier = Modifier.widthIn(max = 320.dp),
         )
         OutlinedButton(onClick = onRetry, shape = CircleShape, modifier = Modifier.padding(top = Spacing.small)) {
-            Text(stringResource(R.string.browsing_try_again), style = ArdiaType.body)
+            Text(stringResource(R.string.browsing_try_again), style = AeriType.body)
         }
     }
 }

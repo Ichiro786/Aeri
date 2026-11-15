@@ -53,11 +53,12 @@ import com.ardia.appmodel.SystemLink
 import com.ardia.browser.android.R
 import com.ardia.browser.android.SystemIntents
 import com.ardia.design.Monogram
+import com.ardia.design.R as DesignR
 import com.ardia.design.ProfileLook
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-object ArdiaWidgets {
+object AeriWidgets {
     suspend fun refreshSearch(context: Context) {
         runCatching { SearchWidget().updateAll(context) }
     }
@@ -106,9 +107,9 @@ class SearchWidget : GlanceAppWidget() {
 
     override suspend fun provideGlance(context: Context, id: GlanceId) {
         val snapshot = withContext(Dispatchers.IO) { SystemStore.shared(context).loadSnapshot() }
-        val dark = ArdiaWidgets.isDark(context)
+        val dark = AeriWidgets.isDark(context)
         val look = snapshot.look
-        val backdrop = ArdiaWidgets.backdrop(look, dark, themed = true, softened = false)
+        val backdrop = AeriWidgets.backdrop(look, dark, themed = true, softened = false)
         val inkIsLight = look.inkIsLight(dark, themed = true)
         provideContent { SearchWidgetContent(backdrop, inkIsLight) }
     }
@@ -123,13 +124,13 @@ class SearchWidget : GlanceAppWidget() {
 private fun SearchWidgetContent(backdrop: Bitmap, inkIsLight: Boolean) {
     val context = LocalContext.current
     val isSmall = LocalSize.current.width < SearchWidget.MEDIUM.width
-    val ink = if (inkIsLight) Color.White else ArdiaWidgets.inkOnLightBackdrop
+    val ink = if (inkIsLight) Color.White else AeriWidgets.inkOnLightBackdrop
     val inkProvider = ColorProvider(ink)
     val capsule = ColorProvider(ink.copy(alpha = 0.08f))
     Box(GlanceModifier.fillMaxSize().background(ImageProvider(backdrop)).cornerRadius(26.dp)) {
         Column(GlanceModifier.fillMaxSize().padding(16.dp)) {
             Row(GlanceModifier.fillMaxWidth(), verticalAlignment = Alignment.Top) {
-                Image(ImageProvider(R.drawable.ardia_logo), contentDescription = null, modifier = GlanceModifier.size(46.dp, 37.dp))
+                Image(ImageProvider(if (inkIsLight) DesignR.drawable.aeri_mark_on_dark else DesignR.drawable.aeri_mark_on_light), contentDescription = null, modifier = GlanceModifier.size(46.dp))
                 Spacer(GlanceModifier.defaultWeight())
                 if (!isSmall) {
                     Text(
@@ -146,7 +147,7 @@ private fun SearchWidgetContent(backdrop: Bitmap, inkIsLight: Boolean) {
                         .height(44.dp)
                         .background(ImageProvider(R.drawable.widget_capsule), colorFilter = ColorFilter.tint(capsule))
                         .padding(horizontal = 14.dp)
-                        .clickable(ArdiaWidgets.open(context, SystemLink.Search(null)))
+                        .clickable(AeriWidgets.open(context, SystemLink.Search(null)))
                         .semantics { contentDescription = context.getString(R.string.widget_search) },
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
@@ -169,7 +170,7 @@ private fun SearchWidgetContent(backdrop: Bitmap, inkIsLight: Boolean) {
                         GlanceModifier
                             .size(44.dp)
                             .background(ImageProvider(R.drawable.widget_circle), colorFilter = ColorFilter.tint(capsule))
-                            .clickable(ArdiaWidgets.open(context, SystemLink.VoiceSearch))
+                            .clickable(AeriWidgets.open(context, SystemLink.VoiceSearch))
                             .semantics { contentDescription = context.getString(R.string.widget_voice_search) },
                         contentAlignment = Alignment.Center,
                     ) {
@@ -201,7 +202,7 @@ class MacTabsWidget : GlanceAppWidget() {
             }.toMap()
         }
         val look = snapshot.look
-        val backdrop = ArdiaWidgets.backdrop(look, ArdiaWidgets.isDark(context), themed = false, softened = true)
+        val backdrop = AeriWidgets.backdrop(look, AeriWidgets.isDark(context), themed = false, softened = true)
         provideContent { MacTabsWidgetContent(snapshot, icons, backdrop) }
     }
 
@@ -241,23 +242,23 @@ private fun MacTabsWidgetContent(snapshot: SystemSnapshot, icons: Map<String, Bi
                 sections.forEachIndexed { index, section ->
                     if (index > 0) Spacer(GlanceModifier.height(10.dp))
                     Row(
-                        GlanceModifier.fillMaxWidth().clickable(ArdiaWidgets.open(context, SystemLink.MacTabs)),
+                        GlanceModifier.fillMaxWidth().clickable(AeriWidgets.open(context, SystemLink.MacTabs)),
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
                         Image(
                             ImageProvider(R.drawable.ic_shortcut_mac_tabs),
                             contentDescription = null,
                             modifier = GlanceModifier.size(14.dp),
-                            colorFilter = ColorFilter.tint(ArdiaWidgets.accent),
+                            colorFilter = ColorFilter.tint(AeriWidgets.accent),
                         )
                         Spacer(GlanceModifier.width(5.dp))
                         Text(
                             section.device.name,
                             maxLines = 1,
                             modifier = GlanceModifier.defaultWeight(),
-                            style = TextStyle(color = ArdiaWidgets.accent, fontSize = 12.sp, fontWeight = FontWeight.Medium),
+                            style = TextStyle(color = AeriWidgets.accent, fontSize = 12.sp, fontWeight = FontWeight.Medium),
                         )
-                        Image(ImageProvider(R.drawable.ardia_logo_plain), contentDescription = null, modifier = GlanceModifier.size(18.dp, 14.dp))
+                        Image(ImageProvider(R.drawable.aeri_logo), contentDescription = null, modifier = GlanceModifier.size(20.dp))
                     }
                     section.tabs.forEach { tab ->
                         Spacer(GlanceModifier.height(10.dp))
@@ -273,23 +274,23 @@ private fun MacTabsWidgetContent(snapshot: SystemSnapshot, icons: Map<String, Bi
 private fun MacTabRow(tab: SystemTab, icon: Bitmap?) {
     val context = LocalContext.current
     Row(
-        GlanceModifier.fillMaxWidth().clickable(ArdiaWidgets.open(context, SystemLink.Open(tab.url))),
+        GlanceModifier.fillMaxWidth().clickable(AeriWidgets.open(context, SystemLink.Open(tab.url))),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         if (icon != null) {
             Image(ImageProvider(icon), contentDescription = null, modifier = GlanceModifier.size(22.dp).cornerRadius(5.dp))
         } else {
-            Box(GlanceModifier.size(22.dp).background(ArdiaWidgets.monogramFill).cornerRadius(5.dp), contentAlignment = Alignment.Center) {
+            Box(GlanceModifier.size(22.dp).background(AeriWidgets.monogramFill).cornerRadius(5.dp), contentAlignment = Alignment.Center) {
                 Text(
                     Monogram.host(tab.url)?.take(1)?.uppercase().orEmpty(),
-                    style = TextStyle(color = ArdiaWidgets.secondaryLabel, fontSize = 12.sp, fontWeight = FontWeight.Medium),
+                    style = TextStyle(color = AeriWidgets.secondaryLabel, fontSize = 12.sp, fontWeight = FontWeight.Medium),
                 )
             }
         }
         Spacer(GlanceModifier.width(10.dp))
         Column(GlanceModifier.defaultWeight()) {
-            Text(tab.displayTitle, maxLines = 1, style = TextStyle(color = ArdiaWidgets.label, fontSize = 15.sp, fontWeight = FontWeight.Medium))
-            tab.host?.let { Text(it, maxLines = 1, style = TextStyle(color = ArdiaWidgets.secondaryLabel, fontSize = 11.sp)) }
+            Text(tab.displayTitle, maxLines = 1, style = TextStyle(color = AeriWidgets.label, fontSize = 15.sp, fontWeight = FontWeight.Medium))
+            tab.host?.let { Text(it, maxLines = 1, style = TextStyle(color = AeriWidgets.secondaryLabel, fontSize = 11.sp)) }
         }
     }
 }
@@ -297,15 +298,15 @@ private fun MacTabRow(tab: SystemTab, icon: Bitmap?) {
 @Composable
 private fun MacTabsEmpty(title: Int, message: Int, icon: Int, large: Boolean) {
     val context = LocalContext.current
-    Column(GlanceModifier.fillMaxSize().clickable(ArdiaWidgets.open(context, SystemLink.MacTabs))) {
+    Column(GlanceModifier.fillMaxSize().clickable(AeriWidgets.open(context, SystemLink.MacTabs))) {
         Row(GlanceModifier.fillMaxWidth(), verticalAlignment = Alignment.Top) {
-            Image(ImageProvider(icon), contentDescription = null, modifier = GlanceModifier.size(26.dp), colorFilter = ColorFilter.tint(ArdiaWidgets.accent))
+            Image(ImageProvider(icon), contentDescription = null, modifier = GlanceModifier.size(26.dp), colorFilter = ColorFilter.tint(AeriWidgets.accent))
             Spacer(GlanceModifier.defaultWeight())
-            Image(ImageProvider(R.drawable.ardia_logo), contentDescription = null, modifier = GlanceModifier.size(32.dp, 26.dp))
+            Image(ImageProvider(R.drawable.aeri_logo), contentDescription = null, modifier = GlanceModifier.size(34.dp))
         }
         Spacer(GlanceModifier.defaultWeight())
-        Text(context.getString(title), style = TextStyle(color = ArdiaWidgets.label, fontSize = 17.sp, fontWeight = FontWeight.Bold))
-        Text(context.getString(message), maxLines = if (large) 4 else 2, style = TextStyle(color = ArdiaWidgets.secondaryLabel, fontSize = 15.sp))
+        Text(context.getString(title), style = TextStyle(color = AeriWidgets.label, fontSize = 17.sp, fontWeight = FontWeight.Bold))
+        Text(context.getString(message), maxLines = if (large) 4 else 2, style = TextStyle(color = AeriWidgets.secondaryLabel, fontSize = 15.sp))
     }
 }
 

@@ -15,7 +15,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.lifecycleScope
 import com.ardia.appmodel.AppModel
-import com.ardia.browser.android.system.ArdiaWidgets
+import com.ardia.browser.android.system.AeriWidgets
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 
@@ -31,11 +31,11 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         uiMode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
-        model = ArdiaApplication.of(this).model(SystemIntents.launchArguments(this, intent))
+        model = AeriApplication.of(this).model(SystemIntents.launchArguments(this, intent))
         model.attach(this)
         lifecycle.addObserver(sceneObserver)
         StartupTiming.watchFirstFrame(window.decorView, createdAt)
-        setContent { ArdiaRoot(model, createdAt) }
+        setContent { AeriRoot(model, createdAt) }
         lifecycleScope.launch {
             snapshotFlow { model.isPrivateOnScreen }.distinctUntilChanged().collect(::hideFromRecents)
         }
@@ -69,8 +69,8 @@ class MainActivity : ComponentActivity() {
         if (night == uiMode) return
         uiMode = night
         if (model.isDemo) return
-        val app = ArdiaApplication.of(this)
-        app.appScope.launch { ArdiaWidgets.refreshSearch(app) }
+        val app = AeriApplication.of(this)
+        app.appScope.launch { AeriWidgets.refreshSearch(app) }
     }
 
     override fun onDestroy() {

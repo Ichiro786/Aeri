@@ -10,7 +10,7 @@ import kotlin.math.abs
 import kotlin.math.pow
 import kotlin.math.sign
 
-fun ardiaColor(hex: Long, alpha: Float = 1f): Color =
+fun aeriColor(hex: Long, alpha: Float = 1f): Color =
     Color(red = channel(hex, 16), green = channel(hex, 8), blue = channel(hex, 0), alpha = alpha)
 
 private fun channel(hex: Long, shift: Int): Float = ((hex shr shift) and 0xFF).toFloat() / 255f
@@ -20,7 +20,7 @@ fun parseHexColor(text: String?): Color? {
     if (value.startsWith("#")) value = value.drop(1)
     if (value.length != 6) return null
     val number = value.toLongOrNull(16) ?: return null
-    return ardiaColor(number)
+    return aeriColor(number)
 }
 
 @Immutable
@@ -28,7 +28,7 @@ data class AdaptiveColor(val light: Color, val dark: Color) {
     fun resolve(dark: Boolean): Color = if (dark) this.dark else light
 
     val current: Color
-        @Composable @ReadOnlyComposable get() = resolve(LocalArdiaDarkTheme.current)
+        @Composable @ReadOnlyComposable get() = resolve(LocalAeriDarkTheme.current)
 }
 
 fun adaptive(light: Color, dark: Color): AdaptiveColor = AdaptiveColor(light, dark)
@@ -74,7 +74,7 @@ object ColorMath {
     }
 }
 
-fun Color.ardiaGradient(): Brush = Brush.verticalGradient(
+fun Color.aeriGradient(): Brush = Brush.verticalGradient(
     listOf(ColorMath.mixEncoded(this, Color.White.copy(alpha = alpha), 0.1f), ColorMath.mixEncoded(this, Color.Black.copy(alpha = alpha), 0.05f)),
 )
 
@@ -111,4 +111,4 @@ object LegibleInk {
 
 @Composable
 @ReadOnlyComposable
-fun legibleInk(tint: Color): Color = LegibleInk.resolve(tint, LocalArdiaDarkTheme.current, LocalIncreasedContrast.current)
+fun legibleInk(tint: Color): Color = LegibleInk.resolve(tint, LocalAeriDarkTheme.current, LocalIncreasedContrast.current)

@@ -30,7 +30,7 @@ import androidx.compose.ui.text.input.TransformedText
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
-import com.ardia.design.ArdiaType
+import com.ardia.design.AeriType
 import com.ardia.design.BrowsePalette
 
 @Immutable
@@ -71,7 +71,7 @@ internal fun OmniboxTextField(
     }
     val textColor = if (isIncognito) Color.White else BrowsePalette.foregroundPrimary.current
     val placeholderColor = if (isIncognito) Color.White.copy(alpha = 0.45f) else BrowsePalette.foregroundTertiary.current
-    val style = remember(textColor) { ArdiaType.title3.copy(color = textColor) }
+    val style = remember(textColor) { AeriType.title3.copy(color = textColor) }
     val label = stringResource(R.string.search_field_label)
     val placeholder = stringResource(R.string.search_placeholder)
     BasicTextField(
@@ -104,7 +104,7 @@ internal fun OmniboxTextField(
         ),
         decorationBox = { inner ->
             Box(Modifier.padding(horizontal = FIELD_TEXT_INSET), contentAlignment = Alignment.CenterStart) {
-                if (state.value.text.isEmpty()) Text(placeholder, style = ArdiaType.title3, color = placeholderColor, maxLines = 1)
+                if (state.value.text.isEmpty()) Text(placeholder, style = AeriType.title3, color = placeholderColor, maxLines = 1)
                 inner()
             }
         },

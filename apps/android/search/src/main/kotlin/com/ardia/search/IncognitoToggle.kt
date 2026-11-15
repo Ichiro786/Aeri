@@ -29,8 +29,8 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.onClick
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.unit.dp
-import com.ardia.design.ArdiaSymbols
-import com.ardia.design.ArdiaType
+import com.ardia.design.AeriSymbols
+import com.ardia.design.AeriType
 import com.ardia.design.BrowsePalette
 import com.ardia.design.Motion
 import com.ardia.design.medium
@@ -64,10 +64,10 @@ internal fun IncognitoToggle(isOn: Boolean, onToggle: () -> Unit, modifier: Modi
                 scaleOut(Motion.modeToggle.spec(), targetScale = 0.9f, transformOrigin = TransformOrigin(1f, 0.5f)) +
                 shrinkHorizontally(Motion.modeToggle.spec(), shrinkTowards = Alignment.End),
         ) {
-            Text(stringResource(R.string.search_incognito), style = ArdiaType.footnote.medium, color = Color.White.copy(alpha = 0.75f), maxLines = 1)
+            Text(stringResource(R.string.search_incognito), style = AeriType.footnote.medium, color = Color.White.copy(alpha = 0.75f), maxLines = 1)
         }
         Icon(
-            ArdiaSymbols.eyeglasses,
+            AeriSymbols.eyeglasses,
             contentDescription = null,
             modifier = Modifier.size(22.dp),
             tint = if (isOn) Color.White.copy(alpha = 0.85f) else BrowsePalette.foregroundTertiary.current,

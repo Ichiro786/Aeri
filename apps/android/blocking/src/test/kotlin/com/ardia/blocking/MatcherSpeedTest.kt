@@ -76,12 +76,12 @@ class MatcherSpeedTest {
         val p99 = samples[runs * 99 / 100] / 1000.0
         val worst = samples[runs - 1] / 1000.0
         println(
-            "ArdiaBlockingTiming lists=${loaded.description} parse=${loaded.parseMillis}ms build=${loaded.buildMillis}ms " +
+            "AeriBlockingTiming lists=${loaded.description} parse=${loaded.parseMillis}ms build=${loaded.buildMillis}ms " +
                 "rules block=${stats.blockRules} important=${stats.importantRules} exception=${stats.exceptionRules} unindexed=${stats.unindexedRules} " +
                 "selectors generic=${stats.genericSelectors} scoped=${stats.scopedSelectors}",
         )
         println(
-            "ArdiaBlockingTiming blocks(): mean=%.2fus median=%.2fus p99=%.2fus max=%.1fus blocked=%d/%d allocated=%.1f bytes/call regexRuns=%d"
+            "AeriBlockingTiming blocks(): mean=%.2fus median=%.2fus p99=%.2fus max=%.1fus blocked=%d/%d allocated=%.1f bytes/call regexRuns=%d"
                 .format(mean, median, p99, worst, blocked, runs, allocated.toDouble() / runs, regexRuns),
         )
         val perUrl = requests.indices.map { index ->
@@ -101,13 +101,13 @@ class MatcherSpeedTest {
             val regexRuns = context.regexRuns - runsBefore
             val globSteps = RequestContext.GLOB_STEPS_PER_REQUEST - context.globSteps
             println(
-                "ArdiaBlockingTiming slowest url best=%.2fus median=%.2fus regexRuns=%d globSteps=%d %s"
+                "AeriBlockingTiming slowest url best=%.2fus median=%.2fus regexRuns=%d globSteps=%d %s"
                     .format(best, middle, regexRuns, globSteps, requests[index].first.take(90)),
             )
         }
         val slowestBest = perUrl.maxOf { it.second }
         val css = engine.hiding("www.theguardian.com")!!
-        println("ArdiaBlockingTiming generic css=${css.generic.length} chars, site css=${css.specific.length} chars")
+        println("AeriBlockingTiming generic css=${css.generic.length} chars, site css=${css.specific.length} chars")
         assertTrue("median $median us", median < 25.0)
         assertTrue("slowest url at best $slowestBest us", slowestBest < 50.0)
         assertTrue("slowest url median ${perUrl.maxOf { it.third }} us", perUrl.maxOf { it.third } < 100.0)
@@ -155,7 +155,7 @@ class MatcherSpeedTest {
             scope.cancel()
             directory.close()
         }
-        println("ArdiaBlockingTiming concurrent calls=${calls.get()} mismatches=${mismatches.get()}")
+        println("AeriBlockingTiming concurrent calls=${calls.get()} mismatches=${mismatches.get()}")
         assertEquals(0, mismatches.get())
         assertEquals(threads * 3_000 * 2, calls.get())
     }

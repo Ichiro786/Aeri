@@ -15,7 +15,7 @@ import com.ardia.appmodel.AppModel
 import com.ardia.appmodel.LaunchArguments
 import com.ardia.browser.Page
 import com.ardia.browser.PageState
-import com.ardia.design.ArdiaTheme
+import com.ardia.design.AeriTheme
 import com.ardia.store.NightShadeMode
 import com.ardia.store.TabOrigin
 import org.junit.After
@@ -44,7 +44,7 @@ class BrowsingViewTest {
         }
         compose.waitUntil(20_000) { onMain { model.isReady } }
         compose.setContent {
-            ArdiaTheme(look = model.look) { BrowsingView(model, isFront = true) }
+            AeriTheme(look = model.look) { BrowsingView(model, isFront = true) }
         }
     }
 

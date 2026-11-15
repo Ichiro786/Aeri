@@ -30,9 +30,9 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.unit.dp
-import com.ardia.design.ArdiaThemeState
+import com.ardia.design.AeriThemeState
 import com.ardia.design.BrowseLayout
-import com.ardia.design.LocalArdiaDarkTheme
+import com.ardia.design.LocalAeriDarkTheme
 import com.ardia.design.MenuLayout
 import com.ardia.design.Motion
 import com.ardia.design.profileBackdrop
@@ -48,13 +48,13 @@ internal fun BrowsingSheet(
     content: @Composable ColumnScope.() -> Unit,
 ) {
     val progress = remember { Animatable(if (visible) 1f else 0f) }
-    val motion = ArdiaThemeState.motion(if (visible) Motion.searchRise else Motion.trayDismiss)
+    val motion = AeriThemeState.motion(if (visible) Motion.searchRise else Motion.trayDismiss)
     LaunchedEffect(visible) { progress.animateTo(if (visible) 1f else 0f, motion.spec()) }
     if (!visible && progress.value == 0f) return
     val drag = rememberTrayDragState()
     LaunchedEffect(visible) { if (visible) drag.reset() }
-    val look = ArdiaThemeState.look
-    val dark = LocalArdiaDarkTheme.current
+    val look = AeriThemeState.look
+    val dark = LocalAeriDarkTheme.current
     val density = LocalDensity.current
     var heightPx by remember { mutableFloatStateOf(0f) }
     val shape = RoundedCornerShape(topStart = MenuLayout.sheetRadius, topEnd = MenuLayout.sheetRadius)

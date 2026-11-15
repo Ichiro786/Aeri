@@ -34,7 +34,7 @@ import androidx.core.content.FileProvider
 import com.ardia.browser.Page
 import com.ardia.browser.PageRequest
 import com.ardia.browser.SitePermission
-import com.ardia.design.ArdiaSymbols
+import com.ardia.design.AeriSymbols
 import com.ardia.design.GlassChoiceRow
 import com.ardia.design.GlassDialog
 import com.ardia.design.GlassDialogActions
@@ -262,7 +262,7 @@ private fun FileChooserRequest(request: PageRequest, kind: PageRequest.Kind.File
             }
             GlassChoiceRow(
                 stringResource(if (kind.allowsMultiple) R.string.browsing_choose_files else R.string.browsing_choose_file),
-                ArdiaSymbols.folderFill,
+                AeriSymbols.folderFill,
             ) {
                 choosing = false
                 documents()

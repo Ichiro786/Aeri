@@ -1,10 +1,10 @@
 package com.ardia.tabs
 
 import androidx.compose.ui.graphics.Color
-import com.ardia.design.ArdiaSymbols
+import com.ardia.design.AeriSymbols
 import com.ardia.design.ColorMath
 import com.ardia.design.ProfileLook
-import com.ardia.design.ardiaColor
+import com.ardia.design.aeriColor
 import com.ardia.design.parseHexColor
 import com.ardia.sync.SyncedDevice
 import com.ardia.sync.SyncedProfile
@@ -56,13 +56,13 @@ object SpaceColors {
         return named[key]
     }
 
-    fun color(name: String?): Color? = hex(name)?.let(::ardiaColor)
+    fun color(name: String?): Color? = hex(name)?.let(::aeriColor)
 
-    fun symbol(name: String?): ImageVector? = name?.takeIf { it.isNotEmpty() }?.let(ArdiaSymbols::named)
+    fun symbol(name: String?): ImageVector? = name?.takeIf { it.isNotEmpty() }?.let(AeriSymbols::named)
 
     fun device(name: String, kind: String): ImageVector = when {
-        kind == SyncedDevice.PHONE -> ArdiaSymbols.iphone
-        name.contains("book", ignoreCase = true) -> ArdiaSymbols.laptopcomputer
-        else -> ArdiaSymbols.named("desktopcomputer") ?: ArdiaSymbols.macbook
+        kind == SyncedDevice.PHONE -> AeriSymbols.iphone
+        name.contains("book", ignoreCase = true) -> AeriSymbols.laptopcomputer
+        else -> AeriSymbols.named("desktopcomputer") ?: AeriSymbols.macbook
     }
 }

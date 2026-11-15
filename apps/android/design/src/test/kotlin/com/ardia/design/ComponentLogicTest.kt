@@ -89,7 +89,7 @@ class PlaceholderLogicTest {
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class ToastCenterTest {
-    private val icon = ArdiaSymbols.link
+    private val icon = AeriSymbols.link
 
     @Test
     fun `a toast goes away after its duration`() = runTest {
@@ -163,9 +163,9 @@ class ToastCenterTest {
         assertEquals("Luke's MacBook Pro", ReceivedTabsSender.name(listOf(" Luke's MacBook Pro ", null, "Luke's MacBook Pro"), "Your Mac"))
         assertEquals("Your Mac", ReceivedTabsSender.name(listOf("A", "B"), "Your Mac"))
         assertEquals("Your Mac", ReceivedTabsSender.name(listOf(null, " "), "Your Mac"))
-        assertSame(ArdiaSymbols.iphone, Toasts.tabReceived("Luke's iPhone").icon)
-        assertSame(ArdiaSymbols.macbook, Toasts.tabReceived("Studio").icon)
+        assertSame(AeriSymbols.iphone, Toasts.tabReceived("Luke's iPhone").icon)
+        assertSame(AeriSymbols.macbook, Toasts.tabReceived("Studio").icon)
         assertEquals(Toast.LONG_DURATION_MILLIS, Toasts.tabReceived("Studio", count = 3).durationMillis)
-        assertEquals(ToastText.Plural(R.plurals.ardia_toast_tabs_from, 3, listOf(3, "Studio")), Toasts.tabReceived("Studio", count = 3).message)
+        assertEquals(ToastText.Plural(R.plurals.aeri_toast_tabs_from, 3, listOf(3, "Studio")), Toasts.tabReceived("Studio", count = 3).message)
     }
 }

@@ -117,39 +117,39 @@ class Toast(
 }
 
 object Toasts {
-    fun copiedUrl() = Toast(ToastText.Resource(R.string.ardia_toast_copied_url), ArdiaSymbols.link)
+    fun copiedUrl() = Toast(ToastText.Resource(R.string.aeri_toast_copied_url), AeriSymbols.link)
 
-    fun copiedUrlWithoutTrackers() = Toast(ToastText.Resource(R.string.ardia_toast_copied_url_without_trackers), ArdiaSymbols.link)
+    fun copiedUrlWithoutTrackers() = Toast(ToastText.Resource(R.string.aeri_toast_copied_url_without_trackers), AeriSymbols.link)
 
-    fun clearedBrowsingData() = Toast(ToastText.Resource(R.string.ardia_toast_cleared_browsing_data), ArdiaSymbols.eraserFill)
+    fun clearedBrowsingData() = Toast(ToastText.Resource(R.string.aeri_toast_cleared_browsing_data), AeriSymbols.eraserFill)
 
-    fun noOpenTabsToExport() = Toast(ToastText.Resource(R.string.ardia_toast_no_open_tabs), ArdiaSymbols.squareOnSquareDashed)
+    fun noOpenTabsToExport() = Toast(ToastText.Resource(R.string.aeri_toast_no_open_tabs), AeriSymbols.squareOnSquareDashed)
 
-    fun syncConnected() = Toast(ToastText.Resource(R.string.ardia_toast_sync_connected), ArdiaSymbols.checkmarkIcloudFill)
+    fun syncConnected() = Toast(ToastText.Resource(R.string.aeri_toast_sync_connected), AeriSymbols.checkmarkIcloudFill)
 
     fun tabReceived(deviceName: String, count: Int = 1, onOpen: (() -> Unit)? = null): Toast {
         val message = if (count == 1) {
-            ToastText.Resource(R.string.ardia_toast_tab_from, listOf(deviceName))
+            ToastText.Resource(R.string.aeri_toast_tab_from, listOf(deviceName))
         } else {
-            ToastText.Plural(R.plurals.ardia_toast_tabs_from, count, listOf(count, deviceName))
+            ToastText.Plural(R.plurals.aeri_toast_tabs_from, count, listOf(count, deviceName))
         }
         return Toast(message, deviceIcon(deviceName), Toast.LONG_DURATION_MILLIS, onOpen)
     }
 
-    fun sentTab(deviceName: String) = Toast(ToastText.Resource(R.string.ardia_toast_sent_to, listOf(deviceName)), ArdiaSymbols.paperplaneFill)
+    fun sentTab(deviceName: String) = Toast(ToastText.Resource(R.string.aeri_toast_sent_to, listOf(deviceName)), AeriSymbols.paperplaneFill)
 
     fun downloaded(fileName: String, onOpen: () -> Unit) =
-        Toast(ToastText.Resource(R.string.ardia_toast_downloaded, listOf(fileName)), ArdiaSymbols.arrowDownCircleFill, Toast.LONG_DURATION_MILLIS, onOpen)
+        Toast(ToastText.Resource(R.string.aeri_toast_downloaded, listOf(fileName)), AeriSymbols.arrowDownCircleFill, Toast.LONG_DURATION_MILLIS, onOpen)
 
     fun downloadFailed(fileName: String): Toast = if (fileName.isEmpty()) {
-        Toast(ToastText.Resource(R.string.ardia_toast_download_failed), ArdiaSymbols.exclamationmarkTriangleFill)
+        Toast(ToastText.Resource(R.string.aeri_toast_download_failed), AeriSymbols.exclamationmarkTriangleFill)
     } else {
-        Toast(ToastText.Resource(R.string.ardia_toast_download_failed_named, listOf(fileName)), ArdiaSymbols.exclamationmarkTriangleFill)
+        Toast(ToastText.Resource(R.string.aeri_toast_download_failed_named, listOf(fileName)), AeriSymbols.exclamationmarkTriangleFill)
     }
 
     fun deviceIcon(deviceName: String): ImageVector {
         val name = deviceName.lowercase()
-        return if ("iphone" in name || "android" in name) ArdiaSymbols.iphone else ArdiaSymbols.macbook
+        return if ("iphone" in name || "android" in name) AeriSymbols.iphone else AeriSymbols.macbook
     }
 }
 
@@ -255,7 +255,7 @@ fun ToastView(toast: Toast, modifier: Modifier = Modifier) {
     ) {
         val ink = SystemPalette.label.current
         Icon(toast.icon, null, Modifier.size(ToastDefaults.iconSize), tint = ink)
-        Text(message, style = ArdiaType.subheadline.semibold, color = ink, maxLines = 3)
+        Text(message, style = AeriType.subheadline.semibold, color = ink, maxLines = 3)
     }
 }
 

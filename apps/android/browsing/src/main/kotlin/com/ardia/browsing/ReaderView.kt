@@ -58,13 +58,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ardia.browser.Page
 import com.ardia.browser.ReadableContent
-import com.ardia.design.ArdiaSymbols
-import com.ardia.design.ArdiaType
-import com.ardia.design.LocalArdiaDarkTheme
+import com.ardia.design.AeriSymbols
+import com.ardia.design.AeriType
+import com.ardia.design.LocalAeriDarkTheme
 import com.ardia.design.Palette
 import com.ardia.design.Spacing
 import com.ardia.design.SystemPalette
-import com.ardia.design.ardiaColor
+import com.ardia.design.aeriColor
 import com.ardia.design.medium
 import com.ardia.design.semibold
 import com.ardia.browser.BrowserUrl as WebUrl
@@ -74,9 +74,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 enum class ReaderTheme(val key: String, val background: Color, val ink: Color) {
-    Light("light", Color.White, ardiaColor(0x1C1C1E)),
-    Sepia("sepia", ardiaColor(0xF8F1E3), ardiaColor(0x4F321C)),
-    Dark("dark", ardiaColor(0x121214), ardiaColor(0xE3E3E6)),
+    Light("light", Color.White, aeriColor(0x1C1C1E)),
+    Sepia("sepia", aeriColor(0xF8F1E3), aeriColor(0x4F321C)),
+    Dark("dark", aeriColor(0x121214), aeriColor(0xE3E3E6)),
     ;
 
     val secondary: Color get() = ink.copy(alpha = 0.6f)
@@ -146,7 +146,7 @@ internal fun rememberReaderSettings(): ReaderSettings {
 
 @Composable
 internal fun ReaderView(page: Page?, settings: ReaderSettings, onDone: () -> Unit, modifier: Modifier = Modifier) {
-    val theme = ReaderTheme.resolve(settings.theme, LocalArdiaDarkTheme.current)
+    val theme = ReaderTheme.resolve(settings.theme, LocalAeriDarkTheme.current)
     var load by remember(page) { mutableStateOf<ReaderLoad>(ReaderLoad.Loading) }
     LaunchedEffect(page) {
         load = if (page == null) {
@@ -170,7 +170,7 @@ internal fun ReaderView(page: Page?, settings: ReaderSettings, onDone: () -> Uni
                     .padding(horizontal = Spacing.small),
                 contentAlignment = Alignment.Center,
             ) {
-                Text(stringResource(R.string.browsing_done), style = ArdiaType.body.semibold, color = Palette.formAccent.current)
+                Text(stringResource(R.string.browsing_done), style = AeriType.body.semibold, color = Palette.formAccent.current)
             }
         }
         Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
@@ -180,8 +180,8 @@ internal fun ReaderView(page: Page?, settings: ReaderSettings, onDone: () -> Uni
                     CircularProgressIndicator(Modifier.size(28.dp).semantics { contentDescription = label }, color = theme.secondary, strokeWidth = 2.5.dp)
                 }
                 ReaderLoad.Failed -> Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(Spacing.small)) {
-                    Icon(ArdiaSymbols.docPlaintext, null, Modifier.size(44.dp), tint = theme.secondary)
-                    Text(stringResource(R.string.browsing_no_article), style = ArdiaType.title3.semibold, color = theme.ink)
+                    Icon(AeriSymbols.docPlaintext, null, Modifier.size(44.dp), tint = theme.secondary)
+                    Text(stringResource(R.string.browsing_no_article), style = AeriType.title3.semibold, color = theme.ink)
                 }
                 is ReaderLoad.Loaded -> Article(state.content, settings, theme)
             }
@@ -225,7 +225,7 @@ private fun Article(content: ReadableContent, settings: ReaderSettings, theme: R
 private fun Header(content: ReadableContent, theme: ReaderTheme, family: FontFamily, size: Float, modifier: Modifier) {
     Column(modifier.padding(bottom = (size * 1.2f).dp), verticalArrangement = Arrangement.spacedBy(Spacing.tight)) {
         PageMenuText.readerSource(content.siteName, content.byline)?.let {
-            Text(it, style = ArdiaType.subheadline.medium, color = theme.secondary, maxLines = 2)
+            Text(it, style = AeriType.subheadline.medium, color = theme.secondary, maxLines = 2)
         }
         Text(
             content.title,
@@ -234,7 +234,7 @@ private fun Header(content: ReadableContent, theme: ReaderTheme, family: FontFam
             modifier = Modifier.semantics { heading() },
         )
         if (content.wordCount > 0) {
-            Text(stringResource(R.string.browsing_minutes_read, PageMenuText.readingMinutes(content.wordCount)), style = ArdiaType.subheadline, color = theme.secondary)
+            Text(stringResource(R.string.browsing_minutes_read, PageMenuText.readingMinutes(content.wordCount)), style = AeriType.subheadline, color = theme.secondary)
         }
     }
 }
@@ -294,13 +294,13 @@ private fun AppearanceMenu(settings: ReaderSettings, theme: ReaderTheme) {
                 .semantics { contentDescription = label },
             contentAlignment = Alignment.Center,
         ) {
-            Icon(ArdiaSymbols.textformatSize, null, Modifier.size(22.dp), tint = Palette.formAccent.current)
+            Icon(AeriSymbols.textformatSize, null, Modifier.size(22.dp), tint = Palette.formAccent.current)
         }
         GlassMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
-            GlassMenuItem(stringResource(R.string.browsing_smaller_text), ArdiaSymbols.textformatSizeSmaller, enabled = settings.step > 0) {
+            GlassMenuItem(stringResource(R.string.browsing_smaller_text), AeriSymbols.textformatSizeSmaller, enabled = settings.step > 0) {
                 settings.changeStep(settings.step - 1)
             }
-            GlassMenuItem(stringResource(R.string.browsing_larger_text), ArdiaSymbols.textformatSizeLarger, enabled = settings.step < ReaderSizes.steps.lastIndex) {
+            GlassMenuItem(stringResource(R.string.browsing_larger_text), AeriSymbols.textformatSizeLarger, enabled = settings.step < ReaderSizes.steps.lastIndex) {
                 settings.changeStep(settings.step + 1)
             }
             GlassMenuDivider()
@@ -323,5 +323,5 @@ private fun MenuHeading(text: String) {
 
 @Composable
 private fun CheckItem(text: String, checked: Boolean, onClick: () -> Unit) {
-    GlassMenuItem(text, if (checked) ArdiaSymbols.checkmark else null, selected = checked, onClick = onClick)
+    GlassMenuItem(text, if (checked) AeriSymbols.checkmark else null, selected = checked, onClick = onClick)
 }

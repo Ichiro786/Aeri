@@ -63,10 +63,10 @@ import com.ardia.appmodel.AppModel
 import com.ardia.appmodel.SettingsRoute
 import com.ardia.browser.Page
 import com.ardia.browser.PageZoom
-import com.ardia.design.ArdiaColors
-import com.ardia.design.ArdiaSymbols
-import com.ardia.design.ArdiaType
-import com.ardia.design.LocalArdiaDarkTheme
+import com.ardia.design.AeriColors
+import com.ardia.design.AeriSymbols
+import com.ardia.design.AeriType
+import com.ardia.design.LocalAeriDarkTheme
 import com.ardia.design.MenuLayout
 import com.ardia.design.Motion
 import com.ardia.design.SettingsGroup
@@ -168,14 +168,14 @@ private fun PageMenuMain(model: AppModel, tab: BrowserTab, page: Page?, onShowSi
                 BlockingRow(model, page, isWebPage, onDismiss)
                 val offersDefaultBrowser = !model.defaultBrowser.isDefault
                 MenuRow(
-                    ArdiaSymbols.gearshape,
+                    AeriSymbols.gearshape,
                     stringResource(R.string.browsing_site_settings),
                     MenuTags.SITE_SETTINGS,
                     divider = offersDefaultBrowser,
                     onClick = onShowSiteSettings,
                 )
                 if (offersDefaultBrowser) {
-                    MenuRow(ArdiaSymbols.safariFill, stringResource(R.string.browsing_open_in_default_browser), MenuTags.DEFAULT_BROWSER, divider = false) {
+                    MenuRow(AeriSymbols.safariFill, stringResource(R.string.browsing_open_in_default_browser), MenuTags.DEFAULT_BROWSER, divider = false) {
                         model.openInDefaultBrowser(page)
                         onDismiss()
                     }
@@ -216,22 +216,22 @@ private fun NavigationCapsule(model: AppModel, tab: BrowserTab, page: Page?, isW
             .padding(horizontal = Spacing.hairline),
     ) {
         Row(Modifier.fillMaxWidth().heightIn(min = MenuLayout.capsuleHeight), verticalAlignment = Alignment.CenterVertically) {
-            CapsuleButton(ArdiaSymbols.chevronLeft, stringResource(R.string.browsing_back), MenuTags.BACK, canGoBack) {
+            CapsuleButton(AeriSymbols.chevronLeft, stringResource(R.string.browsing_back), MenuTags.BACK, canGoBack) {
                 page?.goBack()
                 onDismiss()
             }
-            CapsuleButton(ArdiaSymbols.chevronRight, stringResource(R.string.browsing_forward), MenuTags.FORWARD, canGoForward) {
+            CapsuleButton(AeriSymbols.chevronRight, stringResource(R.string.browsing_forward), MenuTags.FORWARD, canGoForward) {
                 page?.goForward()
                 onDismiss()
             }
             if (large) Spacer(Modifier.weight(1f)) else TitleLabel(model, tab, page, singleLine = true, Modifier.weight(1f))
-            CapsuleButton(ArdiaSymbols.star, stringResource(R.string.browsing_pin_to_mac), MenuTags.PIN, isWebPage && !tab.isPrivate) {
+            CapsuleButton(AeriSymbols.star, stringResource(R.string.browsing_pin_to_mac), MenuTags.PIN, isWebPage && !tab.isPrivate) {
                 model.pinCurrentToMac()
             }
             if (isLoading) {
-                CapsuleButton(ArdiaSymbols.xmark, stringResource(R.string.browsing_stop), MenuTags.RELOAD, true) { page?.stop() }
+                CapsuleButton(AeriSymbols.xmark, stringResource(R.string.browsing_stop), MenuTags.RELOAD, true) { page?.stop() }
             } else {
-                CapsuleButton(ArdiaSymbols.arrowClockwise, stringResource(R.string.browsing_reload), MenuTags.RELOAD, isWebPage) {
+                CapsuleButton(AeriSymbols.arrowClockwise, stringResource(R.string.browsing_reload), MenuTags.RELOAD, isWebPage) {
                     page?.reload()
                     onDismiss()
                 }
@@ -265,15 +265,15 @@ private fun TitleLabel(model: AppModel, tab: BrowserTab, page: Page?, singleLine
             if (shown != null) {
                 Text(
                     shown,
-                    style = ArdiaType.body.semibold,
-                    color = ArdiaColors.accentText.current,
+                    style = AeriType.body.semibold,
+                    color = AeriColors.accentText.current,
                     textAlign = TextAlign.Center,
                     modifier = Modifier.fillMaxWidth(),
                 )
             } else {
                 Text(
                     title,
-                    style = ArdiaType.body,
+                    style = AeriType.body,
                     color = SystemPalette.label.current,
                     maxLines = if (singleLine) 1 else 3,
                     overflow = TextOverflow.Ellipsis,
@@ -313,16 +313,16 @@ private class TileItem(val icon: ImageVector, val title: String, val tag: String
 private fun Tiles(model: AppModel, tab: BrowserTab, isWebPage: Boolean, large: Boolean, onDismiss: () -> Unit) {
     val view = LocalView.current
     val items = listOf(
-        TileItem(ArdiaSymbols.docPlaintext, stringResource(R.string.browsing_reader), MenuTags.READER) {
+        TileItem(AeriSymbols.docPlaintext, stringResource(R.string.browsing_reader), MenuTags.READER) {
             model.browse.isToolbarPresented = false
             model.showReader(tab.id)
         },
-        TileItem(ArdiaSymbols.link, stringResource(R.string.browsing_copy_link), MenuTags.COPY) {
+        TileItem(AeriSymbols.link, stringResource(R.string.browsing_copy_link), MenuTags.COPY) {
             if (model.copyCurrentLink()) {
                 view.performHapticFeedback(if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) HapticFeedbackConstants.CONFIRM else HapticFeedbackConstants.VIRTUAL_KEY)
             }
         },
-        TileItem(ArdiaSymbols.squareAndArrowUp, stringResource(R.string.browsing_share), MenuTags.SHARE) {
+        TileItem(AeriSymbols.squareAndArrowUp, stringResource(R.string.browsing_share), MenuTags.SHARE) {
             onDismiss()
             model.shareCurrentPage()
         },
@@ -361,7 +361,7 @@ private fun RowScope.Tile(item: TileItem, enabled: Boolean) {
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Icon(item.icon, null, Modifier.size(22.dp), tint = ink)
-        Text(item.title, style = ArdiaType.footnote.medium, color = ink, maxLines = 1, overflow = TextOverflow.Ellipsis)
+        Text(item.title, style = AeriType.footnote.medium, color = ink, maxLines = 1, overflow = TextOverflow.Ellipsis)
     }
 }
 
@@ -370,7 +370,7 @@ private fun MenuGroup(content: @Composable ColumnScope.() -> Unit) {
     Column(
         Modifier
             .fillMaxWidth()
-            .glassRim(RoundedCornerShape(MenuLayout.innerRadius), Glass.isLiquid, LocalArdiaDarkTheme.current, Glass.groupRim)
+            .glassRim(RoundedCornerShape(MenuLayout.innerRadius), Glass.isLiquid, LocalAeriDarkTheme.current, Glass.groupRim)
             .clip(RoundedCornerShape(MenuLayout.innerRadius))
             .background(SystemPalette.secondaryGroupedBackground.current),
         content = content,
@@ -413,7 +413,7 @@ private fun MenuRow(
             RowIcon(icon)
             Text(
                 title,
-                style = ArdiaType.body,
+                style = AeriType.body,
                 color = if (enabled) SystemPalette.label.current else SystemPalette.tertiaryLabel.current,
                 modifier = Modifier.weight(1f).padding(vertical = Spacing.tight),
             )
@@ -449,14 +449,14 @@ private fun ToggleRow(
             RowIcon(icon)
             Text(
                 title,
-                style = ArdiaType.body,
+                style = AeriType.body,
                 color = if (enabled) SystemPalette.label.current else SystemPalette.tertiaryLabel.current,
                 modifier = Modifier.weight(1f).padding(vertical = Spacing.tight),
             )
             if (detail != null) {
                 Text(
                     detail,
-                    style = ArdiaType.subheadline.monospacedDigits,
+                    style = AeriType.subheadline.monospacedDigits,
                     color = SystemPalette.secondaryLabel.current,
                     modifier = Modifier.semantics { contentDescription = "${detailLabel.orEmpty()} $detail".trim() },
                 )
@@ -469,7 +469,7 @@ private fun ToggleRow(
 
 @Composable
 private fun FindRow(model: AppModel, isWebPage: Boolean, divider: Boolean = true) {
-    MenuRow(ArdiaSymbols.textMagnifyingglass, stringResource(R.string.browsing_find_on_page), MenuTags.FIND, enabled = isWebPage, divider = divider) {
+    MenuRow(AeriSymbols.textMagnifyingglass, stringResource(R.string.browsing_find_on_page), MenuTags.FIND, enabled = isWebPage, divider = divider) {
         model.showFindOnPage()
     }
 }
@@ -492,11 +492,11 @@ private fun SendRow(model: AppModel, tab: BrowserTab, isWebPage: Boolean, onDism
             BrowsingSymbols.paperplane,
             stringResource(R.string.browsing_send_to_device),
             MenuTags.SEND,
-            accessory = { Icon(ArdiaSymbols.chevronUpChevronDown, null, Modifier.size(14.dp), tint = SystemPalette.tertiaryLabel.current) },
+            accessory = { Icon(AeriSymbols.chevronUpChevronDown, null, Modifier.size(14.dp), tint = SystemPalette.tertiaryLabel.current) },
         ) { expanded = true }
         GlassMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
             for (device in devices) {
-                GlassMenuItem(device.name, if (device.kind == SyncedDevice.MAC) ArdiaSymbols.laptopcomputer else ArdiaSymbols.iphone) {
+                GlassMenuItem(device.name, if (device.kind == SyncedDevice.MAC) AeriSymbols.laptopcomputer else AeriSymbols.iphone) {
                     expanded = false
                     model.send(tab, device)
                     onDismiss()
@@ -509,9 +509,9 @@ private fun SendRow(model: AppModel, tab: BrowserTab, isWebPage: Boolean, onDism
 @Composable
 private fun NightShadeRow(model: AppModel, page: Page, isWebPage: Boolean) {
     page.select { it.host }.value
-    val isOn = PageMenuText.nightShadeIsOn(model.nightShade(page), LocalArdiaDarkTheme.current)
+    val isOn = PageMenuText.nightShadeIsOn(model.nightShade(page), LocalAeriDarkTheme.current)
     ToggleRow(
-        if (isOn) ArdiaSymbols.moonFill else BrowsingSymbols.moon,
+        if (isOn) AeriSymbols.moonFill else BrowsingSymbols.moon,
         stringResource(R.string.browsing_night_shade),
         MenuTags.NIGHT_SHADE,
         checked = isOn,
@@ -536,7 +536,7 @@ private fun BlockingRow(model: AppModel, page: Page, isWebPage: Boolean, onDismi
     val enabled = model.blockersEnabled(page)
     val count by page.select { it.blockedRequests }
     ToggleRow(
-        if (enabled) ArdiaSymbols.handRaisedFill else BrowsingSymbols.handRaisedSlash,
+        if (enabled) AeriSymbols.handRaisedFill else BrowsingSymbols.handRaisedSlash,
         stringResource(R.string.browsing_block_ads_and_trackers),
         MenuTags.BLOCKING,
         checked = enabled,
@@ -561,7 +561,7 @@ private fun ZoomRow(page: Page, isWebPage: Boolean, large: Boolean) {
             Modifier.clip(CircleShape).background(SystemPalette.tertiaryFill.current),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            ZoomButton(ArdiaSymbols.minus, stringResource(R.string.browsing_zoom_out), MenuTags.ZOOM_OUT, canZoomOut && isWebPage) { page.zoomOut() }
+            ZoomButton(AeriSymbols.minus, stringResource(R.string.browsing_zoom_out), MenuTags.ZOOM_OUT, canZoomOut && isWebPage) { page.zoomOut() }
             val resetLabel = stringResource(R.string.browsing_reset_zoom)
             Box(
                 Modifier
@@ -575,17 +575,17 @@ private fun ZoomRow(page: Page, isWebPage: Boolean, large: Boolean) {
                     },
                 contentAlignment = Alignment.Center,
             ) {
-                Text(percent, style = ArdiaType.subheadline.semibold.monospacedDigits, color = SystemPalette.label.current)
+                Text(percent, style = AeriType.subheadline.semibold.monospacedDigits, color = SystemPalette.label.current)
             }
-            ZoomButton(ArdiaSymbols.plus, stringResource(R.string.browsing_zoom_in), MenuTags.ZOOM_IN, canZoomIn && isWebPage) { page.zoomIn() }
+            ZoomButton(AeriSymbols.plus, stringResource(R.string.browsing_zoom_in), MenuTags.ZOOM_IN, canZoomIn && isWebPage) { page.zoomIn() }
         }
     }
     val label = @Composable { modifier: Modifier ->
         Row(modifier, horizontalArrangement = Arrangement.spacedBy(Spacing.small), verticalAlignment = Alignment.CenterVertically) {
-            RowIcon(ArdiaSymbols.textformatSize)
+            RowIcon(AeriSymbols.textformatSize)
             Text(
                 stringResource(R.string.browsing_page_zoom),
-                style = ArdiaType.body,
+                style = AeriType.body,
                 color = if (isWebPage) SystemPalette.label.current else SystemPalette.tertiaryLabel.current,
             )
         }
@@ -641,10 +641,10 @@ internal fun SiteSettingsPage(model: AppModel, onBack: () -> Unit) {
         verticalArrangement = Arrangement.spacedBy(Spacing.large),
     ) {
         Row(Modifier.fillMaxWidth().padding(horizontal = Spacing.tight), verticalAlignment = Alignment.CenterVertically) {
-            CapsuleButton(ArdiaSymbols.chevronLeft, stringResource(R.string.browsing_back), "siteSettings.back", true, onBack)
+            CapsuleButton(AeriSymbols.chevronLeft, stringResource(R.string.browsing_back), "siteSettings.back", true, onBack)
             Text(
                 stringResource(R.string.browsing_site_settings),
-                style = ArdiaType.headline,
+                style = AeriType.headline,
                 color = SystemPalette.label.current,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.weight(1f),
@@ -652,11 +652,11 @@ internal fun SiteSettingsPage(model: AppModel, onBack: () -> Unit) {
             Spacer(Modifier.width(44.dp))
         }
         SettingsGroup {
-            SwitchSettingsRow(stringResource(R.string.browsing_block_ads), ArdiaSymbols.handRaisedFill, SettingsTint.ads, blocking.blocksAds, model::setBlocksAds)
-            SwitchSettingsRow(stringResource(R.string.browsing_block_trackers), ArdiaSymbols.eyeglasses, SettingsTint.trackers, blocking.blocksTrackers, model::setBlocksTrackers)
+            SwitchSettingsRow(stringResource(R.string.browsing_block_ads), AeriSymbols.handRaisedFill, SettingsTint.ads, blocking.blocksAds, model::setBlocksAds)
+            SwitchSettingsRow(stringResource(R.string.browsing_block_trackers), AeriSymbols.eyeglasses, SettingsTint.trackers, blocking.blocksTrackers, model::setBlocksTrackers)
             SwitchSettingsRow(
                 stringResource(R.string.browsing_block_cookie_banners),
-                ArdiaSymbols.listBulletRectanglePortraitFill,
+                AeriSymbols.listBulletRectanglePortraitFill,
                 SettingsTint.cookies,
                 blocking.hidesCookieBanners,
                 model::setHidesCookieBanners,
@@ -669,12 +669,12 @@ internal fun SiteSettingsPage(model: AppModel, onBack: () -> Unit) {
             SettingsRow(
                 onClick = { model.openSiteSettingsRoute(SettingsRoute.TrustedSites) },
                 trailing = { ValueText(if (blocking.exemptHosts.isEmpty()) stringResource(R.string.browsing_none) else blocking.exemptHosts.size.toString()) },
-            ) { SettingsRowLabel(stringResource(R.string.browsing_trusted_sites), ArdiaSymbols.checkmarkShieldFill, SettingsTint.green) }
+            ) { SettingsRowLabel(stringResource(R.string.browsing_trusted_sites), AeriSymbols.checkmarkShieldFill, SettingsTint.green) }
         }
         SettingsGroup(footer = stringResource(R.string.browsing_site_settings_footer)) {
             ChoiceSettingsRow(
                 stringResource(R.string.browsing_night_shade),
-                ArdiaSymbols.moonFill,
+                AeriSymbols.moonFill,
                 SettingsTint.nightShade,
                 NightShadeMode.entries,
                 browsing.nightShade,
@@ -683,7 +683,7 @@ internal fun SiteSettingsPage(model: AppModel, onBack: () -> Unit) {
             )
             ChoiceSettingsRow(
                 stringResource(R.string.browsing_swipe_to_navigate),
-                ArdiaSymbols.handDrawFill,
+                AeriSymbols.handDrawFill,
                 SettingsTint.swipe,
                 SwipeNavigationMode.entries,
                 browsing.swipeNavigation,
@@ -692,7 +692,7 @@ internal fun SiteSettingsPage(model: AppModel, onBack: () -> Unit) {
             )
             SwitchSettingsRow(
                 stringResource(R.string.browsing_collapse_bottom_bar),
-                ArdiaSymbols.platterFilledBottomAndArrowDownIphone,
+                AeriSymbols.platterFilledBottomAndArrowDownIphone,
                 SettingsTint.bottomBar,
                 model.settings.collapsesBottomBar,
                 divider = false,
@@ -721,8 +721,8 @@ private fun swipeTitle(mode: SwipeNavigationMode): String = stringResource(
 
 @Composable
 private fun ValueText(text: String) {
-    Text(text, style = ArdiaType.body, color = SystemPalette.secondaryLabel.current)
-    Icon(ArdiaSymbols.chevronRight, null, Modifier.padding(start = Spacing.hairline).size(13.dp), tint = SystemPalette.tertiaryLabel.current)
+    Text(text, style = AeriType.body, color = SystemPalette.secondaryLabel.current)
+    Icon(AeriSymbols.chevronRight, null, Modifier.padding(start = Spacing.hairline).size(13.dp), tint = SystemPalette.tertiaryLabel.current)
 }
 
 @Composable
@@ -759,13 +759,13 @@ private fun <T> ChoiceSettingsRow(
             onClick = { expanded = true },
             showsDivider = true,
             trailing = {
-                Text(label(selected), style = ArdiaType.body, color = SystemPalette.secondaryLabel.current)
-                Icon(ArdiaSymbols.chevronUpChevronDown, null, Modifier.padding(start = Spacing.hairline).size(13.dp), tint = SystemPalette.tertiaryLabel.current)
+                Text(label(selected), style = AeriType.body, color = SystemPalette.secondaryLabel.current)
+                Icon(AeriSymbols.chevronUpChevronDown, null, Modifier.padding(start = Spacing.hairline).size(13.dp), tint = SystemPalette.tertiaryLabel.current)
             },
         ) { SettingsRowLabel(title, icon, tint) }
         GlassMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
             for (option in options) {
-                GlassMenuItem(label(option), if (option == selected) ArdiaSymbols.checkmark else null, selected = option == selected) {
+                GlassMenuItem(label(option), if (option == selected) AeriSymbols.checkmark else null, selected = option == selected) {
                     expanded = false
                     onSelect(option)
                 }

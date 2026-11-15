@@ -70,10 +70,10 @@ import com.ardia.blocking.FilterListAddress
 import com.ardia.blocking.FilterListGroup
 import com.ardia.blocking.FilterListInfo
 import com.ardia.blocking.FilterListState
-import com.ardia.design.ArdiaSymbols
-import com.ardia.design.ArdiaType
+import com.ardia.design.AeriSymbols
+import com.ardia.design.AeriType
 import com.ardia.design.Glass
-import com.ardia.design.LocalArdiaDarkTheme
+import com.ardia.design.LocalAeriDarkTheme
 import com.ardia.design.Radius
 import com.ardia.design.glassRim
 import com.ardia.design.Palette
@@ -135,11 +135,11 @@ fun FilterListsPage(nav: SettingsNav) {
                         SettingsHero(
                             title = stringResource(R.string.site_filter_lists),
                             subtitle = FilterListWords.summary(resources, source.enabledLists.size, source.enabledRuleCount),
-                            icon = ArdiaSymbols.shieldLefthalfFilled,
+                            icon = AeriSymbols.shieldLefthalfFilled,
                             tint = SettingsTint.ads,
                         ) {
                             Crossfade(FilterListWords.status(resources, source.isUpdating, source.isOffline, source.lastUpdated, now), label = "listsStatus") { status ->
-                                Text(status, style = ArdiaType.footnote, color = if (source.isOffline) warningInk() else SystemPalette.secondaryLabel.current)
+                                Text(status, style = AeriType.footnote, color = if (source.isOffline) warningInk() else SystemPalette.secondaryLabel.current)
                             }
                         }
                     }
@@ -225,9 +225,9 @@ private fun FilterListRow(list: FilterListInfo, now: Long, isFirst: Boolean, isL
                     .padding(start = SettingsLayout.rowInset, top = Spacing.tight, bottom = Spacing.tight),
                 verticalArrangement = Arrangement.spacedBy(2.dp),
             ) {
-                Text(list.title, style = ArdiaType.body, color = SystemPalette.label.current)
+                Text(list.title, style = AeriType.body, color = SystemPalette.label.current)
                 Crossfade(facts, label = "listFacts") { line ->
-                    Text(line.text, style = ArdiaType.subheadline, color = if (line.isWarning) warningInk() else SystemPalette.secondaryLabel.current)
+                    Text(line.text, style = AeriType.subheadline, color = if (line.isWarning) warningInk() else SystemPalette.secondaryLabel.current)
                 }
             }
             if (FilterListWords.isBusy(list)) CircularProgressIndicator(Modifier.size(18.dp), strokeWidth = 2.dp, color = SystemPalette.secondaryLabel.current)
@@ -251,7 +251,7 @@ fun FilterListDetailPage(nav: SettingsNav, listId: String) {
     var confirmingRemoval by remember { mutableStateOf(false) }
     SettingsPage(list?.title ?: stringResource(R.string.list_fallback_title), onBack = nav::pop) {
         if (list == null) {
-            item(key = "removed") { EmptyState(stringResource(R.string.list_removed), "", ArdiaSymbols.listBulletRectangle) }
+            item(key = "removed") { EmptyState(stringResource(R.string.list_removed), "", AeriSymbols.listBulletRectangle) }
             return@SettingsPage
         }
         item(key = "use") {
@@ -268,8 +268,8 @@ fun FilterListDetailPage(nav: SettingsNav, listId: String) {
                         horizontalArrangement = Arrangement.spacedBy(SettingsLayout.labelGap),
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
-                        Icon(ArdiaSymbols.exclamationmarkTriangleFill, null, Modifier.size(22.dp), tint = warningInk())
-                        Text(failure.message, style = ArdiaType.body, color = SystemPalette.label.current)
+                        Icon(AeriSymbols.exclamationmarkTriangleFill, null, Modifier.size(22.dp), tint = warningInk())
+                        Text(failure.message, style = AeriType.body, color = SystemPalette.label.current)
                     }
                     RowDivider()
                     ButtonRow(stringResource(R.string.list_try_again), onClick = { scope.launch { model.updateFilterListsNow() } }, enabled = !source.isUpdating)
@@ -321,7 +321,7 @@ fun LinkRow(text: String, showsDivider: Boolean = false, small: Boolean = false,
     Column(Modifier.fillMaxWidth()) {
         Text(
             text,
-            style = if (small) ArdiaType.subheadline else ArdiaType.body,
+            style = if (small) AeriType.subheadline else AeriType.body,
             color = Palette.formAccent.current,
             maxLines = 2,
             overflow = TextOverflow.MiddleEllipsis,
@@ -372,7 +372,7 @@ fun AddFilterListSheet(nav: SettingsNav, onDismiss: () -> Unit) {
     }
     LaunchedEffect(Unit) { runCatching { focus.requestFocus() } }
 
-    val dark = LocalArdiaDarkTheme.current
+    val dark = LocalAeriDarkTheme.current
     val liquid = Glass.isLiquid
     val sheetShape = RoundedCornerShape(topStart = Radius.sheet, topEnd = Radius.sheet)
     ModalBottomSheet(
@@ -420,7 +420,7 @@ fun AddFilterListSheet(nav: SettingsNav, onDismiss: () -> Unit) {
                     Crossfade(footer, label = "addFooter") { (text, color) -> FootnoteText(text, Modifier.padding(top = Spacing.tight), color = color) }
                 }
                 AnimatedVisibility(address.isEmpty(), modifier = Modifier.align(Alignment.CenterHorizontally)) {
-                    CapsuleButton(stringResource(R.string.settings_paste), icon = ArdiaSymbols.docOnDoc, onClick = {
+                    CapsuleButton(stringResource(R.string.settings_paste), icon = AeriSymbols.docOnDoc, onClick = {
                         scope.launch {
                             val text = clipboard.getClipEntry()?.clipData?.takeIf { it.itemCount > 0 }?.getItemAt(0)?.text?.toString()?.trim()
                             if (!text.isNullOrEmpty()) address = text
@@ -504,15 +504,15 @@ private fun MyFiltersFooter(summary: String, hasChanges: Boolean, onSyntax: () -
         verticalArrangement = Arrangement.spacedBy(Spacing.hairline),
     ) {
         Crossfade(summary, label = "filtersSummary") { line ->
-            Text(line, style = ArdiaType.footnote.semibold, color = if (hasChanges) warningInk() else SystemPalette.secondaryLabel.current)
+            Text(line, style = AeriType.footnote.semibold, color = if (hasChanges) warningInk() else SystemPalette.secondaryLabel.current)
         }
         if (!large) {
             val help = stringResource(R.string.my_filters_help, "||site.com^", "site.com##.ad")
-            Text(help, style = ArdiaType.footnote, color = SystemPalette.secondaryLabel.current)
+            Text(help, style = AeriType.footnote, color = SystemPalette.secondaryLabel.current)
         }
         Text(
             stringResource(R.string.my_filters_syntax),
-            style = ArdiaType.footnote.semibold,
+            style = AeriType.footnote.semibold,
             color = Palette.formAccent.current,
             modifier = Modifier.clickable(role = Role.Button, onClick = onSyntax).padding(vertical = Spacing.hairline),
         )
@@ -534,7 +534,7 @@ fun TrustedSitesPage(nav: SettingsNav) {
         }),
     ) {
         if (hosts.isEmpty()) {
-            item(key = "empty") { EmptyState(stringResource(R.string.trusted_empty_title), stringResource(R.string.trusted_empty_message), ArdiaSymbols.checkmarkShield) }
+            item(key = "empty") { EmptyState(stringResource(R.string.trusted_empty_title), stringResource(R.string.trusted_empty_message), AeriSymbols.checkmarkShield) }
             return@SettingsPage
         }
         hosts.forEachIndexed { index, host ->
@@ -569,11 +569,11 @@ private fun TrustedSiteRow(host: String, editing: Boolean, isFirst: Boolean, isL
                         .testTag(SettingsTags.row("remove.$host")),
                     contentAlignment = Alignment.Center,
                 ) {
-                    Icon(ArdiaSymbols.minus, removeLabel, Modifier.size(14.dp), tint = androidx.compose.ui.graphics.Color.White)
+                    Icon(AeriSymbols.minus, removeLabel, Modifier.size(14.dp), tint = androidx.compose.ui.graphics.Color.White)
                 }
             }
-            Icon(ArdiaSymbols.globe, null, Modifier.size(22.dp), tint = SystemPalette.secondaryLabel.current)
-            Text(host, style = ArdiaType.body, color = SystemPalette.label.current, modifier = Modifier.weight(1f))
+            Icon(AeriSymbols.globe, null, Modifier.size(22.dp), tint = SystemPalette.secondaryLabel.current)
+            Text(host, style = AeriType.body, color = SystemPalette.label.current, modifier = Modifier.weight(1f))
         }
         if (!isLast) RowDivider(SettingsLayout.rowInset + 22.dp + SettingsLayout.labelGap)
     }

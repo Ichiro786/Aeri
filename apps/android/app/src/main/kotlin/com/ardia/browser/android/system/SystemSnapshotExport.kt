@@ -71,9 +71,9 @@ class SystemSnapshotExporter(private val context: Context, private val store: Sy
         if (!saved) return
         last = snapshot
         if (!publishes) return
-        ArdiaWidgets.refreshMacTabs(context)
-        if (snapshot.look != previous.look) ArdiaWidgets.refreshSearch(context)
-        if (fetchFavicons(snapshot) > 0) ArdiaWidgets.refreshMacTabs(context)
+        AeriWidgets.refreshMacTabs(context)
+        if (snapshot.look != previous.look) AeriWidgets.refreshSearch(context)
+        if (fetchFavicons(snapshot) > 0) AeriWidgets.refreshMacTabs(context)
     }
 
     private suspend fun fetchFavicons(snapshot: SystemSnapshot): Int = withContext(Dispatchers.IO) {

@@ -8,11 +8,11 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.remember
-import com.ardia.browser.android.ArdiaApplication
+import com.ardia.browser.android.AeriApplication
 import com.ardia.browser.android.SystemIntents
 import com.ardia.browser.android.system.SystemDevice
 import com.ardia.browser.android.system.SystemStore
-import com.ardia.design.ArdiaTheme
+import com.ardia.design.AeriTheme
 
 class ShareActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,7 +20,7 @@ class ShareActivity : ComponentActivity() {
         enableEdgeToEdge()
         val page = sharedPage(intent)
         val snapshot = SystemStore.shared(this).loadSnapshot()
-        val app = ArdiaApplication.of(this)
+        val app = AeriApplication.of(this)
         setContent {
             val model = remember {
                 ShareSheetModel(
@@ -33,7 +33,7 @@ class ShareActivity : ComponentActivity() {
                     cancel = ::finish,
                 )
             }
-            ArdiaTheme(darkTheme = isSystemInDarkTheme(), look = snapshot.look) {
+            AeriTheme(darkTheme = isSystemInDarkTheme(), look = snapshot.look) {
                 ShareSheetView(model)
             }
         }
@@ -49,7 +49,7 @@ class ShareActivity : ComponentActivity() {
     }
 
     companion object {
-        suspend fun sendFromShare(app: ArdiaApplication, page: SharedPage, device: SystemDevice): Boolean {
+        suspend fun sendFromShare(app: AeriApplication, page: SharedPage, device: SystemDevice): Boolean {
             val url = page.url ?: return false
             return app.model().sendFromShare(url, page.displayTitle, device.id)
         }

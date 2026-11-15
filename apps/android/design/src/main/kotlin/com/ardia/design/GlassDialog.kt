@@ -70,7 +70,7 @@ fun GlassDialog(
         onDismissRequest = onDismissRequest,
         properties = DialogProperties(usePlatformDefaultWidth = false, dismissOnClickOutside = dismissOnOutside),
     ) {
-        val dark = LocalArdiaDarkTheme.current
+        val dark = LocalAeriDarkTheme.current
         val liquid = LocalLiquidGlass.current
         val reduceMotion = LocalReduceMotion.current
         val view = LocalView.current
@@ -110,10 +110,10 @@ fun GlassDialog(
 
 @Composable
 fun GlassDialogText(title: String, message: String?) {
-    val dark = LocalArdiaDarkTheme.current
-    Text(title, style = ArdiaType.headline, color = SystemPalette.label.resolve(dark), textAlign = TextAlign.Center)
+    val dark = LocalAeriDarkTheme.current
+    Text(title, style = AeriType.headline, color = SystemPalette.label.resolve(dark), textAlign = TextAlign.Center)
     if (message != null) {
-        Text(message, style = ArdiaType.subheadline, color = SystemPalette.secondaryLabel.resolve(dark), textAlign = TextAlign.Center)
+        Text(message, style = AeriType.subheadline, color = SystemPalette.secondaryLabel.resolve(dark), textAlign = TextAlign.Center)
     }
 }
 
@@ -126,7 +126,7 @@ fun GlassDialogActions(
     destructive: Boolean = false,
     confirmModifier: Modifier = Modifier,
 ) {
-    val dark = LocalArdiaDarkTheme.current
+    val dark = LocalAeriDarkTheme.current
     val confirmColor = (if (destructive) SystemPalette.red else Palette.formAccent).resolve(dark)
     Spacer(Modifier.height(10.dp))
     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
@@ -165,7 +165,7 @@ fun GlassPillButton(label: String, color: Color, modifier: Modifier = Modifier, 
             .padding(horizontal = 14.dp, vertical = 12.dp),
         contentAlignment = Alignment.Center,
     ) {
-        Text(label, style = ArdiaType.body.semibold, color = color, textAlign = TextAlign.Center, maxLines = 2)
+        Text(label, style = AeriType.body.semibold, color = color, textAlign = TextAlign.Center, maxLines = 2)
     }
 }
 
@@ -178,7 +178,7 @@ fun GlassTextField(
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     visualTransformation: VisualTransformation = VisualTransformation.None,
 ) {
-    val dark = LocalArdiaDarkTheme.current
+    val dark = LocalAeriDarkTheme.current
     val interaction = remember { MutableInteractionSource() }
     val focused by interaction.collectIsFocusedAsState()
     val ring by animateColorAsState(
@@ -191,7 +191,7 @@ fun GlassTextField(
         value = value,
         onValueChange = onValueChange,
         singleLine = true,
-        textStyle = ArdiaType.body.copy(color = textColor),
+        textStyle = AeriType.body.copy(color = textColor),
         cursorBrush = SolidColor(Palette.formAccent.resolve(dark)),
         keyboardOptions = keyboardOptions,
         visualTransformation = visualTransformation,
@@ -208,7 +208,7 @@ fun GlassTextField(
                 contentAlignment = Alignment.CenterStart,
             ) {
                 if (value.isEmpty() && placeholder != null) {
-                    Text(placeholder, style = ArdiaType.body, color = SystemPalette.tertiaryLabel.resolve(dark), maxLines = 1)
+                    Text(placeholder, style = AeriType.body, color = SystemPalette.tertiaryLabel.resolve(dark), maxLines = 1)
                 }
                 inner()
             }
@@ -218,7 +218,7 @@ fun GlassTextField(
 
 @Composable
 fun GlassChoiceRow(title: String, icon: ImageVector, modifier: Modifier = Modifier, onClick: () -> Unit) {
-    val dark = LocalArdiaDarkTheme.current
+    val dark = LocalAeriDarkTheme.current
     val interaction = remember { MutableInteractionSource() }
     val pressed by interaction.collectIsPressedAsState()
     val fill by animateColorAsState(
@@ -240,7 +240,7 @@ fun GlassChoiceRow(title: String, icon: ImageVector, modifier: Modifier = Modifi
     ) {
         Icon(icon, null, Modifier.size(20.dp), tint = Palette.formAccent.resolve(dark))
         Spacer(Modifier.width(12.dp))
-        Text(title, style = ArdiaType.body, color = color, modifier = Modifier.weight(1f), maxLines = 2)
+        Text(title, style = AeriType.body, color = color, modifier = Modifier.weight(1f), maxLines = 2)
     }
 }
 

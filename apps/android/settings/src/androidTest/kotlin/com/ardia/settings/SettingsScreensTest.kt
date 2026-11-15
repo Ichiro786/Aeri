@@ -27,7 +27,7 @@ import androidx.test.platform.app.InstrumentationRegistry
 import com.ardia.appmodel.AppEnvironment
 import com.ardia.appmodel.AppModel
 import com.ardia.appmodel.LaunchArguments
-import com.ardia.design.ArdiaTheme
+import com.ardia.design.AeriTheme
 import com.ardia.design.ProfileLook
 import com.ardia.sync.ConnectResult
 import com.ardia.sync.LocalBrowsingSource
@@ -133,7 +133,7 @@ class SettingsScreensTest {
     }
 
     private fun show(model: AppModel, content: @Composable () -> Unit) {
-        compose.setContent { ArdiaTheme(darkTheme = false, look = model.look, reduceMotion = true) { content() } }
+        compose.setContent { AeriTheme(darkTheme = false, look = model.look, reduceMotion = true) { content() } }
         compose.waitForIdle()
     }
 
