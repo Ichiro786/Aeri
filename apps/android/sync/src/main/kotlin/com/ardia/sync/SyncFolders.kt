@@ -4,7 +4,7 @@ import com.ardia.sync.core.Base32
 import java.io.File
 
 object SyncFolders {
-    val folderNames = listOf("Aeri Sync", "Netnyahoo Sync")
+    val folderNames = listOf("Aeri Sync", "Ardia Sync", "Netnyahoo Sync")
 
     fun locate(picked: File): File? {
         if (!picked.isDirectory) return null
