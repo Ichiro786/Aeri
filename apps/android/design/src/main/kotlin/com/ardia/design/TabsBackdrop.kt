@@ -35,7 +35,7 @@ internal object TabsBackdropMotion {
 
 @Composable
 fun TabsBackdrop(modifier: Modifier = Modifier, look: ProfileLook = LocalProfileLook.current) {
-    val dark = LocalArdiaDarkTheme.current
+    val dark = LocalAeriDarkTheme.current
     val reduceMotion = LocalReduceMotion.current
     val reduceTransparency = LocalReduceTransparency.current
     val mesh = remember(dark, look) { MeshGrid.uniform(3, 2, look.deckBase(dark)) }

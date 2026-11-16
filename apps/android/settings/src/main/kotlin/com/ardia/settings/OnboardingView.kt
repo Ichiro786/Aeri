@@ -69,9 +69,9 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ardia.appmodel.AppModel
-import com.ardia.design.ArdiaSpring
-import com.ardia.design.ArdiaSymbols
-import com.ardia.design.ArdiaType
+import com.ardia.design.AeriSpring
+import com.ardia.design.AeriSymbols
+import com.ardia.design.AeriType
 import com.ardia.design.LocalReduceMotion
 import com.ardia.design.Motion
 import com.ardia.design.Palette
@@ -80,11 +80,11 @@ import com.ardia.design.Radius
 import com.ardia.design.SettingsTint
 import com.ardia.design.Spacing
 import com.ardia.design.SystemPalette
-import com.ardia.design.ardiaGradient
+import com.ardia.design.aeriGradient
 import com.ardia.design.bold
 import com.ardia.design.medium
 import com.ardia.design.profileBackdrop
-import com.ardia.design.LocalArdiaDarkTheme
+import com.ardia.design.LocalAeriDarkTheme
 import com.ardia.design.LocalProfileLook
 import kotlinx.coroutines.delay
 
@@ -170,7 +170,7 @@ private val STEP_SHIFT = 60.dp
 @Composable
 fun OnboardingBackdrop(modifier: Modifier = Modifier) {
     val look = LocalProfileLook.current
-    val dark = LocalArdiaDarkTheme.current
+    val dark = LocalAeriDarkTheme.current
     val fade = remember { Brush.verticalGradient(0f to Color.Black, 0.45f to Color.Black.copy(alpha = 0.6f), 0.8f to Color.Transparent) }
     Box(modifier.background(SystemPalette.background.current).clearAndSetSemantics {}) {
         Box(
@@ -224,13 +224,13 @@ fun OnboardingPage(
         ) {
             Text(
                 title,
-                style = ArdiaType.largeTitle.bold,
+                style = AeriType.largeTitle.bold,
                 color = SystemPalette.label.current,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.semantics { heading() },
             )
             Crossfade(subtitle, label = "onboardingSubtitle") { text ->
-                Text(text, style = ArdiaType.body, color = SystemPalette.secondaryLabel.current, textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth())
+                Text(text, style = AeriType.body, color = SystemPalette.secondaryLabel.current, textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth())
             }
         }
         Column(
@@ -239,6 +239,11 @@ fun OnboardingPage(
             content = actions,
         )
     }
+}
+
+private object OnboardingHero {
+    const val GREETING_SPIN = 1100f
+    val darkFrame = Color(0xFF1C1C1E)
 }
 
 @Composable
@@ -273,9 +278,9 @@ fun OnboardingWelcomeStep(onContinue: () -> Unit) {
             Box(
                 Modifier
                     .shadow(24.dp, RoundedCornerShape(104.dp * 0.225f + 5.dp), ambientColor = Color.Black.copy(alpha = 0.18f), spotColor = Color.Black.copy(alpha = 0.18f))
-                    .background(Color.White, RoundedCornerShape(104.dp * 0.225f + 5.dp))
+                    .background(if (LocalAeriDarkTheme.current) OnboardingHero.darkFrame else Color.White, RoundedCornerShape(104.dp * 0.225f + 5.dp))
                     .padding(5.dp),
-            ) { AppIcon(side = 104.dp, scalesWithText = false) }
+            ) { AppIcon(side = 104.dp, scalesWithText = false, spins = true, greetingSpin = OnboardingHero.GREETING_SPIN) }
         }
         Column(
             Modifier
@@ -290,12 +295,12 @@ fun OnboardingWelcomeStep(onContinue: () -> Unit) {
         ) {
             Text(
                 stringResource(R.string.onboarding_welcome_title),
-                style = ArdiaType.largeTitle.bold.copy(fontSize = 40.sp, lineHeight = 46.sp),
+                style = AeriType.largeTitle.bold.copy(fontSize = 40.sp, lineHeight = 46.sp),
                 color = SystemPalette.label.current,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.semantics { heading() },
             )
-            Text(stringResource(R.string.onboarding_welcome_subtitle), style = ArdiaType.title3.medium, color = SystemPalette.secondaryLabel.current, textAlign = TextAlign.Center)
+            Text(stringResource(R.string.onboarding_welcome_subtitle), style = AeriType.title3.medium, color = SystemPalette.secondaryLabel.current, textAlign = TextAlign.Center)
         }
         if (!scrolls) Spacer(Modifier.weight(1f))
         PrimaryActionButton(
@@ -310,7 +315,7 @@ fun OnboardingWelcomeStep(onContinue: () -> Unit) {
 }
 
 private const val WELCOME_DELAY_MILLIS = 100L
-private val WelcomeSpring = ArdiaSpring.withBounce(duration = 0.7f, bounce = 0.3f)
+private val WelcomeSpring = AeriSpring.withBounce(duration = 0.7f, bounce = 0.3f)
 
 @Composable
 fun OnboardingBlockingStep(model: AppModel, onContinue: () -> Unit) {
@@ -330,15 +335,15 @@ fun OnboardingBlockingStep(model: AppModel, onContinue: () -> Unit) {
                 ) {
                     ToggleRow(
                         stringResource(R.string.site_block_ads), blocking.blocksAds, model::setBlocksAds,
-                        icon = ArdiaSymbols.handRaisedFill, tint = SettingsTint.ads, showsDivider = true, tag = "onboardingAds",
+                        icon = AeriSymbols.handRaisedFill, tint = SettingsTint.ads, showsDivider = true, tag = "onboardingAds",
                     )
                     ToggleRow(
                         stringResource(R.string.site_block_trackers), blocking.blocksTrackers, model::setBlocksTrackers,
-                        icon = ArdiaSymbols.eyeglasses, tint = SettingsTint.trackers, showsDivider = true, tag = "onboardingTrackers",
+                        icon = AeriSymbols.eyeglasses, tint = SettingsTint.trackers, showsDivider = true, tag = "onboardingTrackers",
                     )
                     ToggleRow(
                         stringResource(R.string.site_block_cookie_banners), blocking.hidesCookieBanners, model::setHidesCookieBanners,
-                        icon = ArdiaSymbols.listBulletRectanglePortraitFill, tint = SettingsTint.cookies, tag = "onboardingCookies",
+                        icon = AeriSymbols.listBulletRectanglePortraitFill, tint = SettingsTint.cookies, tag = "onboardingCookies",
                     )
                 }
             }
@@ -393,13 +398,13 @@ private fun LinkBubbleIllustration() {
                 .clip(RoundedCornerShape(18.dp))
                 .background(SystemPalette.secondaryBackground.current),
         ) {
-            Box(Modifier.fillMaxWidth().heightIn(min = 64.dp).background(plum.ardiaGradient()))
+            Box(Modifier.fillMaxWidth().heightIn(min = 64.dp).background(plum.aeriGradient()))
             Column(Modifier.padding(horizontal = Spacing.small, vertical = Spacing.tight + 2.dp), verticalArrangement = Arrangement.spacedBy(2.dp)) {
-                Text(stringResource(R.string.onboarding_link_title), style = ArdiaType.subheadline.bold, color = SystemPalette.label.current, maxLines = 1)
-                Text(stringResource(R.string.onboarding_link_host), style = ArdiaType.caption, color = SystemPalette.secondaryLabel.current)
+                Text(stringResource(R.string.onboarding_link_title), style = AeriType.subheadline.bold, color = SystemPalette.label.current, maxLines = 1)
+                Text(stringResource(R.string.onboarding_link_host), style = AeriType.caption, color = SystemPalette.secondaryLabel.current)
             }
         }
-        Icon(ArdiaSymbols.arrowRight, null, Modifier.padding(bottom = 26.dp).size(22.dp), tint = Palette.formAccent.current)
+        Icon(AeriSymbols.arrowRight, null, Modifier.padding(bottom = 26.dp).size(22.dp), tint = Palette.formAccent.current)
         AppIcon(side = 60.dp, shadow = true, scalesWithText = false, modifier = Modifier.padding(bottom = 8.dp))
     }
 }
@@ -437,10 +442,10 @@ fun OnboardingAllSetStep(onFinish: () -> Unit) {
                         .padding(Spacing.medium),
                     verticalArrangement = Arrangement.spacedBy(Spacing.medium),
                 ) {
-                    AllSetTip(ArdiaSymbols.plus, stringResource(R.string.onboarding_tip_search))
-                    AllSetTip(ArdiaSymbols.squareOnSquare, stringResource(R.string.onboarding_tip_close))
-                    AllSetTip(ArdiaSymbols.handDraw, stringResource(R.string.onboarding_tip_back))
-                    AllSetTip(ArdiaSymbols.archivebox, stringResource(R.string.onboarding_tip_archive))
+                    AllSetTip(AeriSymbols.plus, stringResource(R.string.onboarding_tip_search))
+                    AllSetTip(AeriSymbols.squareOnSquare, stringResource(R.string.onboarding_tip_close))
+                    AllSetTip(AeriSymbols.handDraw, stringResource(R.string.onboarding_tip_back))
+                    AllSetTip(AeriSymbols.archivebox, stringResource(R.string.onboarding_tip_archive))
                 }
             }
         },
@@ -453,6 +458,6 @@ fun OnboardingAllSetStep(onFinish: () -> Unit) {
 private fun AllSetTip(icon: androidx.compose.ui.graphics.vector.ImageVector, text: String) {
     Row(horizontalArrangement = Arrangement.spacedBy(Spacing.small), verticalAlignment = Alignment.CenterVertically) {
         Box(Modifier.width(28.dp), contentAlignment = Alignment.Center) { Icon(icon, null, Modifier.size(20.dp), tint = Palette.formAccent.current) }
-        Text(text, style = ArdiaType.subheadline, color = SystemPalette.label.current)
+        Text(text, style = AeriType.subheadline, color = SystemPalette.label.current)
     }
 }

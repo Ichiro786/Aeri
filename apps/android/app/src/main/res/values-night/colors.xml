@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="ardia_surface">#FF342123</color>
+    <color name="aeri_surface">#FF342123</color>
+    <color name="aeri_icon_background">#FF000000</color>
 </resources>

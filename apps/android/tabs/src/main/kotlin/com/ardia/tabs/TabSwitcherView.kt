@@ -42,7 +42,7 @@ import androidx.compose.ui.zIndex
 import com.ardia.appmodel.AppModel
 import com.ardia.design.BarButtons
 import com.ardia.design.DeckSize
-import com.ardia.design.LocalArdiaDarkTheme
+import com.ardia.design.LocalAeriDarkTheme
 import com.ardia.design.GlassAlert
 import com.ardia.design.LocalBarButtonScale
 import com.ardia.design.LocalLiquidGlass
@@ -100,7 +100,7 @@ fun TabSwitcherView(model: AppModel, modifier: Modifier = Modifier) {
 @Composable
 private fun TabDeck(model: AppModel, state: DeckState, haptics: Haptics, geometry: TabsDeckGeometry) {
     val look = LocalProfileLook.current
-    val dark = LocalArdiaDarkTheme.current
+    val dark = LocalAeriDarkTheme.current
     val backdrop = rememberFrostedBackdrop()
     val order = state.order
     val range = state.renderedRange

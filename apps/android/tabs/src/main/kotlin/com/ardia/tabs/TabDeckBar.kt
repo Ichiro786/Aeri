@@ -34,8 +34,8 @@ import androidx.compose.ui.semantics.onClick
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.ardia.design.ArdiaSymbols
-import com.ardia.design.ArdiaType
+import com.ardia.design.AeriSymbols
+import com.ardia.design.AeriType
 import com.ardia.design.FrostedBackdrop
 import com.ardia.design.FrostedStyle
 import com.ardia.design.Glass
@@ -46,7 +46,7 @@ import com.ardia.design.GlassPlusButton
 import com.ardia.design.LocalLiquidGlass
 import com.ardia.design.glassShadow
 import com.ardia.design.springPress
-import com.ardia.design.LocalArdiaDarkTheme
+import com.ardia.design.LocalAeriDarkTheme
 import com.ardia.design.LookFrosting
 import com.ardia.design.Palette
 import com.ardia.design.ProfileLook
@@ -80,7 +80,7 @@ internal fun TabDeckBar(
     val style = LookFrosting.bar(look)
     Row(modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
         DeckCircleButton(
-            symbol = if (showsSyncedTabs) ArdiaSymbols.laptopcomputer else ArdiaSymbols.archivebox,
+            symbol = if (showsSyncedTabs) AeriSymbols.laptopcomputer else AeriSymbols.archivebox,
             label = stringResource(if (showsSyncedTabs) R.string.tabs_synced_tabs else R.string.tabs_archive),
             backdrop = backdrop,
             style = style,
@@ -89,7 +89,7 @@ internal fun TabDeckBar(
         Spacer(Modifier.weight(1f))
         PlusButton(backdrop, style, isIncognito, canReopen, hasTabs, actions)
         Spacer(Modifier.weight(1f))
-        DeckCircleButton(ArdiaSymbols.gearshape, stringResource(R.string.tabs_settings), backdrop, style, actions.settings)
+        DeckCircleButton(AeriSymbols.gearshape, stringResource(R.string.tabs_settings), backdrop, style, actions.settings)
     }
 }
 
@@ -115,17 +115,17 @@ private fun PlusButton(
         GlassMenu(expanded = menu, onDismissRequest = { menu = false }) {
             val pick = { action: () -> Unit -> { menu = false; action() } }
             if (isIncognito) {
-                MenuRow(stringResource(R.string.tabs_new_tab), ArdiaSymbols.plus, action = pick(actions.newRegularTab))
-                MenuRow(stringResource(R.string.tabs_new_incognito_tab), ArdiaSymbols.eyes, action = pick(actions.newTab))
+                MenuRow(stringResource(R.string.tabs_new_tab), AeriSymbols.plus, action = pick(actions.newRegularTab))
+                MenuRow(stringResource(R.string.tabs_new_incognito_tab), AeriSymbols.eyes, action = pick(actions.newTab))
             } else {
-                MenuRow(stringResource(R.string.tabs_new_incognito_tab), ArdiaSymbols.eyes, action = pick(actions.newIncognitoTab))
-                if (canReopen) MenuRow(stringResource(R.string.tabs_reopen_closed_tab), ArdiaSymbols.arrowUturnBackward, action = pick(actions.reopen))
+                MenuRow(stringResource(R.string.tabs_new_incognito_tab), AeriSymbols.eyes, action = pick(actions.newIncognitoTab))
+                if (canReopen) MenuRow(stringResource(R.string.tabs_reopen_closed_tab), AeriSymbols.arrowUturnBackward, action = pick(actions.reopen))
             }
             if (hasTabs) {
                 GlassMenuDivider()
                 MenuRow(
                     stringResource(if (isIncognito) R.string.tabs_close_incognito_tabs else R.string.tabs_close_all_tabs),
-                    ArdiaSymbols.xmark,
+                    AeriSymbols.xmark,
                     destructive = true,
                     action = pick(actions.closeAll),
                 )
@@ -154,7 +154,7 @@ internal fun IncognitoChip(count: Int, backdrop: FrostedBackdrop?, close: () -> 
     val liquid = LocalLiquidGlass.current
     val interaction = remember { MutableInteractionSource() }
     Box(modifier.heightIn(min = 44.dp), contentAlignment = Alignment.Center) {
-        CompositionLocalProvider(LocalArdiaDarkTheme provides true) {
+        CompositionLocalProvider(LocalAeriDarkTheme provides true) {
             Row(
                 Modifier
                     .springPress(interaction)
@@ -182,12 +182,12 @@ internal fun IncognitoChip(count: Int, backdrop: FrostedBackdrop?, close: () -> 
                 horizontalArrangement = Arrangement.spacedBy(6.dp),
             ) {
                 IncognitoGlyph(16.dp)
-                Text(stringResource(R.string.tabs_incognito), style = ArdiaType.subheadline.semibold, color = Color.White)
-                Text(count.toString(), style = ArdiaType.subheadline.semibold.monospacedDigits, color = Color.White.copy(alpha = 0.6f))
+                Text(stringResource(R.string.tabs_incognito), style = AeriType.subheadline.semibold, color = Color.White)
+                Text(count.toString(), style = AeriType.subheadline.semibold.monospacedDigits, color = Color.White.copy(alpha = 0.6f))
             }
         }
         GlassMenu(expanded = menu, onDismissRequest = { menu = false }) {
-            MenuRow(stringResource(R.string.tabs_close_incognito_tabs), ArdiaSymbols.xmark, destructive = true) {
+            MenuRow(stringResource(R.string.tabs_close_incognito_tabs), AeriSymbols.xmark, destructive = true) {
                 menu = false
                 close()
             }
@@ -197,22 +197,22 @@ internal fun IncognitoChip(count: Int, backdrop: FrostedBackdrop?, close: () -> 
 
 @Composable
 internal fun DeckEmptyState(showsArchive: Boolean, openArchive: () -> Unit, modifier: Modifier = Modifier) {
-    val dark = LocalArdiaDarkTheme.current
+    val dark = LocalAeriDarkTheme.current
     Column(
         modifier.widthIn(max = 300.dp).padding(horizontal = 24.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(6.dp),
     ) {
-        Text(stringResource(R.string.tabs_no_open_tabs), style = ArdiaType.title3.semibold, color = TabsPalette.headerText.resolve(dark), textAlign = TextAlign.Center)
+        Text(stringResource(R.string.tabs_no_open_tabs), style = AeriType.title3.semibold, color = TabsPalette.headerText.resolve(dark), textAlign = TextAlign.Center)
         Text(
             stringResource(R.string.tabs_no_open_tabs_message),
-            style = ArdiaType.subheadline,
+            style = AeriType.subheadline,
             color = SystemPalette.secondaryLabel.resolve(dark),
             textAlign = TextAlign.Center,
         )
         if (showsArchive) {
             TextButton(onClick = openArchive, modifier = Modifier.padding(top = 6.dp).sizeIn(minHeight = 44.dp)) {
-                Text(stringResource(R.string.tabs_open_archive), style = ArdiaType.subheadline.semibold, color = Palette.formAccent.resolve(dark))
+                Text(stringResource(R.string.tabs_open_archive), style = AeriType.subheadline.semibold, color = Palette.formAccent.resolve(dark))
             }
         }
     }

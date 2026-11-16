@@ -27,7 +27,7 @@ import com.ardia.appmodel.AppEnvironment
 import com.ardia.appmodel.AppModel
 import com.ardia.appmodel.LaunchArguments
 import com.ardia.appmodel.TabDeckModel
-import com.ardia.design.ArdiaTheme
+import com.ardia.design.AeriTheme
 import com.ardia.store.CoreScript
 import org.junit.After
 import org.junit.Assert.assertTrue
@@ -79,7 +79,7 @@ class ScreensTest {
     }
 
     private fun show(content: @androidx.compose.runtime.Composable (AppModel) -> Unit) {
-        compose.setContent { ArdiaTheme(darkTheme = false, look = model.look, reduceMotion = false, reduceTransparency = true) { content(model) } }
+        compose.setContent { AeriTheme(darkTheme = false, look = model.look, reduceMotion = false, reduceTransparency = true) { content(model) } }
     }
 
     private fun waitForText(text: String) {

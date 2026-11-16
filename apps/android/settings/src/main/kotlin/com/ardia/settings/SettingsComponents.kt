@@ -63,8 +63,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.ardia.design.ArdiaSymbols
-import com.ardia.design.ArdiaType
+import com.ardia.design.AeriSymbols
+import com.ardia.design.AeriType
 import com.ardia.design.Palette
 import com.ardia.design.ProfileBackdrop
 import com.ardia.design.SettingsChrome
@@ -120,14 +120,14 @@ fun SettingsTopBar(
                         .testTag(SettingsTags.BACK),
                     contentAlignment = Alignment.Center,
                 ) {
-                    Icon(ArdiaSymbols.chevronLeft, stringResource(R.string.settings_back), Modifier.size(22.dp), tint = Palette.formAccent.current)
+                    Icon(AeriSymbols.chevronLeft, stringResource(R.string.settings_back), Modifier.size(22.dp), tint = Palette.formAccent.current)
                 }
             }
             leading?.invoke(this)
         }
         Text(
             title,
-            style = ArdiaType.body.semibold,
+            style = AeriType.body.semibold,
             color = SystemPalette.label.current,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
@@ -149,7 +149,7 @@ fun BarTextButton(text: String, onClick: () -> Unit, modifier: Modifier = Modifi
     TextButton(onClick = onClick, enabled = enabled, modifier = modifier) {
         Text(
             text,
-            style = if (emphasized) ArdiaType.body.semibold else ArdiaType.body,
+            style = if (emphasized) AeriType.body.semibold else AeriType.body,
             color = if (enabled) Palette.formAccent.current else SystemPalette.tertiaryLabel.current,
         )
     }
@@ -190,12 +190,12 @@ fun settingsContentPadding(): PaddingValues {
 
 @Composable
 fun SettingsValueText(text: String, modifier: Modifier = Modifier) {
-    Text(text, style = ArdiaType.body, color = SystemPalette.secondaryLabel.current, maxLines = 1, overflow = TextOverflow.Ellipsis, modifier = modifier)
+    Text(text, style = AeriType.body, color = SystemPalette.secondaryLabel.current, maxLines = 1, overflow = TextOverflow.Ellipsis, modifier = modifier)
 }
 
 @Composable
 fun Chevron() {
-    Icon(ArdiaSymbols.chevronRight, null, Modifier.size(14.dp), tint = SystemPalette.tertiaryLabel.current)
+    Icon(AeriSymbols.chevronRight, null, Modifier.size(14.dp), tint = SystemPalette.tertiaryLabel.current)
 }
 
 @Composable
@@ -220,7 +220,7 @@ fun NavigationRow(
             Chevron()
         },
     ) {
-        if (icon != null) SettingsRowLabel(title, icon, tint) else Text(title, style = ArdiaType.body, color = SystemPalette.label.current)
+        if (icon != null) SettingsRowLabel(title, icon, tint) else Text(title, style = AeriType.body, color = SystemPalette.label.current)
     }
 }
 
@@ -246,7 +246,7 @@ fun ToggleRow(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Box(Modifier.weight(1f)) {
-                if (icon != null) SettingsRowLabel(title, icon, tint) else Text(title, style = ArdiaType.body, color = SystemPalette.label.current)
+                if (icon != null) SettingsRowLabel(title, icon, tint) else Text(title, style = AeriType.body, color = SystemPalette.label.current)
             }
             Spacer(Modifier.size(Spacing.tight))
             SettingsSwitch(checked = checked, onCheckedChange = null, modifier = Modifier.clearAndSetSemantics {})
@@ -286,16 +286,16 @@ fun <T> PickerRow(
             trailing = {
                 SettingsValueText(current)
                 Spacer(Modifier.size(Spacing.hairline))
-                Icon(ArdiaSymbols.chevronUpChevronDown, null, Modifier.size(14.dp), tint = SystemPalette.secondaryLabel.current)
+                Icon(AeriSymbols.chevronUpChevronDown, null, Modifier.size(14.dp), tint = SystemPalette.secondaryLabel.current)
             },
         ) {
-            if (icon != null) SettingsRowLabel(title, icon, tint) else Text(title, style = ArdiaType.body, color = SystemPalette.label.current)
+            if (icon != null) SettingsRowLabel(title, icon, tint) else Text(title, style = AeriType.body, color = SystemPalette.label.current)
         }
         Box(Modifier.align(Alignment.BottomEnd).padding(end = SettingsLayout.rowInset)) {
             GlassMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
                 for (option in options) {
                     val isSelected = option == selected
-                    GlassMenuItem(label(option), if (isSelected) ArdiaSymbols.checkmark else null, selected = isSelected) {
+                    GlassMenuItem(label(option), if (isSelected) AeriSymbols.checkmark else null, selected = isSelected) {
                         expanded = false
                         onSelect(option)
                     }
@@ -331,7 +331,7 @@ fun ButtonRow(
                 .padding(horizontal = SettingsLayout.rowInset, vertical = Spacing.tight),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Text(text, style = ArdiaType.body, color = color, modifier = Modifier.weight(1f))
+            Text(text, style = AeriType.body, color = color, modifier = Modifier.weight(1f))
             if (busy) CircularProgressIndicator(Modifier.size(20.dp), strokeWidth = 2.dp, color = SystemPalette.secondaryLabel.current)
         }
         if (showsDivider) RowDivider()
@@ -341,7 +341,7 @@ fun ButtonRow(
 @Composable
 fun ValueRow(title: String, value: String, modifier: Modifier = Modifier, showsDivider: Boolean = false) {
     SettingsRow(modifier = modifier, showsDivider = showsDivider, dividerInset = SettingsLayout.rowInset, trailing = { SettingsValueText(value) }) {
-        Text(title, style = ArdiaType.body, color = SystemPalette.label.current)
+        Text(title, style = AeriType.body, color = SystemPalette.label.current)
     }
 }
 
@@ -350,18 +350,18 @@ fun IconLabelRow(title: String, icon: ImageVector, modifier: Modifier = Modifier
     SettingsRow(modifier = modifier, trailing = value?.let { { SettingsValueText(it) } }) {
         Row(horizontalArrangement = Arrangement.spacedBy(SettingsLayout.labelGap), verticalAlignment = Alignment.CenterVertically) {
             Icon(icon, null, Modifier.size(22.dp), tint = iconTint)
-            Text(title, style = ArdiaType.body, color = SystemPalette.label.current)
+            Text(title, style = AeriType.body, color = SystemPalette.label.current)
         }
     }
 }
 
 @Composable
 fun FootnoteText(text: String, modifier: Modifier = Modifier, color: Color = SystemPalette.secondaryLabel.current) {
-    Text(text, style = ArdiaType.footnote, color = color, modifier = modifier.padding(horizontal = Spacing.page + SettingsLayout.rowInset))
+    Text(text, style = AeriType.footnote, color = color, modifier = modifier.padding(horizontal = Spacing.page + SettingsLayout.rowInset))
 }
 
 @Composable
-fun warningInk(): Color = legibleInk(ardiaOrange)
+fun warningInk(): Color = legibleInk(aeriOrange)
 
 @Composable
 fun problemInk(): Color = legibleInk(SystemPalette.red.current)
@@ -369,7 +369,7 @@ fun problemInk(): Color = legibleInk(SystemPalette.red.current)
 @Composable
 fun goodInk(): Color = legibleInk(SystemPalette.green.current)
 
-private val ardiaOrange = Color(0xFFFF9500)
+private val aeriOrange = Color(0xFFFF9500)
 
 @Composable
 fun ConfirmDialog(
@@ -412,7 +412,7 @@ fun PrimaryActionButton(text: String, onClick: () -> Unit, modifier: Modifier = 
             .padding(horizontal = Spacing.page, vertical = Spacing.small),
         contentAlignment = Alignment.Center,
     ) {
-        Text(text, style = ArdiaType.body.semibold, color = Palette.onPrimaryAction.current, textAlign = TextAlign.Center)
+        Text(text, style = AeriType.body.semibold, color = Palette.onPrimaryAction.current, textAlign = TextAlign.Center)
     }
 }
 
@@ -426,7 +426,7 @@ fun SecondaryActionButton(text: String, onClick: () -> Unit, modifier: Modifier 
             .clickable(role = Role.Button, onClick = onClick),
         contentAlignment = Alignment.Center,
     ) {
-        Text(text, style = ArdiaType.body.semibold, color = SystemPalette.label.current, textAlign = TextAlign.Center)
+        Text(text, style = AeriType.body.semibold, color = SystemPalette.label.current, textAlign = TextAlign.Center)
     }
 }
 
@@ -453,7 +453,7 @@ fun CapsuleButton(
         verticalAlignment = Alignment.CenterVertically,
     ) {
         if (icon != null) Icon(icon, null, Modifier.size(17.dp), tint = content)
-        Text(text, style = if (large) ArdiaType.body.semibold else ArdiaType.subheadline.copy(fontWeight = FontWeight.Medium), color = content, maxLines = 1)
+        Text(text, style = if (large) AeriType.body.semibold else AeriType.subheadline.copy(fontWeight = FontWeight.Medium), color = content, maxLines = 1)
     }
 }
 
@@ -465,8 +465,8 @@ fun EmptyState(title: String, message: String, icon: ImageVector, modifier: Modi
         verticalArrangement = Arrangement.spacedBy(Spacing.small),
     ) {
         Icon(icon, null, Modifier.size(44.dp), tint = SystemPalette.secondaryLabel.current)
-        Text(title, style = ArdiaType.title2.bold, color = SystemPalette.label.current, textAlign = TextAlign.Center, modifier = Modifier.semantics { heading() })
-        Text(message, style = ArdiaType.subheadline, color = SystemPalette.secondaryLabel.current, textAlign = TextAlign.Center)
+        Text(title, style = AeriType.title2.bold, color = SystemPalette.label.current, textAlign = TextAlign.Center, modifier = Modifier.semantics { heading() })
+        Text(message, style = AeriType.subheadline, color = SystemPalette.secondaryLabel.current, textAlign = TextAlign.Center)
     }
 }
 
@@ -499,7 +499,7 @@ fun Modifier.groupedItem(isFirst: Boolean, isLast: Boolean): Modifier {
 fun GroupHeader(text: String, modifier: Modifier = Modifier) {
     Text(
         text,
-        style = ArdiaType.footnote,
+        style = AeriType.footnote,
         color = SystemPalette.secondaryLabel.current,
         modifier = modifier.padding(start = Spacing.page + SettingsLayout.rowInset, end = Spacing.page, bottom = Spacing.tight).semantics { heading() },
     )
@@ -518,7 +518,7 @@ fun SettingsTextField(
     keyboardOptions: androidx.compose.foundation.text.KeyboardOptions = androidx.compose.foundation.text.KeyboardOptions.Default,
     keyboardActions: androidx.compose.foundation.text.KeyboardActions = androidx.compose.foundation.text.KeyboardActions.Default,
 ) {
-    val style = ArdiaType.body.copy(
+    val style = AeriType.body.copy(
         color = SystemPalette.label.current,
         fontFamily = if (monospaced) androidx.compose.ui.text.font.FontFamily.Monospace else null,
     )

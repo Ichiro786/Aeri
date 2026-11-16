@@ -7,7 +7,7 @@ import androidx.compose.ui.graphics.StrokeJoin
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.addPathNodes
 import androidx.compose.ui.unit.dp
-import com.ardia.design.ArdiaSymbols
+import com.ardia.design.AeriSymbols
 
 internal object BrowsingSymbols {
     private const val STROKE = 1.9f
@@ -72,5 +72,5 @@ internal object BrowsingSymbols {
     val video by lazy {
         outline("video", "M3.5 7h11a1.5 1.5 0 0 1 1.5 1.5v7a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 2 15.5v-7A1.5 1.5 0 0 1 3.5 7z", "M16 10.5l5-3v9l-5-3")
     }
-    val filterLists by lazy { ArdiaSymbols.named("line.3.horizontal.decrease") ?: outline("line.3.horizontal.decrease", "M4 7h16", "M7 12h10", "M10 17h4") }
+    val filterLists by lazy { AeriSymbols.named("line.3.horizontal.decrease") ?: outline("line.3.horizontal.decrease", "M4 7h16", "M7 12h10", "M10 17h4") }
 }

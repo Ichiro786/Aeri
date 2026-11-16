@@ -36,9 +36,9 @@
     <string name="voice_search">Search</string>
     <string name="voice_try_again">Try Again</string>
     <string name="voice_permission_title">Speech and Mic permissions required.</string>
-    <string name="voice_permission_detail">Allow Microphone for Ardia in Settings to search with your voice.</string>
+    <string name="voice_permission_detail">Allow Microphone for Aeri in Settings to search with your voice.</string>
     <string name="voice_open_settings">Open Settings</string>
     <string name="voice_unavailable_language">Dictation is unavailable in your language.</string>
     <string name="voice_unavailable">Speech dictation is unavailable.</string>
-    <string name="voice_heard_nothing">Ardia couldn’t hear anything. Try again.</string>
+    <string name="voice_heard_nothing">Aeri couldn’t hear anything. Try again.</string>
 </resources>

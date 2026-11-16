@@ -69,7 +69,7 @@ fun GlassMenu(expanded: Boolean, onDismissRequest: () -> Unit, modifier: Modifie
     var origin by remember { mutableStateOf(TransformOrigin(0.5f, 0f)) }
     val position = remember(density) { GlassMenuPosition(density) { origin = it } }
     Popup(popupPositionProvider = position, onDismissRequest = onDismissRequest, properties = PopupProperties(focusable = true)) {
-        val dark = LocalArdiaDarkTheme.current
+        val dark = LocalAeriDarkTheme.current
         val liquid = LocalLiquidGlass.current
         val reduceMotion = LocalReduceMotion.current
         val transition = rememberTransition(visibility, label = "glassMenu")
@@ -118,7 +118,7 @@ fun GlassMenuItem(
     selected: Boolean? = null,
     onClick: () -> Unit,
 ) {
-    val dark = LocalArdiaDarkTheme.current
+    val dark = LocalAeriDarkTheme.current
     val base = (if (destructive) SystemPalette.red else SystemPalette.label).resolve(dark)
     val color = if (enabled) base else base.copy(alpha = 0.35f)
     val interaction = remember { MutableInteractionSource() }
@@ -141,7 +141,7 @@ fun GlassMenuItem(
             .padding(horizontal = 14.dp, vertical = 10.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        Text(label, style = ArdiaType.body, color = color, modifier = Modifier.weight(1f), maxLines = 2)
+        Text(label, style = AeriType.body, color = color, modifier = Modifier.weight(1f), maxLines = 2)
         if (icon != null) {
             Spacer(Modifier.width(14.dp))
             Icon(icon, null, Modifier.size(18.dp), tint = color)
@@ -153,7 +153,7 @@ fun GlassMenuItem(
 fun GlassMenuHeading(text: String) {
     Text(
         text,
-        style = ArdiaType.footnote,
+        style = AeriType.footnote,
         color = SystemPalette.secondaryLabel.current,
         modifier = Modifier.padding(horizontal = 20.dp, vertical = 6.dp),
     )

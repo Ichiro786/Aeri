@@ -33,8 +33,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.ardia.appmodel.AppModel
 import com.ardia.appmodel.SettingsRoute
-import com.ardia.design.ArdiaSymbols
-import com.ardia.design.ArdiaType
+import com.ardia.design.AeriSymbols
+import com.ardia.design.AeriType
 import com.ardia.design.ColorChoiceRows
 import com.ardia.design.SettingsGroup
 import com.ardia.design.SettingsIconTile
@@ -83,22 +83,22 @@ fun SettingsRootPage(nav: SettingsNav) {
             SettingsGroup {
                 PickerRow(
                     stringResource(R.string.settings_interface_style), InterfaceStyle.entries, model.settings.interfaceStyle, { it.title },
-                    { model.settings.interfaceStyle = it }, icon = ArdiaSymbols.sparkles, tint = SettingsTint.bottomBar, showsDivider = true, tag = "interfaceStyle",
+                    { model.settings.interfaceStyle = it }, icon = AeriSymbols.sparkles, tint = SettingsTint.bottomBar, showsDivider = true, tag = "interfaceStyle",
                 )
                 PickerRow(
                     stringResource(R.string.settings_bottom_button_size), BarButtonSize.entries, model.settings.barButtonSize, { it.title },
-                    { model.settings.barButtonSize = it }, icon = ArdiaSymbols.textformatSize, tint = SettingsTint.bottomBar, tag = "barButtonSize",
+                    { model.settings.barButtonSize = it }, icon = AeriSymbols.textformatSize, tint = SettingsTint.bottomBar, tag = "barButtonSize",
                 )
             }
         }
         item(key = "site") {
             SettingsGroup {
                 NavigationRow(
-                    stringResource(R.string.settings_site_settings), ArdiaSymbols.globe, SettingsTint.neutral,
+                    stringResource(R.string.settings_site_settings), AeriSymbols.globe, SettingsTint.neutral,
                     onClick = { nav.push(SettingsRoute.SiteSettings) }, showsDivider = true, tag = "siteSettings",
                 )
                 NavigationRow(
-                    stringResource(R.string.settings_default_browser), ArdiaSymbols.safariFill, SettingsTint.defaultBrowser,
+                    stringResource(R.string.settings_default_browser), AeriSymbols.safariFill, SettingsTint.defaultBrowser,
                     onClick = { nav.push(SettingsRoute.DefaultBrowser) }, tag = "defaultBrowser",
                 )
             }
@@ -109,13 +109,13 @@ fun SettingsRootPage(nav: SettingsNav) {
             Column(verticalArrangement = Arrangement.spacedBy(Spacing.page)) {
                 SettingsGroup {
                     SettingsRow(onClick = model::showOnboardingFromSettings, showsDivider = true, dividerInset = SettingsIconDivider, modifier = Modifier.testTag(SettingsTags.row("onboarding"))) {
-                        SettingsRowLabel(stringResource(R.string.settings_show_onboarding), ArdiaSymbols.handWaveFill, SettingsTint.onboarding)
+                        SettingsRowLabel(stringResource(R.string.settings_show_onboarding), AeriSymbols.handWaveFill, SettingsTint.onboarding)
                     }
-                    NavigationRow(stringResource(R.string.settings_about_ardia), ArdiaSymbols.info, SettingsTint.neutral, onClick = { nav.push(SettingsRoute.About) }, tag = "about")
+                    NavigationRow(stringResource(R.string.settings_about_aeri), AeriSymbols.info, SettingsTint.neutral, onClick = { nav.push(SettingsRoute.About) }, tag = "about")
                 }
                 Text(
                     rememberAppVersion(),
-                    style = ArdiaType.footnote,
+                    style = AeriType.footnote,
                     color = SystemPalette.secondaryLabel.current,
                     textAlign = TextAlign.Center,
                     modifier = Modifier.fillMaxWidth().padding(top = Spacing.tight),
@@ -137,16 +137,16 @@ private fun SearchGroup(nav: SettingsNav) {
     )
     SettingsGroup {
         NavigationRow(
-            stringResource(R.string.settings_search_engine), ArdiaSymbols.magnifyingglass, SettingsTint.search,
+            stringResource(R.string.settings_search_engine), AeriSymbols.magnifyingglass, SettingsTint.search,
             onClick = { nav.push(SettingsRoute.SearchEngine) }, value = engineName, showsDivider = true, tag = "searchEngine",
         )
         ToggleRow(
             stringResource(R.string.settings_search_suggestions), browsing.searchSuggestions, model::setSearchSuggestions,
-            icon = ArdiaSymbols.textMagnifyingglass, tint = SettingsTint.blue, showsDivider = true, tag = "searchSuggestions",
+            icon = AeriSymbols.textMagnifyingglass, tint = SettingsTint.blue, showsDivider = true, tag = "searchSuggestions",
         )
         ToggleRow(
             stringResource(R.string.settings_auto_open_keyboard), model.settings.autoOpensKeyboard, { model.settings.autoOpensKeyboard = it },
-            icon = ArdiaSymbols.keyboardFill, tint = SettingsTint.keyboard, tag = "autoOpenKeyboard",
+            icon = AeriSymbols.keyboardFill, tint = SettingsTint.keyboard, tag = "autoOpenKeyboard",
         )
     }
 }
@@ -161,7 +161,7 @@ private fun TabsGroup(nav: SettingsNav) {
             selected = model.autoArchiveInterval,
             label = { it.title },
             onSelect = { model.autoArchiveInterval = it },
-            icon = ArdiaSymbols.archiveboxFill, tint = SettingsTint.archive, showsDivider = true, tag = "archiveInterval",
+            icon = AeriSymbols.archiveboxFill, tint = SettingsTint.archive, showsDivider = true, tag = "archiveInterval",
         )
         PickerRow(
             stringResource(R.string.settings_open_app_links_in),
@@ -169,15 +169,15 @@ private fun TabsGroup(nav: SettingsNav) {
             selected = model.browsing.appLinks,
             label = { it.title },
             onSelect = model::setAppLinks,
-            icon = ArdiaSymbols.arrowUpForwardAppFill, tint = SettingsTint.appLinks, showsDivider = true, tag = "appLinks",
+            icon = AeriSymbols.arrowUpForwardAppFill, tint = SettingsTint.appLinks, showsDivider = true, tag = "appLinks",
         )
         NavigationRow(
-            stringResource(R.string.settings_clear_browsing_data), ArdiaSymbols.eraserFill, SettingsTint.clearData,
+            stringResource(R.string.settings_clear_browsing_data), AeriSymbols.eraserFill, SettingsTint.clearData,
             onClick = { nav.push(SettingsRoute.ClearData) }, showsDivider = true, tag = "clearData",
         )
-        val exportSubject = stringResource(R.string.settings_open_tabs_from_ardia)
+        val exportSubject = stringResource(R.string.settings_open_tabs_from_aeri)
         SettingsRow(onClick = { exportOpenTabs(model, exportSubject) }, modifier = Modifier.testTag(SettingsTags.row("export"))) {
-            SettingsRowLabel(stringResource(R.string.settings_export_open_tabs), ArdiaSymbols.squareAndArrowUpFill, SettingsTint.export)
+            SettingsRowLabel(stringResource(R.string.settings_export_open_tabs), AeriSymbols.squareAndArrowUpFill, SettingsTint.export)
         }
     }
 }
@@ -198,15 +198,15 @@ private fun SyncAccountRow(model: AppModel) {
     val subtitle = words.rowSubtitle
     val content: @Composable () -> Unit = {
         Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
-            Text(words.rowTitle, style = ArdiaType.title3.semibold, color = SystemPalette.label.current)
+            Text(words.rowTitle, style = AeriType.title3.semibold, color = SystemPalette.label.current)
             Crossfade(subtitle, label = "syncSubtitle") { line ->
-                Text(line.text, style = ArdiaType.subheadline, color = if (line.isWarning) warningInk() else SystemPalette.secondaryLabel.current)
+                Text(line.text, style = AeriType.subheadline, color = if (line.isWarning) warningInk() else SystemPalette.secondaryLabel.current)
             }
         }
     }
     if (accessibility) {
         Column(Modifier.padding(vertical = 6.dp).semantics(mergeDescendants = true) {}, verticalArrangement = Arrangement.spacedBy(Spacing.small)) {
-            SettingsIconTile(ArdiaSymbols.macbookAndIphone, SettingsTint.sync, baseSide = 44.dp)
+            SettingsIconTile(AeriSymbols.macbookAndIphone, SettingsTint.sync, baseSide = 44.dp)
             content()
         }
     } else {
@@ -215,7 +215,7 @@ private fun SyncAccountRow(model: AppModel) {
             horizontalArrangement = Arrangement.spacedBy(Spacing.small + 2.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            SettingsIconTile(ArdiaSymbols.macbookAndIphone, SettingsTint.sync, baseSide = 56.dp)
+            SettingsIconTile(AeriSymbols.macbookAndIphone, SettingsTint.sync, baseSide = 56.dp)
             content()
         }
     }
@@ -228,13 +228,13 @@ private fun SettingsShortcuts(model: AppModel) {
     val spaces = stringResource(R.string.settings_spaces)
     if (accessibility) {
         Column(Modifier.padding(horizontal = Spacing.page), verticalArrangement = Arrangement.spacedBy(Spacing.small)) {
-            ShortcutButton(archive, ArdiaSymbols.archivebox, model::openArchive, Modifier.fillMaxWidth())
-            ShortcutButton(spaces, ArdiaSymbols.squareStack, model::openSyncedSpaces, Modifier.fillMaxWidth())
+            ShortcutButton(archive, AeriSymbols.archivebox, model::openArchive, Modifier.fillMaxWidth())
+            ShortcutButton(spaces, AeriSymbols.squareStack, model::openSyncedSpaces, Modifier.fillMaxWidth())
         }
     } else {
         Row(Modifier.padding(horizontal = Spacing.page), horizontalArrangement = Arrangement.spacedBy(Spacing.small)) {
-            ShortcutButton(archive, ArdiaSymbols.archivebox, model::openArchive, Modifier.weight(1f))
-            ShortcutButton(spaces, ArdiaSymbols.squareStack, model::openSyncedSpaces, Modifier.weight(1f))
+            ShortcutButton(archive, AeriSymbols.archivebox, model::openArchive, Modifier.weight(1f))
+            ShortcutButton(spaces, AeriSymbols.squareStack, model::openSyncedSpaces, Modifier.weight(1f))
         }
     }
 }
@@ -252,7 +252,7 @@ private fun ShortcutButton(title: String, icon: ImageVector, onClick: () -> Unit
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Icon(icon, null, Modifier.size(20.dp), tint = SystemPalette.label.current)
-        Text(title, style = ArdiaType.body.medium, color = SystemPalette.label.current)
+        Text(title, style = AeriType.body.medium, color = SystemPalette.label.current)
     }
 }
 

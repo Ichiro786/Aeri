@@ -64,18 +64,18 @@ import com.ardia.design.Glass
 import com.ardia.design.GlassMenu
 import com.ardia.design.GlassMenuItem
 import com.ardia.design.GlassMenuDivider
-import com.ardia.design.ArdiaSymbols
-import com.ardia.design.ArdiaType
+import com.ardia.design.AeriSymbols
+import com.ardia.design.AeriType
 import com.ardia.design.DeckHeaderMetrics
 import com.ardia.design.FaviconImage
-import com.ardia.design.LocalArdiaDarkTheme
+import com.ardia.design.LocalAeriDarkTheme
 import com.ardia.design.Palette
 import com.ardia.design.SystemPalette
 import com.ardia.design.TabsLayout
 import com.ardia.design.TabsMotion
 import com.ardia.design.TabsPalette
 import com.ardia.design.Toasts
-import com.ardia.design.ardiaColor
+import com.ardia.design.aeriColor
 import com.ardia.design.parseHexColor
 import com.ardia.design.semibold
 import com.ardia.browser.PageColors
@@ -94,7 +94,7 @@ internal fun DeckCardItem(model: AppModel, state: DeckState, haptics: Haptics, t
     val frame = remember(id) { DeckPose() }
     val shapes = remember(id) { CardShapeCache() }
     remember(id) { state.motion(id) }
-    val dark = LocalArdiaDarkTheme.current
+    val dark = LocalAeriDarkTheme.current
     val newTab = stringResource(R.string.tabs_new_tab)
     val title = TabText.title(tab, newTab)
     val host = TabText.host(tab, newTab)
@@ -137,10 +137,10 @@ internal fun DeckCardItem(model: AppModel, state: DeckState, haptics: Haptics, t
 internal fun DeckCardHeaderItem(state: DeckState, tab: BrowserTab, index: Int, isLast: Boolean) {
     val pose = remember(tab.id) { DeckPose() }
     val title = TabText.title(tab, stringResource(R.string.tabs_new_tab))
-    val dark = LocalArdiaDarkTheme.current
+    val dark = LocalAeriDarkTheme.current
     val fade = with(LocalDensity.current) { DeckHeaderMetrics.trailingFade.dp.toPx() }
     val fontScale = LocalDensity.current.fontScale
-    val style = ArdiaType.caption.copy(
+    val style = AeriType.caption.copy(
         fontWeight = FontWeight.Medium,
         fontSize = (12 * min(fontScale, HEADER_MAX_FONT_SCALE) / fontScale).sp,
         lineHeight = (16 * min(fontScale, HEADER_MAX_FONT_SCALE) / fontScale).sp,
@@ -203,7 +203,7 @@ private fun DeckHeaderRow(icon: @Composable () -> Unit, title: @Composable () ->
 
 @Composable
 internal fun TabCardContent(tab: BrowserTab, image: ImageBitmap?, title: String, host: String, bottomFill: Color? = null) {
-    val dark = LocalArdiaDarkTheme.current
+    val dark = LocalAeriDarkTheme.current
     val background = when {
         tab.isPrivate -> TabsPalette.incognitoCard
         else -> parseHexColor(tab.themeColorHex) ?: SystemPalette.background.resolve(dark)
@@ -278,19 +278,19 @@ internal object SnapshotEdge {
 
 @Composable
 private fun PageCardPlaceholder(tab: BrowserTab, title: String, host: String) {
-    val dark = LocalArdiaDarkTheme.current
+    val dark = LocalAeriDarkTheme.current
     val theme = parseHexColor(tab.themeColorHex)
     val ink: Color? = theme?.let { if (ThemeInk.isLight(tab.themeColorHex)) Color.Black else Color.White }
-    val pastel = remember(tab.url, dark) { ardiaColor(PlaceholderTint.hex(tab.url, dark)) }
+    val pastel = remember(tab.url, dark) { aeriColor(PlaceholderTint.hex(tab.url, dark)) }
     Column(
         Modifier.fillMaxSize().background(theme ?: pastel).padding(16.dp).padding(top = 48.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         FaviconImage(tab.faviconUrl, tab.url, size = 32.dp)
-        Text(title, style = ArdiaType.headline, color = ink ?: SystemPalette.label.resolve(dark), maxLines = 4, overflow = TextOverflow.Ellipsis)
+        Text(title, style = AeriType.headline, color = ink ?: SystemPalette.label.resolve(dark), maxLines = 4, overflow = TextOverflow.Ellipsis)
         Text(
             host,
-            style = ArdiaType.subheadline,
+            style = AeriType.subheadline,
             color = ink?.copy(alpha = 0.7f) ?: SystemPalette.secondaryLabel.resolve(dark),
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
@@ -306,8 +306,8 @@ private fun IncognitoCardPlaceholder(title: String) {
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         IncognitoGlyph(44.dp)
-        Text(stringResource(R.string.tabs_incognito_tab), style = ArdiaType.footnote.semibold, color = Color.White.copy(alpha = 0.85f))
-        Text(title, style = ArdiaType.caption, color = Color.White.copy(alpha = 0.55f), maxLines = 2, textAlign = TextAlign.Center, overflow = TextOverflow.Ellipsis)
+        Text(stringResource(R.string.tabs_incognito_tab), style = AeriType.footnote.semibold, color = Color.White.copy(alpha = 0.85f))
+        Text(title, style = AeriType.caption, color = Color.White.copy(alpha = 0.55f), maxLines = 2, textAlign = TextAlign.Center, overflow = TextOverflow.Ellipsis)
     }
 }
 
@@ -332,7 +332,7 @@ internal fun IncognitoGlyph(size: Dp, modifier: Modifier = Modifier) {
 
 @Composable
 private fun ReceivedBadge(modifier: Modifier = Modifier) {
-    val dark = LocalArdiaDarkTheme.current
+    val dark = LocalAeriDarkTheme.current
     val fill = TabsPalette.receivedBadge.resolve(dark)
     val ink = Palette.onPrimaryAction.resolve(dark)
     Row(
@@ -343,20 +343,20 @@ private fun ReceivedBadge(modifier: Modifier = Modifier) {
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(4.dp),
     ) {
-        Icon(ArdiaSymbols.macbook, null, Modifier.size(12.dp), tint = ink)
-        Text(stringResource(R.string.tabs_from_your_mac), style = ArdiaType.caption2.semibold, color = ink)
+        Icon(AeriSymbols.macbook, null, Modifier.size(12.dp), tint = ink)
+        Text(stringResource(R.string.tabs_from_your_mac), style = AeriType.caption2.semibold, color = ink)
     }
 }
 
 @Composable
 internal fun CardMenu(model: AppModel, tab: BrowserTab, dismiss: () -> Unit, close: () -> Unit, copied: () -> Unit) {
     if (model.shareUrl(tab) != null) {
-        MenuRow(stringResource(R.string.tabs_copy_link), ArdiaSymbols.link) {
+        MenuRow(stringResource(R.string.tabs_copy_link), AeriSymbols.link) {
             dismiss()
             model.copyLink(tab)
             copied()
         }
-        MenuRow(stringResource(R.string.tabs_share), ArdiaSymbols.squareAndArrowUp) {
+        MenuRow(stringResource(R.string.tabs_share), AeriSymbols.squareAndArrowUp) {
             dismiss()
             model.share(tab)
         }
@@ -367,14 +367,14 @@ internal fun CardMenu(model: AppModel, tab: BrowserTab, dismiss: () -> Unit, clo
             }
         }
         if (!tab.isPrivate && model.syncState.isEnabled) {
-            MenuRow(stringResource(R.string.tabs_pin_to_mac), ArdiaSymbols.star) {
+            MenuRow(stringResource(R.string.tabs_pin_to_mac), AeriSymbols.star) {
                 dismiss()
                 model.pinToMac(tab)
             }
         }
         GlassMenuDivider()
     }
-    MenuRow(stringResource(R.string.tabs_close_tab), ArdiaSymbols.xmark, destructive = true, action = close)
+    MenuRow(stringResource(R.string.tabs_close_tab), AeriSymbols.xmark, destructive = true, action = close)
 }
 
 @Composable

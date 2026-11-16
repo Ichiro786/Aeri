@@ -7,7 +7,7 @@ import androidx.test.platform.app.InstrumentationRegistry
 import com.ardia.appmodel.AppEnvironment
 import com.ardia.appmodel.AppModel
 import com.ardia.appmodel.LaunchArguments
-import com.ardia.design.ArdiaTheme
+import com.ardia.design.AeriTheme
 
 class DemoModel(private val compose: ComposeContentTestRule) {
     lateinit var model: AppModel
@@ -22,7 +22,7 @@ class DemoModel(private val compose: ComposeContentTestRule) {
 
     fun show(content: @Composable (AppModel) -> Unit) {
         compose.setContent {
-            ArdiaTheme(darkTheme = false, look = model.look, reduceMotion = false, reduceTransparency = true) { content(model) }
+            AeriTheme(darkTheme = false, look = model.look, reduceMotion = false, reduceTransparency = true) { content(model) }
         }
     }
 

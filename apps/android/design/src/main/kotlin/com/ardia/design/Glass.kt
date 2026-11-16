@@ -53,22 +53,22 @@ object Glass {
     val control = FrostedStyle(
         blurRadius = 28.dp,
         saturation = 1.9f,
-        tint = adaptive(ardiaColor(0xFFFFFF, 0.4f), ardiaColor(0x2A2A2E, 0.44f)),
-        fallback = adaptive(ardiaColor(0xF2F2F5, 0.93f), ardiaColor(0x2A2A2E, 0.93f)),
+        tint = adaptive(aeriColor(0xFFFFFF, 0.4f), aeriColor(0x2A2A2E, 0.44f)),
+        fallback = adaptive(aeriColor(0xF2F2F5, 0.93f), aeriColor(0x2A2A2E, 0.93f)),
         rim = rim,
     )
 
     val panel = FrostedStyle(
         blurRadius = 36.dp,
         saturation = 1.9f,
-        tint = adaptive(ardiaColor(0xFFFFFF, 0.62f), ardiaColor(0x1F1F22, 0.62f)),
-        fallback = adaptive(ardiaColor(0xF6F6F8, 0.97f), ardiaColor(0x242427, 0.97f)),
+        tint = adaptive(aeriColor(0xFFFFFF, 0.62f), aeriColor(0x1F1F22, 0.62f)),
+        fallback = adaptive(aeriColor(0xF6F6F8, 0.97f), aeriColor(0x242427, 0.97f)),
         rim = rim,
     )
 
     val classicPanel = FrostedStyle.sheet.copy(edge = FrostedStyle.glass.edge)
 
-    val active = adaptive(ardiaColor(0x1C1C1E), ardiaColor(0xECECEF))
+    val active = adaptive(aeriColor(0x1C1C1E), aeriColor(0xECECEF))
 
     val activeStyle = FrostedStyle(
         blurRadius = 0.dp,
@@ -82,7 +82,7 @@ object Glass {
         ),
     )
 
-    val onActive = adaptive(Color.White, ardiaColor(0x111113))
+    val onActive = adaptive(Color.White, aeriColor(0x111113))
     val pressedRow = adaptive(Color.Black.copy(alpha = 0.07f), Color.White.copy(alpha = 0.1f))
     val separator = adaptive(Color.Black.copy(alpha = 0.08f), Color.White.copy(alpha = 0.1f))
     val chip = adaptive(Color.Black.copy(alpha = 0.06f), Color.White.copy(alpha = 0.12f))

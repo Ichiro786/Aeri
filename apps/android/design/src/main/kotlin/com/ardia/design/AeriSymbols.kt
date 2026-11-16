@@ -160,7 +160,7 @@ private fun SymbolScope.laptop(screenX: Float, screenWidth: Float, baseFrom: Flo
     stroke(BOLD) { line(baseFrom, 18.5f, baseTo, 18.5f) }
 }
 
-object ArdiaSymbols {
+object AeriSymbols {
     val plus by lazy { symbol("plus") { stroke(BOLD) { line(12f, 5f, 12f, 19f); line(5f, 12f, 19f, 12f) } } }
     val minus by lazy { symbol("minus") { stroke(BOLD) { line(5f, 12f, 19f, 12f) } } }
     val xmark by lazy { symbol("xmark") { stroke(BOLD) { line(6.5f, 6.5f, 17.5f, 17.5f); line(17.5f, 6.5f, 6.5f, 17.5f) } } }

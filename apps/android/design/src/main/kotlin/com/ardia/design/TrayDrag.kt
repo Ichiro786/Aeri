@@ -81,7 +81,7 @@ class TrayDragState {
         isDragging = false
     }
 
-    suspend fun settle(motion: ArdiaMotion = Motion.traySettle) {
+    suspend fun settle(motion: AeriMotion = Motion.traySettle) {
         animate(initialValue = offsetDp, targetValue = 0f, animationSpec = motion.spec()) { value, _ -> offsetDp = value }
     }
 
@@ -105,7 +105,7 @@ fun Modifier.trayDismissDrag(
     trayHeight: Dp,
     onDismiss: () -> Unit,
     onReleaseKeyboard: () -> Unit = {},
-    settleMotion: ArdiaMotion = Motion.traySettle,
+    settleMotion: AeriMotion = Motion.traySettle,
     enabled: Boolean = true,
 ): Modifier {
     if (!enabled) return this

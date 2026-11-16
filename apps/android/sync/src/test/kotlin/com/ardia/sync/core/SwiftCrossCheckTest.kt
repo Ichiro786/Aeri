@@ -25,7 +25,7 @@ class SwiftCrossCheckTest {
         val expected = manifest(folder)
         val keys = SyncKeys(bytes(expected.getValue("entropy")))
         assertEquals(expected.getValue("chain"), keys.chainTag)
-        val vault = SyncVault(FolderStorage(File(folder, "Ardia Sync")), keys)
+        val vault = SyncVault(FolderStorage(File(folder, "Aeri Sync")), keys)
         for (scope in expected.getValue("scopes").split(",")) {
             assertEquals(expected.getValue("scopeTag:$scope"), keys.scopeTag(scope))
             val read = vault.read(scope, emptySet())
@@ -47,7 +47,7 @@ class SwiftCrossCheckTest {
         folder.deleteRecursively()
         val entropy = RecoveryPhrase.generateEntropy()
         val keys = SyncKeys(entropy)
-        val vault = SyncVault(FolderStorage(File(folder, "Ardia Sync")), keys)
+        val vault = SyncVault(FolderStorage(File(folder, "Aeri Sync")), keys)
         vault.createChain()
         val scopes = listOf("app", "p:personal000000000000000000")
         val lines = mutableListOf(

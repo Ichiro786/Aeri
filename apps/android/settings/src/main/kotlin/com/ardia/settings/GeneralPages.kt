@@ -32,8 +32,8 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.ardia.appmodel.SettingsRoute
-import com.ardia.design.ArdiaSymbols
-import com.ardia.design.ArdiaType
+import com.ardia.design.AeriSymbols
+import com.ardia.design.AeriType
 import com.ardia.design.Palette
 import com.ardia.design.SettingsGroup
 import com.ardia.design.SettingsLayout
@@ -57,24 +57,24 @@ fun SiteSettingsPage(nav: SettingsNav) {
             SettingsGroup {
                 ToggleRow(
                     stringResource(R.string.site_block_ads), blocking.blocksAds, model::setBlocksAds,
-                    icon = ArdiaSymbols.handRaisedFill, tint = SettingsTint.ads, showsDivider = true, tag = "blockAds",
+                    icon = AeriSymbols.handRaisedFill, tint = SettingsTint.ads, showsDivider = true, tag = "blockAds",
                 )
                 ToggleRow(
                     stringResource(R.string.site_block_trackers), blocking.blocksTrackers, model::setBlocksTrackers,
-                    icon = ArdiaSymbols.eyeglasses, tint = SettingsTint.trackers, showsDivider = true, tag = "blockTrackers",
+                    icon = AeriSymbols.eyeglasses, tint = SettingsTint.trackers, showsDivider = true, tag = "blockTrackers",
                 )
                 ToggleRow(
                     stringResource(R.string.site_block_cookie_banners), blocking.hidesCookieBanners, model::setHidesCookieBanners,
-                    icon = ArdiaSymbols.listBulletRectanglePortraitFill, tint = SettingsTint.cookies, showsDivider = true, tag = "blockCookies",
+                    icon = AeriSymbols.listBulletRectanglePortraitFill, tint = SettingsTint.cookies, showsDivider = true, tag = "blockCookies",
                 )
                 NavigationRow(
-                    stringResource(R.string.site_filter_lists), ArdiaSymbols.line3HorizontalDecrease, SettingsTint.neutral,
+                    stringResource(R.string.site_filter_lists), AeriSymbols.line3HorizontalDecrease, SettingsTint.neutral,
                     onClick = { nav.push(SettingsRoute.FilterLists) },
                     value = FilterListWords.number(LocalContext.current.resources, lists.enabledLists.size),
                     showsDivider = true, tag = "filterLists",
                 )
                 NavigationRow(
-                    stringResource(R.string.site_trusted_sites), ArdiaSymbols.checkmarkShieldFill, SettingsTint.green,
+                    stringResource(R.string.site_trusted_sites), AeriSymbols.checkmarkShieldFill, SettingsTint.green,
                     onClick = { nav.push(SettingsRoute.TrustedSites) },
                     value = if (blocking.exemptHosts.isEmpty()) stringResource(R.string.settings_none) else blocking.exemptHosts.size.toString(),
                     tag = "trustedSites",
@@ -85,15 +85,15 @@ fun SiteSettingsPage(nav: SettingsNav) {
             SettingsGroup(footer = stringResource(R.string.site_footer)) {
                 PickerRow(
                     stringResource(R.string.site_night_shade), NightShadeMode.entries, model.browsing.nightShade, { it.title }, model::setDefaultNightShade,
-                    icon = ArdiaSymbols.moonFill, tint = SettingsTint.nightShade, showsDivider = true, tag = "nightShade",
+                    icon = AeriSymbols.moonFill, tint = SettingsTint.nightShade, showsDivider = true, tag = "nightShade",
                 )
                 PickerRow(
                     stringResource(R.string.site_swipe_to_navigate), SwipeNavigationMode.entries, model.browsing.swipeNavigation, { it.title },
-                    model::setSwipeNavigation, icon = ArdiaSymbols.handDrawFill, tint = SettingsTint.swipe, showsDivider = true, tag = "swipe",
+                    model::setSwipeNavigation, icon = AeriSymbols.handDrawFill, tint = SettingsTint.swipe, showsDivider = true, tag = "swipe",
                 )
                 ToggleRow(
                     stringResource(R.string.site_collapse_bottom_bar), model.settings.collapsesBottomBar, { model.settings.collapsesBottomBar = it },
-                    icon = ArdiaSymbols.platterFilledBottomAndArrowDownIphone, tint = SettingsTint.bottomBar, tag = "collapseBottomBar",
+                    icon = AeriSymbols.platterFilledBottomAndArrowDownIphone, tint = SettingsTint.bottomBar, tag = "collapseBottomBar",
                 )
             }
         }
@@ -115,7 +115,7 @@ fun SearchEnginePage(nav: SettingsNav) {
             item(key = "synced") {
                 SettingsGroup(footer = stringResource(R.string.search_set_on_mac)) {
                     IconLabelRow(
-                        stringResource(R.string.search_from_your_mac), ArdiaSymbols.macbook,
+                        stringResource(R.string.search_from_your_mac), AeriSymbols.macbook,
                         iconTint = Palette.formAccent.current,
                         value = SearchEngineNames.name(synced, stringResource(R.string.search_custom), engines),
                     )
@@ -148,8 +148,8 @@ private fun EngineRow(engine: EngineChoice, isSelected: Boolean, showsDivider: B
                 .padding(horizontal = SettingsLayout.rowInset, vertical = Spacing.tight),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Text(engine.name, style = ArdiaType.body, color = SystemPalette.label.current, modifier = Modifier.weight(1f))
-            if (isSelected) Icon(ArdiaSymbols.checkmark, null, Modifier.size(18.dp), tint = Palette.formAccent.current)
+            Text(engine.name, style = AeriType.body, color = SystemPalette.label.current, modifier = Modifier.weight(1f))
+            if (isSelected) Icon(AeriSymbols.checkmark, null, Modifier.size(18.dp), tint = Palette.formAccent.current)
         }
         if (showsDivider) RowDivider()
     }
@@ -219,28 +219,28 @@ fun ClearBrowsingDataPage(nav: SettingsNav) {
 @Composable
 fun AboutPage(nav: SettingsNav) {
     val model = nav.model
-    SettingsPage(stringResource(R.string.settings_about_ardia), onBack = nav::pop) {
+    SettingsPage(stringResource(R.string.settings_about_aeri), onBack = nav::pop) {
         item(key = "hero") {
             Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(Spacing.small)) {
                 AppIcon(side = 72.dp, shadow = true)
                 Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(Spacing.hairline)) {
-                    Text(stringResource(R.string.about_name), style = ArdiaType.title.bold, color = SystemPalette.label.current)
-                    Text(rememberAppVersion(), style = ArdiaType.subheadline, color = SystemPalette.secondaryLabel.current)
+                    Text(stringResource(R.string.about_name), style = AeriType.title.bold, color = SystemPalette.label.current)
+                    Text(rememberAppVersion(), style = AeriType.subheadline, color = SystemPalette.secondaryLabel.current)
                 }
             }
         }
         item(key = "links") {
             SettingsGroup(footer = stringResource(R.string.about_footer)) {
-                AboutLink(stringResource(R.string.about_site), ArdiaSymbols.globe, showsDivider = true) { model.openFromSettings("https://ardia.dev") }
-                AboutLink(stringResource(R.string.about_release_notes), ArdiaSymbols.sparkles, showsDivider = true) { model.openFromSettings("https://ardia.dev/release-notes") }
-                AboutLink(stringResource(R.string.about_source_code), ArdiaSymbols.chevronLeftForwardslashChevronRight) {
+                AboutLink(stringResource(R.string.about_site), AeriSymbols.globe, showsDivider = true) { model.openFromSettings("https://ardia.dev") }
+                AboutLink(stringResource(R.string.about_release_notes), AeriSymbols.sparkles, showsDivider = true) { model.openFromSettings("https://ardia.dev/release-notes") }
+                AboutLink(stringResource(R.string.about_source_code), AeriSymbols.chevronLeftForwardslashChevronRight) {
                     model.openFromSettings("https://github.com/mantrakp04/ardia")
                 }
             }
         }
         item(key = "licenses") {
             SettingsGroup {
-                NavigationRow(stringResource(R.string.about_licenses), ArdiaSymbols.docText, SystemPalette.secondaryLabel.current, onClick = { nav.push(SettingsRoute.Licenses) })
+                NavigationRow(stringResource(R.string.about_licenses), AeriSymbols.docText, SystemPalette.secondaryLabel.current, onClick = { nav.push(SettingsRoute.Licenses) })
             }
         }
     }
@@ -259,8 +259,8 @@ private fun AboutLink(title: String, icon: androidx.compose.ui.graphics.vector.I
             horizontalArrangement = Arrangement.spacedBy(SettingsLayout.labelGap),
         ) {
             Icon(icon, null, Modifier.size(22.dp), tint = Palette.formAccent.current)
-            Text(title, style = ArdiaType.body, color = SystemPalette.label.current, modifier = Modifier.weight(1f))
-            Icon(ArdiaSymbols.arrowUpForward, null, Modifier.size(13.dp), tint = SystemPalette.tertiaryLabel.current)
+            Text(title, style = AeriType.body, color = SystemPalette.label.current, modifier = Modifier.weight(1f))
+            Icon(AeriSymbols.arrowUpForward, null, Modifier.size(13.dp), tint = SystemPalette.tertiaryLabel.current)
         }
         if (showsDivider) RowDivider(SettingsLayout.rowInset + 22.dp + SettingsLayout.labelGap)
     }
@@ -271,7 +271,7 @@ data class OpenSourceCredit(val name: String, val use: Int, val license: String,
 
     companion object {
         val all = listOf(
-            OpenSourceCredit("Ardia", R.string.credit_ardia, "Apache License 2.0", "https://github.com/mantrakp04/ardia"),
+            OpenSourceCredit("Aeri", R.string.credit_aeri, "Apache License 2.0", "https://github.com/mantrakp04/ardia"),
             OpenSourceCredit("EasyList", R.string.credit_easylist, "CC BY-SA 3.0 or GPLv3", "https://easylist.to"),
             OpenSourceCredit("EasyPrivacy", R.string.credit_easyprivacy, "CC BY-SA 3.0 or GPLv3", "https://easylist.to"),
             OpenSourceCredit("Fanboy’s Cookie Monster List", R.string.credit_cookie_monster, "CC BY-SA 3.0 or GPLv3", "https://secure.fanboy.co.nz"),
@@ -296,8 +296,8 @@ fun LicensesPage(nav: SettingsNav) {
             item(key = credit.name) {
                 SettingsGroup {
                     Column(Modifier.fillMaxWidth().padding(horizontal = SettingsLayout.rowInset, vertical = Spacing.small), verticalArrangement = Arrangement.spacedBy(Spacing.hairline)) {
-                        Text(credit.name, style = ArdiaType.body.semibold, color = SystemPalette.label.current)
-                        Text(stringResource(credit.use), style = ArdiaType.subheadline, color = SystemPalette.secondaryLabel.current)
+                        Text(credit.name, style = AeriType.body.semibold, color = SystemPalette.label.current)
+                        Text(stringResource(credit.use), style = AeriType.subheadline, color = SystemPalette.secondaryLabel.current)
                     }
                     RowDivider()
                     ValueRow(stringResource(R.string.about_license), credit.license, showsDivider = true)
@@ -309,7 +309,7 @@ fun LicensesPage(nav: SettingsNav) {
                             .padding(horizontal = SettingsLayout.rowInset, vertical = Spacing.tight),
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
-                        Text(credit.displayUrl, style = ArdiaType.body, color = Palette.formAccent.current, maxLines = 1, overflow = TextOverflow.MiddleEllipsis)
+                        Text(credit.displayUrl, style = AeriType.body, color = Palette.formAccent.current, maxLines = 1, overflow = TextOverflow.MiddleEllipsis)
                         Spacer(Modifier.weight(1f))
                     }
                 }

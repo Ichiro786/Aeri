@@ -34,13 +34,13 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.unit.dp
-import com.ardia.design.ArdiaSymbols
+import com.ardia.design.AeriSymbols
 import com.ardia.design.Motion
 import com.ardia.design.ProfileBackdrop
 import com.ardia.design.ProfileLook
 import com.ardia.design.SystemPalette
-import com.ardia.design.ardiaColor
-import com.ardia.design.ardiaGradient
+import com.ardia.design.aeriColor
+import com.ardia.design.aeriGradient
 
 private data class SketchTab(val color: Color, val width: Int)
 
@@ -94,7 +94,7 @@ private fun MacWindowSketch(modifier: Modifier = Modifier) {
     }
 }
 
-private val trafficLights = listOf(ardiaColor(0xFF5F57), ardiaColor(0xFEBC2E), ardiaColor(0x28C840))
+private val trafficLights = listOf(aeriColor(0xFF5F57), aeriColor(0xFEBC2E), aeriColor(0x28C840))
 
 @Composable
 private fun PhoneSketch(connected: Boolean, modifier: Modifier = Modifier) {
@@ -110,7 +110,7 @@ private fun PhoneSketch(connected: Boolean, modifier: Modifier = Modifier) {
                 .fillMaxSize()
                 .padding(4.dp)
                 .clip(RoundedCornerShape(18.dp))
-                .background(if (connected) plum.ardiaGradient() else androidx.compose.ui.graphics.SolidColor(Color(0xFF383838))),
+                .background(if (connected) plum.aeriGradient() else androidx.compose.ui.graphics.SolidColor(Color(0xFF383838))),
         )
         AnimatedContent(
             connected,
@@ -118,7 +118,7 @@ private fun PhoneSketch(connected: Boolean, modifier: Modifier = Modifier) {
             label = "phoneSketch",
         ) { done ->
             if (done) {
-                Icon(ArdiaSymbols.checkmark, null, Modifier.size(30.dp), tint = Color.White)
+                Icon(AeriSymbols.checkmark, null, Modifier.size(30.dp), tint = Color.White)
             } else {
                 Box(Modifier.size(58.dp), contentAlignment = Alignment.Center) {
                     Canvas(Modifier.size(58.dp)) { drawViewfinderCorners(Color.White, 3.dp.toPx()) }

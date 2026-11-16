@@ -56,7 +56,7 @@ object SystemIntents {
         .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
     fun launchArguments(context: Context, intent: Intent?): LaunchArguments {
-        if (!ArdiaApplication.of(context).acceptsLaunchArguments) return LaunchArguments.none
+        if (!AeriApplication.of(context).acceptsLaunchArguments) return LaunchArguments.none
         return runCatching { LaunchArguments.fromIntent(intent) }.getOrDefault(LaunchArguments.none)
     }
 }

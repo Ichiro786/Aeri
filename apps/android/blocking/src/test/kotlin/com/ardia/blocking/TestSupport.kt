@@ -50,7 +50,7 @@ internal fun FilterEngine.HidingCss.selectors(): Set<String> =
 internal class TestSupport
 
 internal class TempDirectory : AutoCloseable {
-    val file: File = Files.createTempDirectory("ardia-blocking").toFile()
+    val file: File = Files.createTempDirectory("aeri-blocking").toFile()
 
     override fun close() {
         file.deleteRecursively()

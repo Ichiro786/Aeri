@@ -14,7 +14,7 @@ import org.robolectric.RobolectricTestRunner
 
 @RunWith(RobolectricTestRunner::class)
 class SystemEntryTest {
-    private val context get() = ApplicationProvider.getApplicationContext<ArdiaApplication>()
+    private val context get() = ApplicationProvider.getApplicationContext<AeriApplication>()
 
     @Test
     fun aWebLinkFromAnotherAppOpensAsALink() {
@@ -23,7 +23,7 @@ class SystemEntryTest {
     }
 
     @Test
-    fun anArdiaLinkReachesTheModelUnchanged() {
+    fun anAeriLinkReachesTheModelUnchanged() {
         val entry = SystemEntry.from(Intent(Intent.ACTION_VIEW, Uri.parse(SystemLink.Incognito.uri)))
         assertEquals(SystemEntry.Link("ardia://incognito"), entry)
     }
@@ -60,7 +60,7 @@ class SystemEntryTest {
 
     @Test
     fun launchArgumentsAreReadInADebuggableBuild() {
-        val intent = Intent().putExtra(LaunchArguments.ARDIA_DEMO, true).putExtra(LaunchArguments.ARDIA_RESTING_START, "YES")
+        val intent = Intent().putExtra(LaunchArguments.AERI_DEMO, true).putExtra(LaunchArguments.AERI_RESTING_START, "YES")
         val launch = SystemIntents.launchArguments(context, intent)
         assertEquals(context.acceptsLaunchArguments, launch.isDemo)
         assertEquals(context.acceptsLaunchArguments, launch.restingStart)

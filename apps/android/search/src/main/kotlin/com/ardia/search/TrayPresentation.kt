@@ -10,7 +10,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.unit.Density
 import com.ardia.appmodel.BrowseSession
-import com.ardia.design.ArdiaMotion
+import com.ardia.design.AeriMotion
 import kotlin.math.abs
 import kotlin.math.max
 import kotlinx.coroutines.CoroutineScope
@@ -69,7 +69,7 @@ internal class TrayPresentation(private val scope: CoroutineScope, private val k
 
     fun isUp(): Boolean = TrayLift.isKeyboardUp(keyboard.current()) || (!isClosing && hasLanded)
 
-    fun present(request: BrowseSession.SearchRequest, mayFocus: Boolean, rise: ArdiaMotion) {
+    fun present(request: BrowseSession.SearchRequest, mayFocus: Boolean, rise: AeriMotion) {
         removalJob?.cancel()
         holdJob?.cancel()
         if (shown == null || isClosing) count += 1
@@ -109,7 +109,7 @@ internal class TrayPresentation(private val scope: CoroutineScope, private val k
         wantsFocus = false
     }
 
-    fun settleAfterDrag(mayFocus: Boolean, settle: ArdiaMotion) {
+    fun settleAfterDrag(mayFocus: Boolean, settle: AeriMotion) {
         if (heldLift == null || shown == null || isClosing) return
         if (mayFocus) wantsFocus = true
         holdJob?.cancel()
@@ -122,7 +122,7 @@ internal class TrayPresentation(private val scope: CoroutineScope, private val k
         }
     }
 
-    fun beginClosing(dismiss: ArdiaMotion, onFinished: () -> Unit) {
+    fun beginClosing(dismiss: AeriMotion, onFinished: () -> Unit) {
         if (shown == null || isClosing) return
         landingJob?.cancel()
         holdJob?.cancel()

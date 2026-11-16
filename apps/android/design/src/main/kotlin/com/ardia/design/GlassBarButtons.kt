@@ -35,7 +35,7 @@ fun GlassCircleButton(
     enabled: Boolean = true,
     onClick: () -> Unit,
 ) {
-    val dark = LocalArdiaDarkTheme.current
+    val dark = LocalAeriDarkTheme.current
     val liquid = LocalLiquidGlass.current
     val scale = LocalBarButtonScale.current
     val circle = TabsLayout.barCircle * scale
@@ -78,7 +78,7 @@ fun GlassPlusButton(
     onLongClick: () -> Unit,
     menu: @Composable () -> Unit,
 ) {
-    val dark = LocalArdiaDarkTheme.current
+    val dark = LocalAeriDarkTheme.current
     val liquid = LocalLiquidGlass.current
     val scale = LocalBarButtonScale.current
     val interaction = remember { MutableInteractionSource() }
@@ -105,7 +105,7 @@ fun GlassPlusButton(
                 },
             contentAlignment = Alignment.Center,
         ) {
-            Icon(ArdiaSymbols.plus, null, Modifier.size(iconSize * scale), tint = (if (liquid) Glass.onActive else SystemPalette.label).resolve(dark))
+            Icon(AeriSymbols.plus, null, Modifier.size(iconSize * scale), tint = (if (liquid) Glass.onActive else SystemPalette.label).resolve(dark))
         }
         menu()
     }

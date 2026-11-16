@@ -32,15 +32,15 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.ardia.appmodel.AppModel
-import com.ardia.design.ArdiaSymbols
-import com.ardia.design.ArdiaType
+import com.ardia.design.AeriSymbols
+import com.ardia.design.AeriType
 import com.ardia.design.ProfileBackdrop
 import com.ardia.design.Radius
 import com.ardia.design.SettingsTint
 import com.ardia.design.Spacing
 import com.ardia.design.SystemPalette
 import com.ardia.design.bold
-import com.ardia.design.ardiaGradient
+import com.ardia.design.aeriGradient
 
 @Composable
 fun DefaultBrowserPage(nav: SettingsNav) {
@@ -83,14 +83,14 @@ fun DefaultBrowserInstructions(model: AppModel, modifier: Modifier = Modifier, o
         Column(verticalArrangement = Arrangement.spacedBy(Spacing.small), horizontalAlignment = Alignment.CenterHorizontally) {
             Text(
                 stringResource(if (isHeld) R.string.default_done_title else R.string.default_title),
-                style = ArdiaType.title.bold,
+                style = AeriType.title.bold,
                 color = SystemPalette.label.current,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.semantics { heading() },
             )
             Text(
                 stringResource(if (isHeld) R.string.default_done_subtitle else R.string.default_subtitle),
-                style = ArdiaType.body,
+                style = AeriType.body,
                 color = SystemPalette.secondaryLabel.current,
                 textAlign = TextAlign.Center,
             )
@@ -104,7 +104,7 @@ fun DefaultBrowserInstructions(model: AppModel, modifier: Modifier = Modifier, o
             if (LocalDensity.current.fontScale >= ACCESSIBILITY_FONT_SCALE) {
                 Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(Spacing.small)) {
                     steps.forEachIndexed { index, step ->
-                        Text(stringResource(R.string.default_step_numbered, index + 1, step), style = ArdiaType.body, color = SystemPalette.label.current)
+                        Text(stringResource(R.string.default_step_numbered, index + 1, step), style = AeriType.body, color = SystemPalette.label.current)
                     }
                 }
             } else {
@@ -146,14 +146,14 @@ private fun StepsCard(steps: List<String>) {
                         AppIcon()
                     } else {
                         Box(
-                            Modifier.size(29.dp).clip(RoundedCornerShape(7.dp)).background(SettingsTint.defaultBrowser.ardiaGradient()),
+                            Modifier.size(29.dp).clip(RoundedCornerShape(7.dp)).background(SettingsTint.defaultBrowser.aeriGradient()),
                             contentAlignment = Alignment.Center,
                         ) {
-                            Icon(ArdiaSymbols.handPointUpLeftFill, null, Modifier.size(18.dp), tint = Color.White)
+                            Icon(AeriSymbols.handPointUpLeftFill, null, Modifier.size(18.dp), tint = Color.White)
                         }
                     }
                 }
-                Text(stringResource(R.string.default_step_numbered, index + 1, step), style = ArdiaType.body, color = SystemPalette.label.current)
+                Text(stringResource(R.string.default_step_numbered, index + 1, step), style = AeriType.body, color = SystemPalette.label.current)
             }
             if (index < steps.lastIndex) RowDivider(56.dp)
         }

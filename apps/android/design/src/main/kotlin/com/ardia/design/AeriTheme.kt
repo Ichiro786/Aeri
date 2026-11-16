@@ -19,14 +19,14 @@ import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 
-val LocalArdiaDarkTheme = staticCompositionLocalOf { false }
+val LocalAeriDarkTheme = staticCompositionLocalOf { false }
 val LocalReduceMotion = staticCompositionLocalOf { false }
 val LocalReduceTransparency = staticCompositionLocalOf { false }
 val LocalIncreasedContrast = staticCompositionLocalOf { false }
 
-object ArdiaThemeState {
+object AeriThemeState {
     val isDark: Boolean
-        @Composable @ReadOnlyComposable get() = LocalArdiaDarkTheme.current
+        @Composable @ReadOnlyComposable get() = LocalAeriDarkTheme.current
 
     val reduceMotion: Boolean
         @Composable @ReadOnlyComposable get() = LocalReduceMotion.current
@@ -36,7 +36,7 @@ object ArdiaThemeState {
 
     @Composable
     @ReadOnlyComposable
-    fun motion(full: ArdiaMotion, reduced: ArdiaMotion = Motion.reducedFade): ArdiaMotion = if (LocalReduceMotion.current) reduced else full
+    fun motion(full: AeriMotion, reduced: AeriMotion = Motion.reducedFade): AeriMotion = if (LocalReduceMotion.current) reduced else full
 }
 
 object SystemAccessibility {
@@ -51,7 +51,7 @@ object SystemAccessibility {
 }
 
 @Composable
-fun ArdiaTheme(
+fun AeriTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     look: ProfileLook = ProfileLook.plum,
     reduceMotion: Boolean? = null,
@@ -62,37 +62,37 @@ fun ArdiaTheme(
     val context = LocalContext.current
     val systemReduceMotion = remember(context) { SystemAccessibility.reduceMotion(context) }
     val systemContrast = remember(context) { SystemAccessibility.increasedContrast(context) }
-    val colors = remember(darkTheme, look) { ArdiaMaterial.colorScheme(darkTheme, look) }
+    val colors = remember(darkTheme, look) { AeriMaterial.colorScheme(darkTheme, look) }
     CompositionLocalProvider(
-        LocalArdiaDarkTheme provides darkTheme,
+        LocalAeriDarkTheme provides darkTheme,
         LocalProfileLook provides look,
         LocalReduceMotion provides (reduceMotion ?: systemReduceMotion),
         LocalReduceTransparency provides reduceTransparency,
         LocalIncreasedContrast provides (increasedContrast ?: systemContrast),
     ) {
-        MaterialTheme(colorScheme = colors, typography = ArdiaMaterial.typography) {
+        MaterialTheme(colorScheme = colors, typography = AeriMaterial.typography) {
             CompositionLocalProvider(LocalContentColor provides SystemPalette.label.resolve(darkTheme), content = content)
         }
     }
 }
 
-object ArdiaMaterial {
+object AeriMaterial {
     val typography = Typography(
-        displayLarge = ArdiaType.largeTitle,
-        displayMedium = ArdiaType.largeTitle,
-        displaySmall = ArdiaType.title,
-        headlineLarge = ArdiaType.title,
-        headlineMedium = ArdiaType.title2,
-        headlineSmall = ArdiaType.title3,
-        titleLarge = ArdiaType.title2.bold,
-        titleMedium = ArdiaType.headline,
-        titleSmall = ArdiaType.subheadline.semibold,
-        bodyLarge = ArdiaType.body,
-        bodyMedium = ArdiaType.subheadline,
-        bodySmall = ArdiaType.footnote,
-        labelLarge = ArdiaType.subheadline.semibold,
-        labelMedium = ArdiaType.caption.semibold,
-        labelSmall = ArdiaType.caption2,
+        displayLarge = AeriType.largeTitle,
+        displayMedium = AeriType.largeTitle,
+        displaySmall = AeriType.title,
+        headlineLarge = AeriType.title,
+        headlineMedium = AeriType.title2,
+        headlineSmall = AeriType.title3,
+        titleLarge = AeriType.title2.bold,
+        titleMedium = AeriType.headline,
+        titleSmall = AeriType.subheadline.semibold,
+        bodyLarge = AeriType.body,
+        bodyMedium = AeriType.subheadline,
+        bodySmall = AeriType.footnote,
+        labelLarge = AeriType.subheadline.semibold,
+        labelMedium = AeriType.caption.semibold,
+        labelSmall = AeriType.caption2,
     )
 
     fun colorScheme(dark: Boolean, look: ProfileLook = ProfileLook.plum): ColorScheme {

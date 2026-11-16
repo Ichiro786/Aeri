@@ -1,7 +1,7 @@
 package com.ardia.browsing
 
 import com.ardia.design.glassRim
-import com.ardia.design.LocalArdiaDarkTheme
+import com.ardia.design.LocalAeriDarkTheme
 import com.ardia.design.LocalLiquidGlass
 import com.ardia.design.GlassMenuItem
 import com.ardia.design.GlassMenuDivider
@@ -58,8 +58,8 @@ import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.unit.dp
 import com.ardia.appmodel.AppModel
 import com.ardia.browser.PageColors
-import com.ardia.design.ArdiaSymbols
-import com.ardia.design.ArdiaThemeState
+import com.ardia.design.AeriSymbols
+import com.ardia.design.AeriThemeState
 import com.ardia.design.BarButtons
 import com.ardia.design.BarPalette
 import com.ardia.design.BrowseLayout
@@ -167,7 +167,7 @@ internal fun BottomBar(
                         .clip(CircleShape)
                         .background(BarPalette.plusFill.current)
                         .border(0.33.dp, BarPalette.controlEdge.current, CircleShape)
-                        .glassRim(CircleShape, LocalLiquidGlass.current, LocalArdiaDarkTheme.current)
+                        .glassRim(CircleShape, LocalLiquidGlass.current, LocalAeriDarkTheme.current)
                         .combinedClickable(interactionSource = interaction, indication = null, onClick = onPlus)
                         .semantics {
                             contentDescription = label
@@ -175,7 +175,7 @@ internal fun BottomBar(
                         },
                     contentAlignment = Alignment.Center,
                 ) {
-                    Icon(ArdiaSymbols.plus, null, Modifier.size(17.dp * scale), tint = BrowsePalette.foregroundPrimary.current)
+                    Icon(AeriSymbols.plus, null, Modifier.size(17.dp * scale), tint = BrowsePalette.foregroundPrimary.current)
                 }
             }
         }
@@ -199,10 +199,10 @@ internal fun BottomBar(
                         .size(chevron)
                         .background(BarPalette.chevronFill.current, CircleShape)
                         .border(0.33.dp, BarPalette.controlEdge.current, CircleShape)
-                        .glassRim(CircleShape, LocalLiquidGlass.current, LocalArdiaDarkTheme.current),
+                        .glassRim(CircleShape, LocalLiquidGlass.current, LocalAeriDarkTheme.current),
                     contentAlignment = Alignment.Center,
                 ) {
-                    Icon(ArdiaSymbols.chevronUp, null, Modifier.size(16.dp * scale), tint = BrowsePalette.foregroundPrimary.current)
+                    Icon(AeriSymbols.chevronUp, null, Modifier.size(16.dp * scale), tint = BrowsePalette.foregroundPrimary.current)
                 }
             }
         }
@@ -229,7 +229,7 @@ private fun RecentTabsMenu(
         if (recent.isNotEmpty()) GlassMenuDivider()
         GlassMenuItem(
             stringResource(R.string.browsing_close_tab),
-            ArdiaSymbols.xmark,
+            AeriSymbols.xmark,
             destructive = true,
             enabled = model.tabs.selectedTabId != null,
         ) {
@@ -304,7 +304,7 @@ private fun TabThumbnail(model: AppModel, tab: BrowserTab, modifier: Modifier = 
             Image(bitmap, null, Modifier.size(BrowseLayout.tabStackTile), contentScale = ContentScale.Crop, alignment = Alignment.TopCenter)
         } else if (tab.isPrivate) {
             Box(Modifier.size(BrowseLayout.tabStackTile).background(TabsPalette.incognitoCard), contentAlignment = Alignment.Center) {
-                Icon(ArdiaSymbols.eyes, null, Modifier.size(12.dp), tint = Color.White.copy(alpha = 0.8f))
+                Icon(AeriSymbols.eyes, null, Modifier.size(12.dp), tint = Color.White.copy(alpha = 0.8f))
             }
         } else {
             val theme = parseHexColor(tab.themeColorHex)
@@ -317,7 +317,7 @@ private fun TabThumbnail(model: AppModel, tab: BrowserTab, modifier: Modifier = 
 
 @Composable
 internal fun Modifier.barBacking(tone: Int?): Modifier {
-    val look = ArdiaThemeState.look
+    val look = AeriThemeState.look
     val surface = look.surface.current
     val target = tone?.let { Color(it) } ?: surface
     val color by animateColorAsState(target, Motion.barTone.spec(), label = "barTone")

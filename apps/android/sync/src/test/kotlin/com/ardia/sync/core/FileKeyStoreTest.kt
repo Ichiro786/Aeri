@@ -11,7 +11,7 @@ import org.junit.Test
 class FileKeyStoreTest {
     @Test
     fun theKeyFileIsOnlyEverTheOwnersAndNothingIsLeftBeside() {
-        val folder = Files.createTempDirectory("ardia-sync-keys").toFile()
+        val folder = Files.createTempDirectory("aeri-sync-keys").toFile()
         try {
             val store = FileKeyStore(folder)
             assertTrue(store.save("first".toByteArray(), "device"))

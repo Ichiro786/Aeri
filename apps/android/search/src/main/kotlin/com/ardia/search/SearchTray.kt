@@ -66,11 +66,11 @@ import androidx.compose.ui.unit.dp
 import com.ardia.appmodel.AppModel
 import com.ardia.appmodel.BrowseSession
 import com.ardia.appmodel.SearchSuggestionsModel
-import com.ardia.design.ArdiaSymbols
-import com.ardia.design.ArdiaType
+import com.ardia.design.AeriSymbols
+import com.ardia.design.AeriType
 import com.ardia.design.BrowseLayout
 import com.ardia.design.BrowsePalette
-import com.ardia.design.LocalArdiaDarkTheme
+import com.ardia.design.LocalAeriDarkTheme
 import com.ardia.design.LocalProfileLook
 import com.ardia.design.LocalReduceMotion
 import com.ardia.design.Motion
@@ -93,8 +93,8 @@ internal fun SearchTray(
     modifier: Modifier = Modifier,
 ) {
     val isIncognito = model.isIncognito
-    val dark = LocalArdiaDarkTheme.current || isIncognito
-    CompositionLocalProvider(LocalArdiaDarkTheme provides dark) {
+    val dark = LocalAeriDarkTheme.current || isIncognito
+    CompositionLocalProvider(LocalAeriDarkTheme provides dark) {
         TrayPanel(model, request, presentation, isIncognito, maxHeight, dismissDrag, modifier)
     }
 }
@@ -169,7 +169,7 @@ private class TrayController(
             SearchSuggestion.Kind.Query -> listOf(
                 RowMenuItem(
                     context.getString(if (incognito) R.string.search_in_new_tab else R.string.search_in_incognito_tab),
-                    if (incognito) ArdiaSymbols.squareOnSquare else ArdiaSymbols.eyes,
+                    if (incognito) AeriSymbols.squareOnSquare else AeriSymbols.eyes,
                 ) {
                     presentation.wantsFocus = false
                     model.searchSwitchingMode(suggestion.query)
@@ -177,7 +177,7 @@ private class TrayController(
             )
             SearchSuggestion.Kind.Calculation -> listOfNotNull(
                 suggestion.copyValue?.let { value ->
-                    RowMenuItem(context.getString(R.string.search_copy), ArdiaSymbols.docOnDoc) { model.copyText(value) }
+                    RowMenuItem(context.getString(R.string.search_copy), AeriSymbols.docOnDoc) { model.copyText(value) }
                 },
             )
             else -> if (url == null) {
@@ -186,15 +186,15 @@ private class TrayController(
                 listOf(
                     RowMenuItem(
                         context.getString(if (incognito) R.string.search_open_in_new_tab else R.string.search_open_in_incognito_tab),
-                        if (incognito) ArdiaSymbols.squareOnSquare else ArdiaSymbols.eyes,
+                        if (incognito) AeriSymbols.squareOnSquare else AeriSymbols.eyes,
                     ) {
                         presentation.wantsFocus = false
                         model.openSwitchingMode(url)
                     },
-                    RowMenuItem(context.getString(R.string.search_copy_link), ArdiaSymbols.link) {
+                    RowMenuItem(context.getString(R.string.search_copy_link), AeriSymbols.link) {
                         model.copyLink(url)
                     },
-                    RowMenuItem(context.getString(R.string.search_share), ArdiaSymbols.squareAndArrowUp) {
+                    RowMenuItem(context.getString(R.string.search_share), AeriSymbols.squareAndArrowUp) {
                         model.share(url, suggestion.title)
                     },
                 )
@@ -251,7 +251,7 @@ private fun TrayPanel(
     )
     val radius = BrowseLayout.sheetTopRadius
     val shape = remember { RoundedCornerShape(topStart = radius, topEnd = radius) }
-    val rimColor = if (Glass.isLiquid) Glass.rim.highlight.resolve(LocalArdiaDarkTheme.current || isIncognito) else null
+    val rimColor = if (Glass.isLiquid) Glass.rim.highlight.resolve(LocalAeriDarkTheme.current || isIncognito) else null
     Column(
         modifier
             .fillMaxWidth()
@@ -304,7 +304,7 @@ private fun TrayHeader(model: AppModel, controller: TrayController, isIncognito:
     val fill = if (isIncognito) BrowsePalette.incognitoField else BrowsePalette.fieldFill.current
     val stroke = if (isIncognito) Color.White.copy(alpha = 0.1f) else BrowsePalette.fieldStroke.current
     val fieldEdge = if (Glass.isLiquid) {
-        Brush.verticalGradient(listOf(Glass.rim.highlight.resolve(LocalArdiaDarkTheme.current || isIncognito), stroke))
+        Brush.verticalGradient(listOf(Glass.rim.highlight.resolve(LocalAeriDarkTheme.current || isIncognito), stroke))
     } else {
         SolidColor(stroke)
     }
@@ -348,14 +348,14 @@ private fun FieldAccessories(model: AppModel, controller: TrayController, isInco
             label = stringResource(R.string.search_clear_text),
             onClick = controller::clear,
         ) {
-            Icon(ArdiaSymbols.xmarkCircleFill, null, Modifier.size(18.dp), tint = if (isIncognito) BrowsePalette.incognitoCaption else tertiary)
+            Icon(AeriSymbols.xmarkCircleFill, null, Modifier.size(18.dp), tint = if (isIncognito) BrowsePalette.incognitoCaption else tertiary)
         }
     } else if (fontScale <= LARGE_FONT_SCALE && !isIncognito) {
         AccessoryButton(
             label = stringResource(R.string.search_voice),
             onClick = { model.browse.isVoicePresented = true },
         ) {
-            Icon(ArdiaSymbols.mic, null, Modifier.size(19.dp), tint = tertiary)
+            Icon(AeriSymbols.mic, null, Modifier.size(19.dp), tint = tertiary)
         }
     }
     IncognitoToggle(isOn = isIncognito, onToggle = { model.isIncognito = !model.isIncognito })
@@ -407,7 +407,7 @@ private fun TrayBody(
             BodyMode.Caption -> Box(Modifier.fillMaxSize().then(dismissDrag), contentAlignment = Alignment.Center) {
                 Text(
                     stringResource(R.string.search_browsing_incognito),
-                    style = ArdiaType.title3.semibold,
+                    style = AeriType.title3.semibold,
                     color = BrowsePalette.incognitoCaption,
                     textAlign = TextAlign.Center,
                     modifier = Modifier.padding(horizontal = Spacing.large),

@@ -12,7 +12,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 
-class ArdiaApplication : Application(), SyncControllerOwner {
+class AeriApplication : Application(), SyncControllerOwner {
     val appScope: CoroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
     private val lock = Any()
 
@@ -46,6 +46,6 @@ class ArdiaApplication : Application(), SyncControllerOwner {
     override val syncController: SyncController get() = model().sync
 
     companion object {
-        fun of(context: Context): ArdiaApplication = context.applicationContext as ArdiaApplication
+        fun of(context: Context): AeriApplication = context.applicationContext as AeriApplication
     }
 }

@@ -30,7 +30,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.unit.dp
 import com.ardia.appmodel.AppModel
-import com.ardia.design.ArdiaSymbols
+import com.ardia.design.AeriSymbols
 import com.ardia.design.BarButtons
 import com.ardia.design.BrowseLayout
 import com.ardia.design.BrowsePalette
@@ -41,7 +41,7 @@ import com.ardia.design.GlassCircleButton
 import com.ardia.design.GlassMenu
 import com.ardia.design.GlassMenuItem
 import com.ardia.design.GlassPlusButton
-import com.ardia.design.LocalArdiaDarkTheme
+import com.ardia.design.LocalAeriDarkTheme
 import com.ardia.design.LocalBarButtonScale
 import com.ardia.design.LocalReduceMotion
 import com.ardia.design.Motion
@@ -67,8 +67,8 @@ fun SearchHomeView(model: AppModel, modifier: Modifier = Modifier) {
         model.refreshRecents()
         if (!isOnboarding) model.openTrayIfWanted()
     }
-    val dark = LocalArdiaDarkTheme.current || isIncognito
-    CompositionLocalProvider(LocalArdiaDarkTheme provides dark) {
+    val dark = LocalAeriDarkTheme.current || isIncognito
+    CompositionLocalProvider(LocalAeriDarkTheme provides dark) {
         val frost = rememberFrostedBackdrop()
         Box(modifier.fillMaxSize()) {
             Box(Modifier.fillMaxSize().frostedBackdropSource(frost)) {
@@ -89,7 +89,7 @@ fun SearchHomeView(model: AppModel, modifier: Modifier = Modifier) {
                 Modifier
                     .align(Alignment.Center)
                     .padding(bottom = (TabsDeckGeometry.BAR_RESERVE * 0.5).dp)
-                    .size(BrowseLayout.logoSize, BrowseLayout.logoSize * 0.82f)
+                    .size(BrowseLayout.logoSize)
                     .graphicsLayer {
                         alpha = shown.value
                         val scale = if (reduceMotion) 1f else 0.92f + 0.08f * shown.value
@@ -135,9 +135,9 @@ private fun DeckBar(model: AppModel, frost: FrostedBackdrop, enabled: Boolean, m
     ) {
         DeckCircleButton(
             symbol = when {
-                opensTabs -> ArdiaSymbols.squareOnSquare
-                syncs -> ArdiaSymbols.laptopcomputer
-                else -> ArdiaSymbols.archivebox
+                opensTabs -> AeriSymbols.squareOnSquare
+                syncs -> AeriSymbols.laptopcomputer
+                else -> AeriSymbols.archivebox
             },
             label = stringResource(
                 when {
@@ -158,7 +158,7 @@ private fun DeckBar(model: AppModel, frost: FrostedBackdrop, enabled: Boolean, m
         Spacer(Modifier.weight(1f))
         PlusButton(model, frost, enabled)
         Spacer(Modifier.weight(1f))
-        DeckCircleButton(ArdiaSymbols.gearshape, stringResource(R.string.deck_settings), frost, enabled) {
+        DeckCircleButton(AeriSymbols.gearshape, stringResource(R.string.deck_settings), frost, enabled) {
             model.sheet = AppModel.Sheet.Settings
         }
     }
@@ -180,21 +180,21 @@ private fun PlusButton(model: AppModel, frost: FrostedBackdrop, enabled: Boolean
     ) {
         GlassMenu(expanded = menuOpen, onDismissRequest = { menuOpen = false }) {
             if (isIncognito) {
-                GlassMenuItem(stringResource(R.string.deck_new_tab), ArdiaSymbols.plus) {
+                GlassMenuItem(stringResource(R.string.deck_new_tab), AeriSymbols.plus) {
                     menuOpen = false
                     model.newRegularTab()
                 }
-                GlassMenuItem(stringResource(R.string.deck_new_incognito_tab), ArdiaSymbols.eyes) {
+                GlassMenuItem(stringResource(R.string.deck_new_incognito_tab), AeriSymbols.eyes) {
                     menuOpen = false
                     model.newTab()
                 }
             } else {
-                GlassMenuItem(stringResource(R.string.deck_new_incognito_tab), ArdiaSymbols.eyes) {
+                GlassMenuItem(stringResource(R.string.deck_new_incognito_tab), AeriSymbols.eyes) {
                     menuOpen = false
                     model.newIncognitoTab()
                 }
                 if (model.tabs.canReopenClosed) {
-                    GlassMenuItem(stringResource(R.string.deck_reopen_closed_tab), ArdiaSymbols.arrowUturnBackward) {
+                    GlassMenuItem(stringResource(R.string.deck_reopen_closed_tab), AeriSymbols.arrowUturnBackward) {
                         menuOpen = false
                         model.reopenLastClosed()
                     }

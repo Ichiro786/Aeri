@@ -3,7 +3,7 @@ package com.ardia.settings
 import android.content.res.Resources
 import android.text.format.DateUtils
 import androidx.compose.ui.graphics.vector.ImageVector
-import com.ardia.design.ArdiaSymbols
+import com.ardia.design.AeriSymbols
 import com.ardia.sync.SyncDeviceIcon
 import com.ardia.sync.SyncedDevice
 
@@ -21,8 +21,8 @@ object SyncDeviceWords {
     }
 
     fun icon(device: SyncedDevice): ImageVector = when (SyncDeviceIcon.of(device.kind, device.name)) {
-        SyncDeviceIcon.PHONE -> ArdiaSymbols.iphone
-        SyncDeviceIcon.LAPTOP -> ArdiaSymbols.laptopcomputer
-        SyncDeviceIcon.DESKTOP, SyncDeviceIcon.STUDIO, SyncDeviceIcon.MINI -> ArdiaSymbols.macbook
+        SyncDeviceIcon.PHONE -> AeriSymbols.iphone
+        SyncDeviceIcon.LAPTOP -> AeriSymbols.laptopcomputer
+        SyncDeviceIcon.DESKTOP, SyncDeviceIcon.STUDIO, SyncDeviceIcon.MINI -> AeriSymbols.macbook
     }
 }

@@ -256,7 +256,7 @@ internal fun PagerNeighbors(model: AppModel, pager: TabPager, statusHeight: Dp, 
 
 @Composable
 private fun PagerCard(model: AppModel, pager: TabPager, tab: BrowserTab, side: Int, statusHeight: Dp, cornerRadius: Dp) {
-    val look = com.ardia.design.ArdiaThemeState.look
+    val look = com.ardia.design.AeriThemeState.look
     val surface = look.surface.current
     val tone = model.tone(tab, model.page(tab.id)?.state?.value)
     val shadowWidth = 36.dp
@@ -296,7 +296,7 @@ private fun PagerCard(model: AppModel, pager: TabPager, tab: BrowserTab, side: I
 
 @Composable
 private fun PagerSnapshot(model: AppModel, pager: TabPager, tab: BrowserTab, modifier: Modifier) {
-    val surface = com.ardia.design.ArdiaThemeState.look.surface.current
+    val surface = com.ardia.design.AeriThemeState.look.surface.current
     var stored by remember(tab.id) { mutableStateOf<Bitmap?>(null) }
     val memory = pager.cover(tab)
     LaunchedEffect(tab.id, tab.snapshotFileName) {

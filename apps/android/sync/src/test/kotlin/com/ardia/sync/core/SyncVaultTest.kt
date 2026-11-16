@@ -11,7 +11,7 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class SyncVaultTest {
-    private val folder: File = Files.createTempDirectory("ardia-sync-vault").toFile()
+    private val folder: File = Files.createTempDirectory("aeri-sync-vault").toFile()
     private val entropy = RecoveryPhrase.generateEntropy()
     private val vault = SyncVault(FolderStorage(folder), SyncKeys(entropy))
 

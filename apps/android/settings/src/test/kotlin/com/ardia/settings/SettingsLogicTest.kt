@@ -94,8 +94,8 @@ class SettingsLogicTest {
 
     @Test
     fun folderNamesComeFromTheTreeDocumentId() {
-        assertEquals("Ardia Sync", FolderNames.fromTreeDocumentId("primary:Documents/Ardia Sync", "Fallback"))
-        assertEquals("Ardia Sync", FolderNames.fromTreeDocumentId("primary:Ardia Sync/", "Fallback"))
+        assertEquals("Aeri Sync", FolderNames.fromTreeDocumentId("primary:Documents/Aeri Sync", "Fallback"))
+        assertEquals("Aeri Sync", FolderNames.fromTreeDocumentId("primary:Aeri Sync/", "Fallback"))
         assertEquals("Fallback", FolderNames.fromTreeDocumentId("primary:", "Fallback"))
         assertEquals("Fallback", FolderNames.fromTreeDocumentId(null, "Fallback"))
     }

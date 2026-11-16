@@ -14,7 +14,7 @@ import com.ardia.appmodel.AppEnvironment
 import com.ardia.appmodel.AppModel
 import com.ardia.appmodel.BrowseSession
 import com.ardia.appmodel.LaunchArguments
-import com.ardia.design.ArdiaTheme
+import com.ardia.design.AeriTheme
 import com.ardia.store.CoreScript
 import com.ardia.store.TabOrigin
 import org.junit.After
@@ -51,7 +51,7 @@ class RootLayersTest {
         model = AppModel(LaunchArguments(isDemo = true, restingStart = true), environment)
         settle { model.isReady }
         compose.setContent {
-            ArdiaTheme(darkTheme = false, look = model.look, reduceMotion = true, reduceTransparency = true) {
+            AeriTheme(darkTheme = false, look = model.look, reduceMotion = true, reduceTransparency = true) {
                 RootView(model, markers)
             }
         }

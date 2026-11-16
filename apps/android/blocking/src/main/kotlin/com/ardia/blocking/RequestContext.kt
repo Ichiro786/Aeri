@@ -289,7 +289,7 @@ internal class RequestContext {
 
         private val asciiFolds: Map<Char, Char> = buildMap {
             for (letter in 'a'..'z') {
-                for (rune in com.google.re2j.ArdiaProgramBridge.foldOrbit(letter.code)) if (rune in 128..0xFFFF) put(rune.toChar(), letter)
+                for (rune in com.google.re2j.AeriProgramBridge.foldOrbit(letter.code)) if (rune in 128..0xFFFF) put(rune.toChar(), letter)
             }
         }
         private val foldedFrom = asciiFolds.keys.toCharArray()
